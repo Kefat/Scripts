@@ -1,7 +1,7 @@
 {
   "id": "app.sub",
   "name": "脚本订阅",
-  "author": "NO",
+  "author": "",
   "icon": "https://avatars0.githubusercontent.com/u/21308593?s=52&v=4",
   "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/",
   "apps": [
@@ -54,7 +54,7 @@
           "desc": "不懂不知不会UserAgent的请不要随意填写内容，如需填写使用建议使用京东APP的UserAgent"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "icons": [
         "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
@@ -80,7 +80,7 @@
           "desc": "不懂不知不会UserAgent的请不要随意填写内容，如需填写使用建议使用京东APP的UserAgent"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "icons": [
         "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
@@ -122,7 +122,7 @@
           "desc": "好友邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_fruit.js",
       "icons": [
@@ -158,7 +158,7 @@
           "desc": "好友邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_pet.js",
       "icons": [
@@ -194,7 +194,7 @@
           "desc": "好友邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_plantBean.js",
       "icons": [
@@ -251,7 +251,7 @@
           ]
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_joy.js",
       "icons": [
@@ -297,7 +297,7 @@
           ]
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_joy_reward.js",
       "icons": [
@@ -383,7 +383,7 @@
           "desc": "多个账号使用英文逗号','隔开,最多6个"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_joy_run.js",
       "icons": [
@@ -411,7 +411,7 @@
           "desc": "是否卖出金果获得金币,金币具有有效期，默认卖出"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_moneyTree.js",
       "icons": [
@@ -432,7 +432,7 @@
           "desc": "运行京东天天加速脚本时不发出系统弹窗通知"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_speed.js",
       "icons": [
@@ -484,7 +484,7 @@
           "desc": "匹配到此处店铺后面(包括此店铺)的不再进行取关(此处内容请尽量从头开始输入店铺名称)"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_unsubscribe.js",
       "icons": [
@@ -519,7 +519,7 @@
           "desc": "运行脚本消耗金币进行抽奖，默认抽奖"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "scripts":[
         {
@@ -555,7 +555,7 @@
           "desc": "输入兑换奖品名称(默认不兑换奖品)"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "scripts": [
         {
@@ -599,7 +599,7 @@
           "desc": "需要修改最小的运动步数的数字,例如:25000"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/xmSports.js",
       "icons": [
@@ -622,7 +622,7 @@
           "desc": "请尽量填写完整和别的商品有区分度"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_jdfactory.js",
       "icons": [
@@ -662,7 +662,7 @@
         "https://raw.githubusercontent.com/58xinian/icon/master/jdgc_mini.png",
         "https://github.com/58xinian/icon/raw/master/jdgc.png"
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_dreamFactory.js"
     },
@@ -691,7 +691,7 @@
         "https://raw.githubusercontent.com/58xinian/icon/master/jxcfd_mini.png",
         "https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png"
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_cfd.js"
     },
@@ -727,7 +727,7 @@
         "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
         "https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png"
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_cash.js"
     },
@@ -744,7 +744,7 @@
           "desc": "自动把抽奖卷兑换为兑币,默认关闭"
         }
       ],
-      "author": "NO",
+      "author": "",
       "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
       "scripts":[
         {
