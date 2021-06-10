@@ -1,6 +1,6 @@
 {
   "id": "app.sub",
-  "name": "京东_脚本订阅",
+  "name": "脚本订阅",
   "author": "NO",
   "icon": "https://avatars0.githubusercontent.com/u/21308593?s=52&v=4",
   "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/",
@@ -31,7 +31,7 @@
         "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
         "https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png"
       ],
-      "author": "@dompling",
+      "author": "",
       "repo": "https://github.com/dompling/Script",
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_joy_feedPets.js"
     },
