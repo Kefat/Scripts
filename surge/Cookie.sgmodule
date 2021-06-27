@@ -1,0 +1,60 @@
+#!name=Tartarus iOS Cookies Module
+#!desc=iOS Cookies 模块配置.自用
+
+[Script]
+# Chavy (tieba.baidu.com, *.smzdm.com, *.v2ex.com, mobwsa.ximalaya.com, *.bilibili.com, *.feng.com, *.video.qq.com, m.client.10010.com, act.10010.com, wx.10086.cn, wapside.189.cn, wx-mini.pagoda.com.cn)
+http-request ^https?:\/\/tieba\.baidu\.com\/?.? script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/tieba/tieba.cookie.js, tag=百度签到(网页)
+http-request ^https:\/\/www\.smzdm\.com\/?.? script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/smzdm/smzdm.cookie.js, tag=什么值得买
+http-request ^https:\/\/www\.v2ex\.com\/mission\/daily script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.cookie.js, tag=V2ex
+http-request ^https:\/\/(www|live)\.bilibili\.com\/?.? script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.cookie.js,enable=false, tag=哔哩哔哩
+http-request ^https:\/\/(www\.)?feng\.com\/?.? script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/feng/feng.cookie.js, tag=威锋论坛
+http-request ^https:\/\/access.video.qq.com\/user\/auth_refresh script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/videoqq/videoqq.cookie.js, tag=腾讯视频
+http-request ^https?:\/\/.*\/mobile\-user\/homePage\/.* script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/ximalaya/ximalaya.cookie.js,tag=喜马拉雅
+http-request ^https?:\/\/act.10010.com\/SigninApp\/signin\/querySigninActivity.htm script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js, tag=中国联通
+http-request ^https?:\/\/act.10010.com\/SigninApp(.*?)\/signin\/daySign script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js, tag=中国联通
+http-request ^https?:\/\/m.client.10010.com\/dailylottery\/static\/(textdl\/userLogin|active\/findActivityInfo) script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js, tag=中国联通
+http-response ^https:\/\/clientaccess.10086.cn\/biz-orange\/LN\/uamrandcodelogin\/autoLogin script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.fee.cookie.js, tag=中国移动-查话费
+http-response ^https:\/\/clientaccess.10086.cn\/biz-orange\/BN\/realFeeQuery\/getRealFee script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10086/10086.fee.cookie.js, tag=中国移动-查话费
+http-request ^https:\/\/wapside.189.cn:9001\/api\/home\/homeInfo script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.cookie.js, requires-body=true, tag=中国电信
+http-request ^https:\/\/wx-mini.pagoda.com.cn\/api\/v1\/wxmini\/signIn\/customer script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/pagoda/pagoda.cookie.js, tag=百果园
+
+# Nobyda  (ifac*.iqiyi.com, www.52pojie.cn, api.m.jd.com, c.tieba.baidu.com)
+http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean(Index|GroupStageIndex) max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东
+http-request ^https?:\/\/iface(\d)?\.iqiyi\.com\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js, tag=爱奇艺
+http-request https:\/\/www\.52pojie\.cn\/home\.php\? script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js, tag=吾爱破解
+http-request https?:\/\/(c\.tieba\.baidu\.com|180\.97\.\d+\.\d+)\/c\/s\/login script-path=https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js, tag=百度贴吧(客户端)
+
+# Macsuny（api.weibo.cn, pay.sc.weibo.com）
+http-request https:\/\/api\.weibo\.cn\/\d\/video\/machine\?gsid script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js, tag=微博
+http-request https:\/\/pay\.sc\.weibo\.com\/aj\/mobile\/home\/welfare\/signin\/do\? script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js, tag=微博
+
+# zZPiglet  (daojia.jd.com, h5.bianlifeng.com, mall.oclean.com)
+http-request https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jddj.js, tag=京东到家
+http-request ^https:\/\/h5\.bianlifeng\.com\/meepo\/taskCenter\/home\/v\d script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Blibee/Blibee.js, tag=便利蜂
+http-request ^https:\/\/mall\.oclean\.com\/API\/VshopProcess\.ashx\?action=TaskHome&clientType=5&client=5&openId= script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Oclean/Oclean_mini.js, tag=欧可林商城cookie
+
+# vinewx  (app*.jegotrip.com.cn, task.jegotrip.com.cn)
+http-response https?:\/\/app.*\.jegotrip\.com\.cn\/.*getUser\? script-path=https://ooxx.be/js/jegotrip.js, requires-body=true, tag=无忧行
+http-response https?:\/\/task\.jegotrip\.com\.cn\:8080\/app\/tasks\?userid script-path=https://ooxx.be/js/jegotrip.js, requires-body=true,  tag=无忧行
+
+# syzzzf (h5.ele.me)
+http-request ^https:\/\/h5\.ele\.me\/restapi\/eus\/v\d\/current_user$ script-path=https://raw.githubusercontent.com/songyangzz/QuantumultX/master/elem/elemGetCookies.js, tag=饿了么
+
+# blackmatrix7 (%APPEND% zhiyou.smzdm.com, user-api.smzdm.com)
+什么值得买_获取cookie = script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_checkin.js,type=http-request,requires-body=true,pattern=^https?:\/\/zhiyou\.smzdm\.com\/user$
+什么值得买_获取账号密码 = script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_checkin.js,type=http-request,requires-body=true,pattern=^https?:\/\/user-api\.smzdm\.com\/user_login\/normal$
+
+# lxk0301 (account.huami.com)
+小米运动获取Token = type=http-response,pattern=^https:\/\/account\.huami\.com\/v2\/client\/login, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/backUp/xmSports.js
+
+# XidNDD (commontgw6.reader.qq.com, eventv3.reader.qq.com)
+QQ阅读APP = type=http-request,pattern=^https:\/\/(commontgw6|eventv3)\.reader\.qq\.com\/*,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/XidNDD/2020scripts/master/QQReadSign.js
+
+# ziye12  (mobile.app.autohome.com.cn, pay.autohome.com.cn, openapi.autohome.com.cn)
+# 汽车之家极速版
+汽车之家极速版获取body = type=http-request,pattern=(mobile\.app\.autohome\.com\.cn\/*||openapi\.autohome\.com\.cn\/*),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ziye12/QCZJSPEED/master/Task/qczjspeed.js, script-update-interval=0
+汽车之家极速版获取header = type=http-request,pattern=(mobile\.app\.autohome\.com\.cn\/*||openapi\.autohome\.com\.cn\/*),script-path=https://raw.githubusercontent.com/ziye12/QCZJSPEED/master/Task/qczjspeed.js
+汽车之家极速版获取时段body = type=http-request,pattern=http:\/\/mobile\.app\.autohome\.com\.cn\/fasthome\/mainpagecoin\/addCoin,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ziye12/QCZJSPEED/master/Task/qczjspeed.js, script-update-interval=0
+
+[MITM]
+hostname = tieba.baidu.com, *.smzdm.com, *.v2ex.com, mobwsa.ximalaya.com, *.bilibili.com, *.feng.com, *.video.qq.com, m.client.10010.com, act.10010.com, wx.10086.cn, wapside.189.cn, wx-mini.pagoda.com.cn, ifac*.iqiyi.com, www.52pojie.cn, api.m.jd.com, c.tieba.baidu.com, api.weibo.cn, pay.sc.weibo.com, h5.bianlifeng.com, mall.oclean.com, app*.jegotrip.com.cn, task.jegotrip.com.cn, daojia.jd.com, commontgw6.reader.qq.com, eventv3.reader.qq.com, %APPEND% zhiyou.smzdm.com, user-api.smzdm.com, h5.ele.me, account.huami.com, mobile.app.autohome.com.cn, pay.autohome.com.cn, openapi.autohome.com.cn
