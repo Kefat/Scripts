@@ -41,4 +41,3 @@ V2EX = type=cron,cronexp=59 18 * * *,wake-system=1,timeout=30,script-path=https:
 京东_汽车 = type=cron,cronexp=59 20 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_car.js,script-update-interval=0
 京东_京豆变动通知 = type=cron,cronexp=59 21 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_bean_change.js,script-update-interval=0
 京东_取关店铺商品 = type=cron,cronexp=59 22 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_unsubscribe.js,script-update-interval=0
-京东_注销会员卡 = type=cron,cronexp=30 23 * * *,wake-system=1,timeout=150,script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_unbind.js,script-update-interval=0
