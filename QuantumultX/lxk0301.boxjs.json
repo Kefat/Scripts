@@ -726,35 +726,6 @@
       "icons": [
         "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
         "https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png"
-      ],
-      "author": "",
-      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
-      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_cash.js"
-    },
-    {
-      "id": "jd_jxd",
-      "name": "京小兑",
-      "keys": [],
-      "settings": [
-        {
-          "id": "jdJxdExchange",
-          "name": "自动把抽奖卷兑换为兑币",
-          "val": false,
-          "type": "boolean",
-          "desc": "自动把抽奖卷兑换为兑币,默认关闭"
-        }
-      ],
-      "author": "",
-      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
-      "scripts":[
-        {
-          "name" : "京小兑",
-          "script" : "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_jxd.js"
-        }
-      ],
-      "icons": [
-        "https://raw.githubusercontent.com/58xinian/icon/master/jd_jxd_mini.png",
-        "https://raw.githubusercontent.com/58xinian/icon/master/jd_jxd.png"
       ]
     }
   ]
