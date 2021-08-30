@@ -487,6 +487,8 @@
     }
     {
       "id": "weibo", 
+      "name": "新浪微博", 
+      "author": "@sunert", 
       "descs_html": [
         "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://github.com/Sunert/Script/raw/master/TaskConf/sina/readme.md\">配置说明</a></h4>", 
         "<br />", 
@@ -497,10 +499,8 @@
         "wb_cookie", 
         "wb_nick"
       ], 
-      "repo": "https://github.com/Sunert/Script/blob/master/Task/weibo.js", 
-      "id": "weibo", 
+      "repo": "https://github.com/Sunert/Script/blob/master/Task/weibo.js",  
       "script": "https://raw.githubusercontent.com/Sunert/Script/master/Task/weibo.js", 
-      "name": "新浪微博", 
       "icons": [
         "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Alpha/weibo.png", 
         "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/weibo.png"
