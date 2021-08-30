@@ -1,0 +1,516 @@
+{
+  "id": "app.sub",
+  "name": "脚本订阅",
+  "author": "自用",
+  "icon": "https://avatars0.githubusercontent.com/u/21308593?s=52&v=4",
+  "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/",
+  "apps": [
+    {
+      "id": "JD_Cookies_remark",
+      "name": "登陆助手",
+      "keys": ["@jd_ck_remark.remark", "@jd_ck_remark.mute"],
+      "descs_html": [
+        "请勿随意在输入框修改内容，建议通过脚本去获取cookie，若要修改，请按照JSON 格式修改（<a href=\"https://www.bejson.com/json/format\">可使用此JSON校验</a> ，或点击右上角按钮🔘进行校验(如有弹窗提示则为异常JSON)）。",
+        "脚本地址【<a href=\"https://jdsharedresourcescdn.azureedge.net/jdresource/JD_extra_cookie.js\">京东多 CK获取</a>】,并按照此脚本注释进行配置",
+        "可以修改的字段，nickname,mobile",
+        "示例：[{username:\"yaya\",nickname:\"I'm YaYa man\",mobile:\"1234567890\"}]",
+        "可以根据 下标、username、nickname、status 字段检索京东多账号 ck"
+      ],
+      "settings": [
+        {
+          "id": "@jd_ck_remark.mute",
+          "name": "静音",
+          "val": false,
+          "type": "boolean",
+          "desc": "不会执行通知提示"
+        },
+        {
+          "id": "@jd_ck_remark.keyword",
+          "name": "检索条件",
+          "val": null,
+          "type": "text",
+          "autoGrow": false,
+          "rows": 2,
+          "placeholder": "下标（0）、username、nickname、status 的值"
+        },
+        {
+          "id": "@jd_ck_remark.remark",
+          "name": "CK 备注列表",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": false,
+          "rows": 8,
+          "desc": "CK 备注列表 (JSON 格式)"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/Orz-3/mini/master/jd.png",
+        "https://raw.githubusercontent.com/Orz-3/task/master/jd.png"
+      ],
+      "author": "@dompling",
+      "repo": "https://github.com/dompling/Script/blob/master/jd/jd_cookie_search.js",
+      "script": "https://raw.githubusercontent.com/dompling/Script/master/jd/jd_cookie_search.js"
+    },
+    {
+      "id": "JD_jr_Cookies",
+      "name": "金融领豆",
+      "keys": ["@jd_jr.cookies", "@jd_jr.bodys"],
+      "descs_html": [
+        "请勿随意在输入框修改内容，只能通过脚本去获取cookie，若要修改，请按照JSON 格式修改（<a href=\"https://www.bejson.com/json/format\">可使用此JSON校验</a> ，或点击右上角按钮🔘进行校验(如有弹窗提示则为异常JSON)）。",
+        "仅能修改phoneNumber内容",
+        "JSON示例：[{phoneNumber: \"13348751678\", username: \"yaya\" }]"
+      ],
+      "settings": [
+        {
+          "id": "@jd_jr.cookies",
+          "name": "CK 列表",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "CK 列表 (JSON 格式)"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/Orz-3/mini/master/jd.png",
+        "https://raw.githubusercontent.com/Orz-3/task/master/jd.png"
+      ],
+      "author": "@dompling",
+      "repo": "https://github.com/dompling/Script/blob/master/jd/jd_jr_cookie.js",
+      "script": "https://raw.githubusercontent.com/dompling/Script/master/jd/jd_jr_sign.js"
+    },
+    {
+      "id": "jx_tokens",
+      "name": "京喜tokens",
+      "keys": ["jx_tokens"],
+      "descs_html": [
+        "请勿随意在输入框修改内容，建议通过脚本去获取Token，若要修改，请按照 JSON 数组格式修改。",
+        "脚本地址【<a href=\"https://github.com/whyour/hundun/blob/master/quanx/jx_tokens.js\">京喜多账号Token获取</a>】,并按照此脚本注释进行配置"
+      ],
+      "settings": [
+        {
+          "id": "jx_tokens",
+          "name": "Tokens",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "Tokens 列表 (JSON 数组格式)"
+        }
+      ],
+      "author": "@whyour",
+      "repo": "https://github.com/whyour/hundun/blob/master/quanx/jx_tokens.js",
+      "script": "https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_tokens.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jx_sign_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jx_sign.png"
+      ]
+    },
+    {
+      "id": "jd_fruit",
+      "name": "东东农场",
+      "keys": ["jd_fruit_inviter"],
+      "descs_html": [
+        "请在输入框输入跟你互助的东东农场的好友互助码",
+        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
+        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
+      ],
+      "settings": [
+        {
+          "id": "jdFruitNotify",
+          "name": "静默运行",
+          "val": false,
+          "type": "boolean",
+          "desc": "运行东东农场脚本时不发出系统通知"
+        },
+        {
+          "id": "jdFruitBeanCard",
+          "name": "使用水滴换豆卡",
+          "val": false,
+          "type": "boolean",
+          "desc": "使用水滴换豆卡(如果出现限时活动是100g水换20豆,此时比浇水划算,推荐换豆)"
+        },
+        {
+          "id": "jd_fruit_inviter",
+          "name": "东东农场好友邀请码 列表",
+          "val": "",
+          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "好友邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_fruit.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdnc_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdnc.png"
+      ]
+    },
+    {
+      "id": "jd_pet",
+      "name": "东东萌宠",
+      "keys": ["jd_pet_inviter"],
+      "descs_html": [
+        "请在输入框输入跟你互助的东东萌宠的好友互助码",
+        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
+        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
+      ],
+      "settings": [
+        {
+          "id": "jdPetNotify",
+          "name": "静默运行",
+          "val": false,
+          "type": "boolean",
+          "desc": "运行东东萌宠脚本时不发出系统通知"
+        },
+        {
+          "id": "jd_pet_inviter",
+          "name": "东东萌宠好友邀请码 列表",
+          "val": "",
+          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "好友邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_pet.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdmc_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdmc.png"
+      ]
+    },
+    {
+      "id": "jd_plantBean",
+      "name": "京东种豆",
+      "keys": ["jd_plantbean_inviter"],
+      "descs_html": [
+        "请在输入框输入跟你互助的京东种豆得豆的好友互助码",
+        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
+        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
+      ],
+      "settings": [
+        {
+          "id": "jdPlantBeanNotify",
+          "name": "静默运行",
+          "val": true,
+          "type": "boolean",
+          "desc": "运行种豆脚本时不发出系统通知"
+        },
+        {
+          "id": "jd_plantbean_inviter",
+          "name": "京东种豆好友邀请码 列表",
+          "val": "",
+          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "好友邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_plantBean.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdzd_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png"
+      ]
+    },
+    {
+      "id": "jdUnsubscribe",
+      "name": "取关京东店铺和商品",
+      "keys": [
+        "jdUnsubscribeStopGoods",
+        "jdUnsubscribeStopShop"
+      ],
+      "settings": [
+        {
+          "id": "jdUnsubscribeNotify",
+          "name": "静默运行",
+          "val": false,
+          "type": "boolean",
+          "desc": "运行脚本时不发出系统弹窗通知"
+        },
+        {
+          "id": "jdUnsubscribePageSize",
+          "name": "取消已关注商品的数量",
+          "val": 10,
+          "type": "number",
+          "desc": "运行一次脚本取消多少个已关注的商品（默认10个,输入0表示不取关）"
+        },
+        {
+          "id": "jdUnsubscribeShopPageSize",
+          "name": "取消已关注店铺的数量",
+          "val": 10,
+          "type": "number",
+          "desc": "运行一次脚本取消多少个已关注的店铺（默认10个,输入0表示不取关）"
+        },
+        {
+          "id": "jdUnsubscribeStopGoods",
+          "name": "遇到此商品不再进行取关",
+          "val": "",
+          "type": "text",
+          "desc": "匹配到此处商品后面(包括此商品)不再进行取关(此处内容需去商品详情页长按（自营处）文字拷贝商品信息)"
+        },
+        {
+          "id": "jdUnsubscribeStopShop",
+          "name": "遇到此店铺不再进行取关",
+          "val": "",
+          "type": "text",
+          "desc": "匹配到此处店铺后面(包括此店铺)的不再进行取关(此处内容请尽量从头开始输入店铺名称)"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_unsubscribe.js",
+      "icons": [
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png"
+      ]
+    },
+    {
+      "id": "jd_SuperMarket",
+      "name": "东东超市",
+      "keys": [],
+      "settings": [
+        {
+          "id": "jdSuperMarketNotify",
+          "name": "静默运行",
+          "val": true,
+          "type": "boolean",
+          "desc": "运行此脚本时不发出系统弹窗通知"
+        },
+        {
+          "id": "JOIN_PK_TEAM",
+          "name": "自动参加作者PK队伍",
+          "val": true,
+          "type": "boolean",
+          "desc": "每次pk活动自动参加作者PK队伍，默认参加"
+        },
+        {
+          "id": "jdSuperMarketLottery",
+          "name": "抽奖(招财进宝)",
+          "val": false,
+          "type": "boolean",
+          "desc": "运行脚本消耗金币进行抽奖，默认抽奖"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "scripts":[
+        {
+          "name" : "东东超市",
+          "script" : "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_superMarket.js"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxc_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxc.png"
+      ]
+    },
+    {
+      "id": "jd_SuperMarket_Reawrd",
+      "name": "东东超市兑换奖品",
+      "keys": [
+        "coinToBeans"
+      ],
+      "desc": "默认不兑换奖品,例如:兑换20京豆输入20,兑换1000京豆输入1000,兑换 柠檬果香洗手液， 输入 柠檬果香洗手液。其他详细的奖品名称去东东超市活动页面查看",
+      "settings": [
+        {
+          "id": "jdSuperMarketRewardNotify",
+          "name": "静默运行",
+          "val": false,
+          "type": "boolean",
+          "desc": "开启后成功兑换到奖品不发出系统弹窗通知"
+        },
+        {
+          "id": "coinToBeans",
+          "name": "兑换奖品（默认不兑换）",
+          "val": "0",
+          "type": "text",
+          "desc": "输入兑换奖品名称(默认不兑换奖品)"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "scripts": [
+        {
+          "name" : "东东超市兑换奖品",
+          "script" : "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_blueCoin.js"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxc_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxc.png"
+      ]
+    },
+    {
+      "id": "xmSports",
+      "name": "小米运动",
+      "keys": [
+        "xmSportsToken",
+        "xmMinStep",
+        "xmMaxStep"
+      ],
+      "settings": [
+        {
+          "id": "xmSportsToken",
+          "name": "小米运动Token",
+          "val": "",
+          "type": "text",
+          "desc": "小米运动登录时获取的token"
+        },
+        {
+          "id": "xmMinStep",
+          "name": "最小运动步数",
+          "val": "19000",
+          "type": "text",
+          "desc": "需要修改最小的运动步数的数字,例如:19000"
+        },
+        {
+          "id": "xmMaxStep",
+          "name": "最大运动步数",
+          "val": "25000",
+          "type": "text",
+          "desc": "需要修改最小的运动步数的数字,例如:25000"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/xmSports.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/xmyd_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/xmyd.png"
+      ]
+    },
+    {
+      "id": "lxk_jdfactory",
+      "name": "东东工厂",
+      "keys": [
+        "FACTORAY_WANTPRODUCT_NAME"
+      ],
+      "settings": [
+        {
+          "id": "FACTORAY_WANTPRODUCT_NAME",
+          "name": "心仪商品名称",
+          "val": "",
+          "type": "text",
+          "desc": "请尽量填写完整和别的商品有区分度"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_jdfactory.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jd_factory_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jd_factory.png"
+      ]
+    },
+    {
+      "id": "jd_dreamFactory",
+      "name": "京喜工厂",
+      "keys": ["jd_jxFactory", "tuanActiveId"],
+      "descs_html": [
+        "请在输入框输入跟你互助的京喜工厂的好友互助码",
+        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
+        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
+      ],
+      "settings": [
+        {
+          "id": "jd_jxFactory",
+          "name": "京喜工厂好友邀请码 列表",
+          "val": "",
+          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "京喜工厂邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
+        },
+        {
+          "id": "tuanActiveId",
+          "name": "京喜工厂拼团瓜分电力活动团ID",
+          "val": "",
+          "type": "text",
+          "desc": "默认读取作者设置，如出现脚本提示开团失败：`活动已结束，请稍后再试~`，可自行抓包替换(开启抓包，进入拼团瓜分电力页面，寻找带有`tuan`的链接里面的`activeId=`"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdgc_mini.png",
+        "https://github.com/58xinian/icon/raw/master/jdgc.png"
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_dreamFactory.js"
+    },
+    {
+      "id": "jd_jxCFD_invites",
+      "name": "京喜财富岛",
+      "keys": ["jd_jxCFD"],
+      "descs_html": [
+        "请在输入框输入跟你互助的京喜财富岛的好友互助码",
+        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
+        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
+      ],
+      "settings": [
+        {
+          "id": "jd_jxCFD",
+          "name": "京喜财富岛好友邀请码 列表",
+          "val": "",
+          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "京喜财富岛邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxcfd_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png"
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_cfd.js"
+    },
+    {
+      "id": "jd_cash",
+      "name": "签到领现金",
+      "keys": ["jd_cash_invite"],
+      "descs_html": [
+        "请在输入框输入跟你互助的签到领现金的好友互助码",
+        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
+        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
+      ],
+      "settings": [
+        {
+          "id": "cash_exchange",
+          "name": "是否消耗红包兑换京豆",
+          "val": false,
+          "type": "boolean",
+          "desc": "是否消耗2元红包兑换200京豆，一周可换四次，默认否"
+        },
+        {
+          "id": "jd_cash_invite",
+          "name": "签到领现金好友邀请码 列表",
+          "val": "",
+          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "签到领现金邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png"
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_cash.js"
+    }
+  ]
+}
