@@ -486,14 +486,7 @@
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_cash.js"
     }
     {
-     "id": "sunert.app.sub", 
-  "author": "@Sunert", 
-  "icon": "https://avatars2.githubusercontent.com/u/47924389?s=460&u=5152f048a9e8aaa45102763a578172407c40fcc8&v=4", 
-  "name": "Sunert 签到应用订阅", 
-  "repo": "https://github.com/Sunert/Script/tree/master", 
-  "apps": [
-    {
-      "author": "@sunert", 
+      "id": "weibo", 
       "descs_html": [
         "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://github.com/Sunert/Script/raw/master/TaskConf/sina/readme.md\">配置说明</a></h4>", 
         "<br />", 
