@@ -131,9 +131,9 @@ async function showMsg() {
   if ($.errorMsg) return;
   let notifyMsg = `
 账号${$.index}：${$.nickName || $.UserName}
-今日收入：${$.todayIncomeBean}京豆
-昨日收入：${$.incomeBean}京豆
-昨日支出：${$.expenseBean}京豆
+今日收入：${$.todayIncomeBean}京豆 🐶
+昨日收入：${$.incomeBean}京豆 🐶
+昨日支出：${$.expenseBean}京豆 🐶
 当前京豆：${$.beanCount}(今日过期${$.expirejingdou})${$.message}`;
   if ($.pet) notifyMsg += `\n东东萌宠：${$.pet}`;
   if ($.fruit) notifyMsg += `\n东东农场：${$.fruit}`;
@@ -430,13 +430,13 @@ function redPacket() {
             ).toFixed(2);
             $.message += `\n当前红包：${$.balance}(今日过期${
               $.expiredBalance
-            })元 \n京喜红包：${$.jxRed}(今日过期${$.jxRedExpire.toFixed(
+            })元 🧧\n京喜红包：${$.jxRed}(今日过期${$.jxRedExpire.toFixed(
               2,
-            )})元 \n极速红包：${$.jsRed}(今日过期${$.jsRedExpire.toFixed(
+            )})元 🧧\n极速红包：${$.jsRed}(今日过期${$.jsRedExpire.toFixed(
               2,
-            )})元 \n京东红包：${$.jdRed}(今日过期${$.jdRedExpire.toFixed(
+            )})元 🧧\n京东红包：${$.jdRed}(今日过期${$.jdRedExpire.toFixed(
               2,
-            )})元 \n健康红包：${$.jdhRed}(今日过期${$.jdhRedExpire.toFixed(
+            )})元 🧧\n健康红包：${$.jdhRed}(今日过期${$.jdhRedExpire.toFixed(
               2,
             )})元 `;
           } else {
