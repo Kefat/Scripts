@@ -28,7 +28,7 @@
     }, 
     {
       "id": "blackmatrix7.10010",
-      "name": "联通每日签到与抽奖",
+      "name": "中国联通",
       "keys": ["unicom_user_cookie", "unicom_mobile", "unicom_encrypt_mobile", "city_code"],
       "author": "@blackmatrix7",
       "repo": "https://github.com/blackmatrix7/ios_rule_script/tree/master/script/10010",
