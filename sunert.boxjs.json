@@ -27,30 +27,6 @@
       ]
     }, 
     {
-      "id": "10000",
-      "name": "10000",
-      "keys": [],
-      "settings": [
-        {
-          "id": "chavy_mobile_10000",
-          "name": "手机号码",
-          "val": "",
-          "type": "textarea",
-          "placeholder": "18918920000,\n18918920000",
-          "autoGrow": true,
-          "rows": 5,
-          "desc": "以英文逗号分隔多个号码, 可加回车"
-        }
-      ],
-      "author": "@wangfei021325, @chavyleung",
-      "repo": "https://github.com/chavyleung/scripts/blob/master/10000/10000.js",
-      "script": "https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.js",
-      "icons": [
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/10000.png",
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/10000.png"
-      ]
-    },
-    {
       "id": "blackmatrix7.10010",
       "name": "联通每日签到与抽奖",
       "keys": ["unicom_user_cookie", "unicom_mobile", "unicom_encrypt_mobile", "city_code"],
