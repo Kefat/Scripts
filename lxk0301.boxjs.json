@@ -107,20 +107,6 @@
       ]
     },
     {
-      "author": "@sunert", 
-      "keys": [
-        "sy_cookie_dj"
-      ], 
-      "repo": "https://github.com/Sunert/Script/blob/master/Task/jddj.js", 
-      "id": "jddj", 
-      "script": "https://raw.githubusercontent.com/Sunert/Script/master/Task/jddj.js", 
-      "name": "京东到家", 
-      "icons": [
-        "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Alpha/jddj.png", 
-        "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/jddj.png"
-      ]
-    }, 
-    {
       "id": "jd_fruit",
       "name": "东东农场",
       "keys": ["jd_fruit_inviter"],
