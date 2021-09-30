@@ -2,34 +2,38 @@
 #!desc=iOS Cookies 模块配置.自用
 
 [Script]
-# Chavy (*.smzdm.com, *.v2ex.com, 49.234.36.200:9091, m.client.10010.com, act.10010.com)
-http-request ^https:\/\/www\.smzdm\.com\/?.? script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/smzdm/smzdm.cookie.js, tag=什么值得买
-http-request ^https:\/\/www\.v2ex\.com\/mission\/daily script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.cookie.js, tag=V2ex
-http-request ^http:\/\/49.234.36.200:9091\/v1\/auth\/signin script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/feng/feng.cookie.js, tag=威锋论坛
-http-request ^https?:\/\/act.10010.com\/SigninApp\/signin\/querySigninActivity.htm script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js, tag=中国联通
-http-request ^https?:\/\/act.10010.com\/SigninApp(.*?)\/signin\/daySign script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js, tag=中国联通
-http-request ^https?:\/\/m.client.10010.com\/dailylottery\/static\/(textdl\/userLogin|active\/findActivityInfo) script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js, tag=中国联通
+# Chavy (wapside.189.cn:9001, api.wfdata.club, *.v2ex.com, music.163.com, tieba.baidu.com, *.smzdm.com, *.video.qq.com, 113.96.156.178, *.ximalaya.com)
+电信营业厅Cookie = type=http-request,pattern=^https:\/\/wapside.189.cn:9001\/api\/home\/sign,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.cookie.js
+威锋Cookie = type=http-request,pattern=^https?:\/\/api.wfdata.club\/v1\/auth\/signin,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/feng/feng.cookie.js
+V2EX Cookie = type=http-request,pattern=^https:\/\/www\.v2ex\.com\/mission\/daily,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.cookie.js
+网易云音乐Cookie = type=http-request,pattern=^https:\/\/music.163.com\/weapi\/user\/level,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/neteasemusic/quanx/neteasemusic.cookie.js
+百度签到Cookie = type=http-request,pattern=^https?:\/\/tieba\.baidu\.com\/?.?,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/tieba/tieba.cookie.js
+什么值得买Cookie = type=http-request,pattern=^https:\/\/www\.smzdm\.com\/?.?,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/smzdm/smzdm.cookie.js
+腾讯视频Cookie = type=http-request,pattern=^https:\/\/access.video.qq.com\/user\/auth_refresh,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/videoqq/videoqq.cookie.js
+喜马拉雅Cookie = type=http-request,pattern=^https?:\/\/.*\/mobile\-user\/(v1\/)?homePage\/.*,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/ximalaya/ximalaya.cookie.js
 
-# Nobyda  (ifac*.iqiyi.com, www.52pojie.cn, api.m.jd.com, c.tieba.baidu.com)
-http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean(Index|GroupStageIndex) max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东
-http-request ^https?:\/\/iface(\d)?\.iqiyi\.com\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js, tag=爱奇艺
-http-request https:\/\/www\.52pojie\.cn\/home\.php\? script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js, tag=吾爱破解
-http-request https?:\/\/(c\.tieba\.baidu\.com|180\.97\.\d+\.\d+)\/c\/s\/login script-path=https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js, tag=百度贴吧(客户端)
+# Nobyda  (www.52pojie.cn, ifac*.iqiyi.com, c.tieba.baidu.com, api.m.jd.com, ms.jr.jd.com, me-api.jd.com)
+吾爱破解Cookie = type=http-request,pattern=https:\/\/www\.52pojie\.cn\/home\.php\?,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js
+爱奇艺Cookie = type=http-request,pattern=^https?:\/\/iface(\d)?\.iqiyi\.com\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+百度贴吧Cookie = type=http-request,pattern=https?:\/\/(c\.tieba\.baidu\.com|180\.97\.\d+\.\d+)\/c\/s\/login,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js
+京东Cookie = type=http-request,requires-body=1,pattern=^https:\/\/(api\.m|me-api|ms\.jr)\.jd\.com\/(client\.action\?functionId=signBean|user_new\/info\/GetJDUserInfoUnion\?|gw\/generic\/hy\/h5\/m\/appSign\?),script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
-# Sunert（api.weibo.cn, daojia.jd.com）
-http-request https:\/\/api\.weibo\.cn\/2\/users\/show script-path=https://raw.githubusercontent.com/Sunert/Script/master/Task/weibo.js, tag=微博
-http-request https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}(.*?)&functionId=%2Fsignin script-path=https://raw.githubusercontent.com/Sunert/Script/master/Task/jddj.js, tag=京东到家
+# Dompling
+京东金融领豆Cookie = type=http-request,pattern=^https?:\/\/ms\.jr\.jd\.com\/gw\/generic\/uc\/newna\/m\/userstat,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/dompling/Script/master/jd/jd_jr_cookie.js
 
-# vinewx  (app*.jegotrip.com.cn, task.jegotrip.com.cn)
-http-response https?:\/\/app.*\.jegotrip\.com\.cn\/.*getUser\? script-path=https://ooxx.be/js/jegotrip.js, requires-body=true, tag=无忧行
-http-response https?:\/\/task\.jegotrip\.com\.cn\:8080\/app\/tasks\?userid script-path=https://ooxx.be/js/jegotrip.js, requires-body=true,  tag=无忧行
+# whyour（wq.jd.com, m.jingxi.com）
+京喜token = type=http-request,pattern=^https\:\/\/wq\.jd\.com\/cubeactive\/farm\/dotask,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_tokens.js
+京喜token = type=http-request,pattern=^https\:\/\/m\.jingxi\.com\/dreamfactory\/generator\/CollectCurrentElectricity,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_tokens.js
 
-# syzzzf (h5.ele.me)
-http-request ^https:\/\/h5\.ele\.me\/restapi\/eus\/v\d\/current_user$ script-path=https://raw.githubusercontent.com/songyangzz/QuantumultX/master/elem/elemGetCookies.js, tag=饿了么
+# Blackmatrix7（m.client.10010.com）
+联通_获取cookie = type=http-request,pattern=^https?:\/\/m\.client\.10010\.com\/dailylottery\/static\/(integral|doubleball)\/firstpage,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/10010/unicom_signin.min.js
 
-# lxk0301 (account.huami.com)
-小米运动获取Token = type=http-response,pattern=^https:\/\/account\.huami\.com\/v2\/client\/login, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/xmSports.js
+# Sunert（api.weibo.cn）
+微博Cookie = type=http-request,pattern=https:\/\/api\.weibo\.cn\/2\/users\/show,script-path=https://raw.githubusercontent.com/Sunert/Script/master/Task/weibo.js
+
+# Aaron-lv (account.huami.com)
+小米运动获取Token = type=http-response,pattern=^https:\/\/account\.huami\.com\/v2\/client\/login, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/backUp/xmSports.js
 
 
 [MITM]
-hostname = *.smzdm.com, *.v2ex.com, 49.234.36.200:9091, m.client.10010.com, act.10010.com, ifac*.iqiyi.com, www.52pojie.cn, api.m.jd.com, c.tieba.baidu.com, api.weibo.cn, pay.sc.weibo.com, app*.jegotrip.com.cn, task.jegotrip.com.cn, daojia.jd.com, h5.ele.me, account.huami.com
+hostname = wapside.189.cn:9001, api.wfdata.club, *.v2ex.com, music.163.com, tieba.baidu.com, *.smzdm.com, *.video.qq.com, 113.96.156.178, *.ximalaya.com, www.52pojie.cn, ifac*.iqiyi.com, c.tieba.baidu.com, api.m.jd.com, ms.jr.jd.com, me-api.jd.com, wq.jd.com, m.jingxi.com, m.client.10010.com, api.weibo.cn, account.huami.com
