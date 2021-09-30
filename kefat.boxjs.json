@@ -111,6 +111,28 @@
       ]
     },
     {
+      "id": "NeteaseMusic",
+      "name": "网易云音乐",
+      "keys": ["chavy_cookie_neteasemusic"],
+      "settings": [
+        { "id": "CFG_neteasemusic_retryCnt", "name": "重试次数", "val": 10, "type": "text", "desc": "一直尝试签到直至出现“重复签到”标识!" },
+        {
+          "id": "CFG_neteasemusic_retryInterval",
+          "name": "重试间隔 (毫秒)",
+          "val": 500,
+          "type": "text",
+          "desc": "每次重试间隔时间 (毫秒)！"
+        }
+      ],
+      "author": "@chavyleung",
+      "repo": "https://github.com/chavyleung/scripts/tree/master/neteasemusic",
+      "script": "https://raw.githubusercontent.com/chavyleung/scripts/master/neteasemusic/neteasemusic.js",
+      "icons": [
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/neteasemusic.png",
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/neteasemusic.png"
+      ]
+    },
+    {
       "id": "feng",
       "name": "威锋网",
       "keys": ["chavy_login_feng"],
