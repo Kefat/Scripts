@@ -29,7 +29,7 @@ V2EX Cookie = type=http-request,pattern=^https:\/\/www\.v2ex\.com\/mission\/dail
 联通_获取cookie = type=http-request,pattern=^https?:\/\/m\.client\.10010\.com\/dailylottery\/static\/(integral|doubleball)\/firstpage,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/10010/unicom_signin.min.js
 
 # Sunert（api.weibo.cn）
-微博Cookie = type=http-request,pattern=https:\/\/api\.weibo\.cn\/2\/users\/show,script-path=https://raw.githubusercontent.com/Sunert/Script/master/Task/weibo.js
+微博Cookie = type=http-request,pattern=https:\/\/api\.weibo\.cn\/\d\/users\/show,script-path=https://raw.githubusercontent.com/Sunert/Script/master/Task/weibo.js
 
 # Aaron-lv (account.huami.com)
 小米运动获取Token = type=http-response,pattern=^https:\/\/account\.huami\.com\/v2\/client\/login, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/backUp/xmSports.js
