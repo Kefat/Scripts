@@ -1,7 +1,8 @@
-#!name=抖音去广告
+#!name=Script - All in one .
+#!desc=该模块来自网络收集，自用
 #!system=ios
-[General]
 
+[URL Rewrite]
 # > 抖音 去广告&水印
 ^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/feed\/ https://aweme.snssdk.com/aweme/v1/feed/ header
 ^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/aweme\/post\/ https://aweme.snssdk.com/aweme/v1/aweme/post/ header
