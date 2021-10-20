@@ -1,6 +1,5 @@
 /*
 城城领现金
-cron 0 0-23/2 * * * https://raw.githubusercontent.com/Kefat/Scripts/main/jd_city.js
 说明：只助力第一个CK，脚本内会内置作者助力码，介意勿跑
  */
 const $ = new Env('城城领现金');
@@ -27,9 +26,9 @@ let inviteCodes = []
     console.log(`注意：只助力第一个CK，脚本内会内置作者助力码，介意勿跑，等待10秒`);
     await $.wait(10000);
     let res = [];
-    try{res = await getAuthorShareCode('https://raw.githubusercontent.com/Kefat/Scripts/main/city.json');}catch (e) {}
+    try{res = await getAuthorShareCode('');}catch (e) {}
     if(!res){
-        try{res = await getAuthorShareCode('https://raw.githubusercontent.com/Kefat/Scripts/main/city.json');}catch (e) {}
+        try{res = await getAuthorShareCode('');}catch (e) {}
         if(!res){res = [];}
     }
     if(res.length > 0){
