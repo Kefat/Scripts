@@ -1,6 +1,6 @@
 /*
 城城领现金
-cron 0 0-23/1 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_city.js
+cron 0 0-23/2 * * * https://raw.githubusercontent.com/Kefat/Scripts/main/jd_city.js
 说明：只助力第一个CK，脚本内会内置作者助力码，介意勿跑
  */
 const $ = new Env('城城领现金');
