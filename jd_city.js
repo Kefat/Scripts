@@ -24,7 +24,7 @@ let inviteCodes = []
         return;
     }
     console.log(`注意：只助力第一个CK，脚本内会内置作者助力码，介意勿跑，等待10秒`);
-    await $.wait(5000);
+    await $.wait(10000);
     let res = ["RtGKzuzxQ1-hLYecFtU3gGLFaDHg2P5glmI_alu7sqRqnmzCLQ","RtGKq7HECUrmKtztfqthmtCcUQDXI_icpQVwOh80ATrJQerR"]
 ;
     try{res = await getAuthorShareCode('');}catch (e) {}
