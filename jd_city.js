@@ -25,11 +25,13 @@ let inviteCodes = []
     }
     console.log(`注意：只助力第一个CK，脚本内会内置作者助力码，介意勿跑，等待10秒`);
     await $.wait(10);
-    let res = [];
+    let res = ["RtGKzuzxQ1-hLYecFtU3gGLFaDHg2P5glmI_alu7sqRqnmzCLQ","RtGKq7HECUrmKtztfqthmtCcUQDXI_icpQVwOh80ATrJQerR"]
+;
     try{res = await getAuthorShareCode('');}catch (e) {}
     if(!res){
         try{res = await getAuthorShareCode('');}catch (e) {}
-        if(!res){res = [];}
+        if(!res){res = ["RtGKzuzxQ1-hLYecFtU3gGLFaDHg2P5glmI_alu7sqRqnmzCLQ","RtGKq7HECUrmKtztfqthmtCcUQDXI_icpQVwOh80ATrJQerR"]
+;}
     }
     if(res.length > 0){
         if(res.length > 3){
