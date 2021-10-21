@@ -26,12 +26,14 @@ let inviteCodes = []
         return;
     }
     console.log(`注意：助力第一个CK和脚本内置作者助力码，介意勿跑，等待10秒`);
-    await $.wait(12000);
-    let res = [];
+    await $.wait(10000);
+    let res = ["RtGKzuzxQ1-hLYecFtU3gGLFaDHg2P5glmI_alu7sqRqnmzCLQ","RtGKq7HECUrmKtztfqthmtCcUQDXI_icpQVwOh80ATrJQerR"]
+;
     try{res = await getAuthorShareCode('https://raw.githubusercontent.com/Kefat/Scripts/main/city.json');}catch (e) {}
     if(!res){
         try{res = await getAuthorShareCode('https://raw.githubusercontent.com/Kefat/Scripts/main/city.json');}catch (e) {}
-        if(!res){res = [];}
+        if(!res){res = ["RtGKzuzxQ1-hLYecFtU3gGLFaDHg2P5glmI_alu7sqRqnmzCLQ","RtGKq7HECUrmKtztfqthmtCcUQDXI_icpQVwOh80ATrJQerR"]
+;}
     }
     if(res.length > 0){
         if(res.length > 3){
@@ -74,7 +76,7 @@ let inviteCodes = []
     console.log('\n##################开始账号内互助#################\n');
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
-        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[4])
+        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
         $.index = i + 1;
         $.canHelp = true;
         if (!cookie) continue
