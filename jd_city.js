@@ -1,6 +1,5 @@
 /*
 城城领现金
-cron 0 0-23/1 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_city.js
 说明：默认助力第一个CK和脚本内置作者助力码，介意勿跑
 环境变量：CITYHELP, 脚本助力哪一个CK，默认助力第一个CK； 例：CITYHELP="3"，则助力第3个CK
  */
@@ -27,11 +26,11 @@ let inviteCodes = []
         return;
     }
     console.log(`注意：助力第一个CK和脚本内置作者助力码，介意勿跑，等待10秒`);
-    await $.wait(10000);
+    await $.wait();
     let res = [];
-    try{res = await getAuthorShareCode('https://raw.githubusercontent.com/lsh26/share_code/main/city.json');}catch (e) {}
+    try{res = await getAuthorShareCode('');}catch (e) {}
     if(!res){
-        try{res = await getAuthorShareCode('https://gitee.com/star267/share-code/raw/master/city.json');}catch (e) {}
+        try{res = await getAuthorShareCode('');}catch (e) {}
         if(!res){res = [];}
     }
     if(res.length > 0){
