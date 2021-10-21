@@ -74,7 +74,7 @@ let inviteCodes = []
     console.log('\n##################开始账号内互助#################\n');
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
-        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[4])
         $.index = i + 1;
         $.canHelp = true;
         if (!cookie) continue
