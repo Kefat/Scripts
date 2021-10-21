@@ -7,8 +7,8 @@ const $ = new Env('城城领现金');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let exchangeFlag = $.getdata('jdJxdExchange') || false;//是否开启自动抽奖，建议活动快结束开启，默认关闭
-const helpIndex = $.isNode() ? (process.env.CITYHELP ? process.env.CITYHELP : `999`):`999`;//环境变量：CITYHELP, 脚本助力哪一个CK，默认助力第一个CK； 例：CITYHELP="3"，则助力第3个CK
-let cookiesArr = [4], cookie = '', message;
+const helpIndex = $.isNode(4) ? (process.env.CITYHELP ? process.env.CITYHELP : `999`):`999`;//环境变量：CITYHELP, 脚本助力哪一个CK，默认助力第一个CK； 例：CITYHELP="3"，则助力第3个CK
+let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
