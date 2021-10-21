@@ -1,13 +1,11 @@
 /*
 城城领现金
-说明：默认助力第一个CK和脚本内置作者助力码，介意勿跑
-环境变量：CITYHELP, 脚本助力哪一个CK，默认助力第一个CK； 例：CITYHELP="3"，则助力第3个CK
+说明：只助力第一个CK，脚本内会内置作者助力码，介意勿跑
  */
 const $ = new Env('城城领现金');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let exchangeFlag = $.getdata('jdJxdExchange') || false;//是否开启自动抽奖，建议活动快结束开启，默认关闭
-const helpIndex = $.isNode() ? (process.env.CITYHELP ? process.env.CITYHELP : `999`):`999`;//环境变量：CITYHELP, 脚本助力哪一个CK，默认助力第一个CK； 例：CITYHELP="3"，则助力第3个CK
 let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
@@ -25,8 +23,8 @@ let inviteCodes = []
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         return;
     }
-    console.log(`注意：助力第一个CK和脚本内置作者助力码，介意勿跑，等待10秒`);
-    await $.wait();
+    console.log(`注意：只助力第一个CK，脚本内会内置作者助力码，介意勿跑，等待10秒`);
+    await $.wait(10);
     let res = [];
     try{res = await getAuthorShareCode('');}catch (e) {}
     if(!res){
@@ -39,6 +37,7 @@ let inviteCodes = []
         }else{
             insertCodes = getRandomArrayElements(res,res.length);
         }
+        //$.newShareCodes.push(...shareUuid)
     }
     console.log(JSON.stringify(insertCodes));
     await requireConfig();
@@ -47,7 +46,7 @@ let inviteCodes = []
     } else {
         console.log(`脚本默认在10.30日自动开启抽奖,如需现在自动抽奖请设置环境变量  JD_CITY_EXCHANGE 为true`);
     }
-    for (let i = 0; i < cookiesArr.length && inviteCodes.length === 0; i++) {
+    for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
             cookie = cookiesArr[i];
             $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
@@ -67,9 +66,6 @@ let inviteCodes = []
             }
             await main();
         }
-    }
-    if(inviteCodes.length === 0){
-        return ;
     }
     console.log('\n##################开始账号内互助#################\n');
     for (let i = 0; i < cookiesArr.length; i++) {
@@ -198,12 +194,7 @@ function getInfo(inviteId, flag = false) {
                             if (data.data && data['data']['bizCode'] === 0) {
                                 if (flag) console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${data.data && data.data.result.userActBaseInfo.inviteId}\n`);
                                 if (flag) console.log(`【京东账号${$.index}（${$.UserName}）当前现金】${data.data && data.data.result.userActBaseInfo.poolMoney}元`);
-                                if (data.data && data.data.result.userActBaseInfo.inviteId && inviteCodes.length === 0 && helpIndex === '999') {
-                                    inviteCodes.push({
-                                        user: $.UserName,
-                                        code: data.data.result.userActBaseInfo.inviteId
-                                    });
-                                }else if (data.data && data.data.result.userActBaseInfo.inviteId && inviteCodes.length === 0 && Number(helpIndex) === Number($.index)) {
+                                if (data.data && data.data.result.userActBaseInfo.inviteId && inviteCodes.length === 0) {
                                     inviteCodes.push({
                                         user: $.UserName,
                                         code: data.data.result.userActBaseInfo.inviteId
