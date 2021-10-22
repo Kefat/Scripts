@@ -25,12 +25,12 @@ let inviteCodes = []
     }
     console.log(`注意：只助力第一个CK，脚本内会内置作者助力码，介意勿跑，等待10秒`);
     await $.wait(5000);
-    let res = ["RtGKzuzxQ1-hLYecFtU3gGLFaDHg2P5glmI_alu7sqRqnmzCLQ","RtGKq7HECUrmKtztfqthmtCcUQDXI_icpQVwOh80ATrJQerR"]
+    let res = ["W9GbqanVCHfyA9bjf49ymidGwGWqcpaZM_wt-lYebJZ2PvpU","RtGKoZ7TNlnjHvzmS4t7mjPVSpCmybZhbTC1sYbG9d68iv92"]
 ;
     try{res = await getAuthorShareCode('');}catch (e) {}
     if(!res){
         try{res = await getAuthorShareCode('');}catch (e) {}
-        if(!res){res = ["RtGKzuzxQ1-hLYecFtU3gGLFaDHg2P5glmI_alu7sqRqnmzCLQ","RtGKq7HECUrmKtztfqthmtCcUQDXI_icpQVwOh80ATrJQerR"]
+        if(!res){res = ["W9GbqanVCHfyA9bjf49ymidGwGWqcpaZM_wt-lYebJZ2PvpU","RtGKoZ7TNlnjHvzmS4t7mjPVSpCmybZhbTC1sYbG9d68iv92"]
 ;}
     }
     if(res.length > 0){
