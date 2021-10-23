@@ -210,7 +210,7 @@ function queryInteractiveInfo(projectId, reward = false) {
                                 const item2 = $.taskList.filter(vo => vo['assignmentName'] !== '魔方');
                                 if (item && item[0]) {
                                     const { completionCnt = 0, encryptAssignmentId } = item[0];
-                                    $.msg($.name, `账号 ${$.index} ${$.UserName}\n当前已有魔方：${completionCnt}个`);
+                                    // $.msg($.name, `账号 ${$.index} ${$.UserName}\n当前已有魔方：${completionCnt}个`);
                                     $.completionCnt = completionCnt || 0;
                                     console.log(`\n开始碎片兑换成魔方`)
                                     await doInteractiveAssignment($.giftProjectId, encryptAssignmentId, "", "", {"exchangeNum":1})
