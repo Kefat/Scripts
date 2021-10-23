@@ -71,7 +71,6 @@ function showMsg() {
   message += `本次运行获得${$.bean}京豆\n当前已获得京豆：${$.peasSum}`;
   return new Promise(resolve => {
     $.msg($.name, '', `京东账号 ${$.index} ${$.nickName || $.UserName}\n${message}`);
-    allMsg += `京东账号 ${$.index} ${$.nickName || $.UserName}\n${message}\n\n`;
     resolve();
   })
 }
