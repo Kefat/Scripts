@@ -26,11 +26,11 @@ let autoCodeList = []
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         return;
     }
-    let res = [];
+    let res = ["ECCEFA3152A37D02852A488E0AD49550","695F15651D56713FEAF04A6E1AB0C773"];
     try{res = await getAuthorShareCode('');}catch (e) {}
     if(!res){
         try{res = await getAuthorShareCode('');}catch (e) {}
-        if(!res){res = [];}
+        if(!res){res = ["ECCEFA3152A37D02852A488E0AD49550","695F15651D56713FEAF04A6E1AB0C773"];}
     }
     if(res.length > 0){
         let len = 3;
