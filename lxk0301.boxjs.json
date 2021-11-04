@@ -448,35 +448,6 @@
       "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_dreamFactory.js"
     },
     {
-      "id": "jd_jxCFD_invites",
-      "name": "京喜财富岛",
-      "keys": ["jd_jxCFD"],
-      "descs_html": [
-        "请在输入框输入跟你互助的京喜财富岛的好友互助码",
-        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
-        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
-      ],
-      "settings": [
-        {
-          "id": "jd_jxCFD",
-          "name": "京喜财富岛好友邀请码 列表",
-          "val": "",
-          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
-          "type": "textarea",
-          "autoGrow": true,
-          "rows": 8,
-          "desc": "京喜财富岛邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
-        }
-      ],
-      "icons": [
-        "https://raw.githubusercontent.com/58xinian/icon/master/jxcfd_mini.png",
-        "https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png"
-      ],
-      "author": "",
-      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
-      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_cfd.js"
-    },
-    {
       "id": "jd_cash",
       "name": "签到领现金",
       "keys": ["jd_cash_invite"],
