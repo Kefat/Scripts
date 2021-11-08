@@ -63,6 +63,69 @@
       ]
     },
     {
+      "id": "id77_jegotrip",
+      "name": "无忧行",
+      "descs_html": [
+        "支持开发者：<a href=\"http://www.jegotrip.com.cn/api/atv/callback/wechat?code=&state=eyJhIjo0NDgyLCJlIjoxMTAyLCJrIjoic2hhcmVJbnZpdGVCdG5fMzc5NjUxNyIsImwiOnRydWUsInVyaSI6IjExMDIiLCJvIjozNzk2NTE3fQ==\" target=\"_blank\">App邀请活动链接</a>"
+      ],
+      "keys": [
+        "id77_jegotrip_accountId",
+        "id77_jegotrip_userId",
+        "id77_jegotrip_mobile",
+        "id77_jegotrip_token",
+        "id77_jegotrip_taskId"
+      ],
+      "settings": [
+        {
+          "id": "id77_jegotrip_mobile",
+          "name": "手机号码",
+          "val": "",
+          "type": "number",
+          "autoGrow": true,
+          "rows": 2
+        },
+        {
+          "id": "id77_jegotrip_userId",
+          "name": "User Id",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 2
+        },
+        {
+          "id": "id77_jegotrip_accountId",
+          "name": "Account Id",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 2
+        },
+        {
+          "id": "id77_jegotrip_token",
+          "name": "Token",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 2
+        },
+        {
+          "id": "id77_jegotrip_taskId",
+          "name": "Task Id",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 2
+        }
+      ],
+      "script": "https://raw.githubusercontent.com/id77/QuantumultX/master/task/jegotrip.js",
+      "author": "@id77",
+      "repo": "https://raw.githubusercontent.com/id77/QuantumultX/master/task/jegotrip.js",
+      "icons": [
+        "https://raw.githubusercontent.com/id77/QuantumultX/master/icon/wyx.png",
+        "https://raw.githubusercontent.com/id77/QuantumultX/master/icon/wyx.png"
+      ]
+    },
+    {
       "id": "blackmatrix7.tieba",
       "name": "百度贴吧",
       "keys": ["tieba_checkin_cookie"],
