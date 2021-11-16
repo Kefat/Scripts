@@ -1,7 +1,7 @@
 /*
 逛好物，赚京豆
-活动地址：https://u.jd.com/ydunJTF
-1 0,12,18,22 * * * jd_ifanli.js
+活动地址：https://ifanli.m.jd.com/rebate/earnBean.html
+2 0 0,12,18,22 * * * jd_ifanli.js
 */
 const $ = new Env("逛好物，赚京豆");
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : {};
@@ -75,12 +75,13 @@ function getActTaskFinishCount(taskCookie, index) {
                 for (let task of tasksList) {
                   if (!task.taskId) continue
                   console.log(
-                      `京东账号${index + 1} ${userName} 任务${task.taskName},taskType=${task.taskType}taskId=${task.taskId}`
+                      `京东账号${index + 1} ${userName} 任务：【${task.taskName}】,taskType=${task.taskType}taskId=${task.taskId}`
                   );
                   //提交任务
                   let body = {
                     taskId: task.taskId,
                     taskType: task.taskType,
+                    businessId: task.businessId,
                   }
                   const taskRecord = await doTask(body, taskCookie, index);
                   if (taskRecord.uid && taskRecord.tt) {
@@ -182,9 +183,9 @@ function doTask(body, taskCookie, index) {
               if (uid || (uid != null && uid !== "null")) {
                 console.log(`\n京东账号${index + 1} ${userName} 领取奖励`, data.content.msg);
                 $.finishCount = $.finishCount + 1
-                message += `京东账号${index + 1} ${userName}\n完成任务${uid}-${data.content.msg}\n\n`;
+                message += `京东账号${index + 1} ${userName}\n完成任务${uid}\n${data.content.msg}\n\n`;
               } else {
-                console.log(`京东账号${index + 1} ${userName} 提交任务`, JSON.stringify(data.content));
+                console.log(`\n京东账号${index + 1} ${userName} 提交任务`, JSON.stringify(data.content));
                 resolve(data.content);
               }
             } else {
