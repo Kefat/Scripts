@@ -12,21 +12,25 @@ V2EX Cookie = type=http-request,pattern=^https:\/\/www\.v2ex\.com\/mission\/dail
 腾讯视频Cookie = type=http-request,pattern=^https:\/\/access.video.qq.com\/user\/auth_refresh,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/videoqq/videoqq.cookie.js
 喜马拉雅Cookie = type=http-request,pattern=^https?:\/\/.*\/mobile\-user\/(v1\/)?homePage\/.*,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/ximalaya/ximalaya.cookie.js
 
-# Nobyda  (www.52pojie.cn, ifac*.iqiyi.com, c.tieba.baidu.com, api.m.jd.com, ms.jr.jd.com, me-api.jd.com)
+# Nobyda  (www.52pojie.cn, ifac*.iqiyi.com, api.m.jd.com, ms.jr.jd.com, me-api.jd.com)
 吾爱破解Cookie = type=http-request,pattern=https:\/\/www\.52pojie\.cn\/home\.php\?,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js
 爱奇艺Cookie = type=http-request,pattern=^https?:\/\/iface(\d)?\.iqiyi\.com\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
-百度贴吧Cookie = type=http-request,pattern=https?:\/\/(c\.tieba\.baidu\.com|180\.97\.\d+\.\d+)\/c\/s\/login,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js
 京东Cookie = type=http-request,requires-body=1,pattern=^https:\/\/(api\.m|me-api|ms\.jr)\.jd\.com\/(client\.action\?functionId=signBean|user_new\/info\/GetJDUserInfoUnion\?|gw\/generic\/hy\/h5\/m\/appSign\?),script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
 # Dompling
 京东金融领豆Cookie = type=http-request,pattern=^https?:\/\/ms\.jr\.jd\.com\/gw\/generic\/uc\/newna\/m\/userstat,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/dompling/Script/master/jd/jd_jr_cookie.js
 
+# ZCY01
+京东保价Cookie = type=http-request,pattern=https:\/\/api\.m.jd.com\/api\?appid=siteppM&functionId=siteppM_priceskusPull,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtectRewrite.js
+
 # whyour（wq.jd.com, m.jingxi.com）
 京喜token = type=http-request,pattern=^https\:\/\/wq\.jd\.com\/cubeactive\/farm\/dotask,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_tokens.js
 京喜token = type=http-request,pattern=^https\:\/\/m\.jingxi\.com\/dreamfactory\/generator\/CollectCurrentElectricity,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_tokens.js
 
-# Blackmatrix7（m.client.10010.com）
+# Blackmatrix7（m.client.10010.com, c.tieba.baidu.com）
 联通_获取cookie = type=http-request,pattern=^https?:\/\/m\.client\.10010\.com\/dailylottery\/static\/(integral|doubleball)\/firstpage,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/10010/unicom_signin.min.js
+贴吧_获取cookie = type=http-request,pattern=^https?:\/\/(c\.tieba\.baidu\.com|180\.97\.\d+\.\d+)\/c\/s\/login,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/tieba/tieba_checkin.js
+贴吧_获取新版cookie = type=http-request,pattern=^https?:\/\/c\.tieba\.baidu\.com\/c\/s\/channelIconConfig,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/tieba/tieba_checkin.js
 
 # Sunert（api.weibo.cn）
 微博Cookie = type=http-request,pattern=https:\/\/api\.weibo\.cn\/\d\/users\/show,script-path=https://raw.githubusercontent.com/Sunert/Script/master/Task/weibo.js
@@ -36,4 +40,4 @@ V2EX Cookie = type=http-request,pattern=^https:\/\/www\.v2ex\.com\/mission\/dail
 
 
 [MITM]
-hostname = wapside.189.cn:9001, api.wfdata.club, *.v2ex.com, music.163.com, tieba.baidu.com, *.smzdm.com, *.video.qq.com, 113.96.156.178, *.ximalaya.com, www.52pojie.cn, ifac*.iqiyi.com, c.tieba.baidu.com, api.m.jd.com, ms.jr.jd.com, me-api.jd.com, wq.jd.com, m.jingxi.com, m.client.10010.com, api.weibo.cn, account.huami.com
+hostname = wapside.189.cn:9001, api.wfdata.club, *.v2ex.com, music.163.com, tieba.baidu.com, *.smzdm.com, *.video.qq.com, 113.96.156.178, *.ximalaya.com, www.52pojie.cn, ifac*.iqiyi.com, api.m.jd.com, ms.jr.jd.com, me-api.jd.com, wq.jd.com, m.jingxi.com, m.client.10010.com, c.tieba.baidu.com, api.weibo.cn, account.huami.com
