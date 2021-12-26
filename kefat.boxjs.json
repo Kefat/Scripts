@@ -149,6 +149,7 @@
         {
           "name": "每日自动签到",
           "script": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_signin.js"
+        }
       ]
     },
     {
