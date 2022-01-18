@@ -1,6 +1,6 @@
 /*
 东东水果
-更新时间：2021-11-9
+更新时间：2021-11-23
 活动入口：京东APP我的-更多工具-东东农场
 东东农场活动链接：https://h5.m.jd.com/babelDiy/Zeus/3KSjXqQabiTuD1cJ28QskrpWoBKT/index.html
 已支持IOS双京东账号,Node.js支持N个京东账号
@@ -55,7 +55,7 @@ const urlSchema = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%2
       $.isLogin = true;
       $.nickName = '';
       await TotalBean();
-      console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
+      console.log(`\n*************开始【京东账号${$.index}】${$.nickName || $.UserName}*************\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
 
@@ -96,7 +96,7 @@ async function jdFruit() {
         option['open-url'] = urlSchema;
         $.msg($.name, ``, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n点击弹窗即达`, option);
         if ($.isNode()) {
-          await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}水果已可领取`, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看`);
+          await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}水果已可领取`, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n活动地址：https://h5.m.jd.com/babelDiy/Zeus/3KSjXqQabiTuD1cJ28QskrpWoBKT/index.html`);
         }
         return
       } else if ($.farmInfo.treeState === 1) {
@@ -106,7 +106,7 @@ async function jdFruit() {
         option['open-url'] = urlSchema;
         $.msg($.name, ``, `【京东账号${$.index}】 ${$.nickName || $.UserName}\n【提醒⏰】您忘了种植新的水果\n请去京东APP或微信小程序选购并种植新的水果\n点击弹窗即达`, option);
         if ($.isNode()) {
-          await notify.sendNotify(`${$.name} - 您忘了种植新的水果`, `京东账号${$.index} ${$.nickName}\n【提醒⏰】您忘了种植新的水果\n请去京东APP或微信小程序选购并种植新的水果`);
+          await notify.sendNotify(`${$.name} - 您忘了种植新的水果`, `京东账号${$.index} ${$.nickName}\n【提醒⏰】您忘了种植新的水果\n请去京东APP或微信小程序选购并种植新的水果\n活动地址：https://h5.m.jd.com/babelDiy/Zeus/3KSjXqQabiTuD1cJ28QskrpWoBKT/index.html`);
         }
         return
       }
@@ -138,7 +138,7 @@ async function doDailyTask() {
   if (!$.farmTask.signInit.todaySigned) {
     await signForFarm(); //签到
     if ($.signResult.code === "0") {
-      console.log(`【签到成功】获得${$.signResult.amount}g💧\\n`)
+      console.log(`【签到成功】获得${$.signResult.amount}g💧\n`)
       //message += `【签到成功】获得${$.signResult.amount}g💧\n`//连续签到${signResult.signDay}天
     } else {
       // message += `签到失败,详询日志\n`;
@@ -197,7 +197,37 @@ async function doDailyTask() {
   } else {
     console.log(`今天已经做过浏览广告任务\n`);
   }
-  //定时领水
+  //去首页逛逛“领京豆”
+  if ($.farmTask['treasureBoxInit-getBean']) {
+    if (!$.farmTask['treasureBoxInit-getBean']['f']) {
+      if ($.farmTask['treasureBoxInit-getBean']['status'] === 0) {
+        console.log(`开始做 ${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务\n`)
+        $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":1,"babelChannel":"120","line":"getBean","version":14,"channel":1});
+        if ($.getTreasureBoxAwardRes.code === "0") {
+          await beanTaskList();
+          await $.wait(500);
+          $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":2,"babelChannel":"120","line":"getBean","version":14,"channel":1});
+          if ($.getTreasureBoxAwardRes && $.getTreasureBoxAwardRes.code === "0") {
+            console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
+          } else {
+            console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
+          }
+        } else {
+          console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
+        }
+      } else if ($.farmTask['treasureBoxInit-getBean']['status'] === 1) {
+        console.log(`任务已完成，水滴未领取，开始领取水滴\n`)
+        $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":2,"babelChannel":"120","line":"getBean","version":14,"channel":1});
+        if ($.getTreasureBoxAwardRes && $.getTreasureBoxAwardRes.code === "0") {
+          console.log(`领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
+        } else {
+          console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
+        }
+      }
+    } else {
+      console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}已完成\n`)
+    }
+  }
   if (!$.farmTask.gotThreeMealInit.f) {
     //
     await gotThreeMealForFarm();
@@ -231,6 +261,39 @@ async function doDailyTask() {
   await executeWaterRains();//水滴雨
   await getExtraAward();//领取额外水滴奖励
   await turntableFarm()//天天抽奖得好礼
+}
+function beanTaskList() {
+  return new Promise(resolve => {
+    const options = {
+      "url": "https://api.m.jd.com/client.action?functionId=beanTaskList",
+      "body": "body=%7B%22viewChannel%22%3A%22AppHome%22%7D&build=167853&client=apple&clientVersion=10.2.0&d_brand=apple&d_model=iPhone11%2C8&ef=1&eid=eidIf12a8121eas2urxgGc%2BzS5%2BUYGu1Nbed7bq8YY%2BgPd0Q0t%2BiviZdQsxnK/HTA7AxZzZBrtu1ulwEviYSV3QUuw2XHHC%2BPFHdNYx1A/3Zt8xYR%2Bd3&ep=%7B%22ciphertype%22%3A5%2C%22cipher%22%3A%7B%22screen%22%3A%22ENS4AtO3EJS%3D%22%2C%22osVersion%22%3A%22CJGkDy4n%22%2C%22openudid%22%3A%22ENq3CzTwENGmYtc3ENSnYtC0DWTwCNdwZNcnZtYmEWU2ZwYnCwY0Cm%3D%3D%22%2C%22area%22%3A%22CJvpCJYmCV81CNS1EP82Ctq1EK%3D%3D%22%2C%22uuid%22%3A%22aQf1ZRdxb2r4ovZ1EJZhcxYlVNZSZz09%22%7D%2C%22ts%22%3A1637625634%2C%22hdid%22%3A%22JM9F1ywUPwflvMIpYPok0tt5k9kW4ArJEU3lfLhxBqw%3D%22%2C%22version%22%3A%221.0.3%22%2C%22appname%22%3A%22com.360buy.jdmobile%22%2C%22ridx%22%3A-1%7D&ext=%7B%22prstate%22%3A%220%22%7D&isBackground=N&joycious=117&lang=zh_CN&networkType=4g&networklibtype=JDNetworkBaseAF&partner=apple&rfs=0000&scope=11&sign=778b3d3d83e0d3f45508a958f306abda&st=1637627411874&sv=101&uemps=0-0&uts=0f31TVRjBSsqndu4/jgUPz6uymy50MQJ1DpIH6AlcMry0eQsMwEN/GgP2FpcEJvoNVODK8ho6G6xfFEYSmOOdwauVOUqIQFPdxhcdWdM05U%2BMN5h6umteQ78SpJGXOymjKiTiGjvSOiTpoqO8k%2BT6stsfe0WS9QQ41HfWeVF6cdpDTzsmufz0XDdJ6CcltPUazK5UqRSuo0UyDMBmw/oWg%3D%3D",
+      "headers": {
+        "Cookie": cookie,
+        "Host": "api.m.jd.com",
+        "Accept": "*/*",
+        "Connection": "keep-alive",
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        "Accept-Language": "zh-Hans-CN;q=1,en-CN;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+    $.post(options, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} beanTaskList API请求失败，请检查网路重试`)
+        } else {
+          // console.log('data-----beanTaskList', data)
+          data = $.toObj(data);
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
 }
 async function predictionFruit() {
   console.log('开始预测水果成熟时间\n');
@@ -295,7 +358,7 @@ async function doTenWater() {
       $.msg($.name, ``, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n点击弹窗即达`, option);
       $.done();
       if ($.isNode()) {
-        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}水果已可领取`, `京东账号${$.index} ${$.nickName}\n${$.farmInfo.farmUserPro.name}已可领取`);
+        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}水果已可领取`, `京东账号${$.index} ${$.nickName}\n${$.farmInfo.farmUserPro.name}已可领取\n活动地址：https://h5.m.jd.com/babelDiy/Zeus/3KSjXqQabiTuD1cJ28QskrpWoBKT/index.html`);
       }
     }
   } else {
@@ -419,7 +482,7 @@ async function doTenWaterAgain() {
       $.msg($.name, ``, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n点击弹窗即达`, option);
       $.done();
       if ($.isNode()) {
-        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}水果已可领取`, `京东账号${$.index} ${$.nickName}\n${$.farmInfo.farmUserPro.name}已可领取`);
+        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}水果已可领取`, `京东账号${$.index} ${$.nickName}\n${$.farmInfo.farmUserPro.name}已可领取\n活动地址：https://h5.m.jd.com/babelDiy/Zeus/3KSjXqQabiTuD1cJ28QskrpWoBKT/index.html`);
       }
     }
   } else if (overageEnergy >= 10) {
@@ -447,7 +510,7 @@ async function doTenWaterAgain() {
       $.msg($.name, ``, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n点击弹窗即达`, option);
       $.done();
       if ($.isNode()) {
-        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}水果已可领取`, `京东账号${$.index} ${$.nickName}\n${$.farmInfo.farmUserPro.name}已可领取`);
+        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}水果已可领取`, `京东账号${$.index} ${$.nickName}\n${$.farmInfo.farmUserPro.name}已可领取\n活动地址：https://h5.m.jd.com/babelDiy/Zeus/3KSjXqQabiTuD1cJ28QskrpWoBKT/index.html`);
       }
     }
   } else {
@@ -533,13 +596,17 @@ async function turntableFarm() {
       }
       await lotteryMasterHelp(code);
       // console.log('天天抽奖助力结果',lotteryMasterHelpRes.helpResult)
-      if ($.lotteryMasterHelpRes.helpResult.code === '0') {
-        console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}成功\n`)
-      } else if ($.lotteryMasterHelpRes.helpResult.code === '11') {
-        console.log(`天天抽奖-不要重复助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}\n`)
-      } else if ($.lotteryMasterHelpRes.helpResult.code === '13') {
-        console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}失败,助力次数耗尽\n`);
-        break;
+      if ($.lotteryMasterHelpRes.helpResult) {
+        if ($.lotteryMasterHelpRes.helpResult.code === '0') {
+          console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}成功\n`)
+        } else if ($.lotteryMasterHelpRes.helpResult.code === '11') {
+          console.log(`天天抽奖-不要重复助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}\n`)
+        } else if ($.lotteryMasterHelpRes.helpResult.code === '13') {
+          console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}失败,助力次数耗尽\n`);
+          break;
+        }
+      } else {
+        console.log(`天天抽奖助力异常：${$.toStr($.lotteryMasterHelpRes)}\n`)
       }
     }
     console.log(`---天天抽奖次数remainLotteryTimes----${remainLotteryTimes}次`)
@@ -791,9 +858,10 @@ async function getAwardInviteFriend() {
   await friendListInitForFarm();//查询好友列表
   // console.log(`查询好友列表数据：${JSON.stringify($.friendList)}\n`)
   if ($.friendList) {
-    console.log(`\n今日已邀请好友${$.friendList.inviteFriendCount}个 / 每日邀请上限${$.friendList.inviteFriendMax}个`);
-    console.log(`开始删除${$.friendList.friends && $.friendList.friends.length}个好友,可拿每天的邀请奖励`);
-    if ($.friendList.friends && $.friendList.friends.length > 0) {
+    console.log(`\n今日已邀请好友${$.friendList.inviteFriendCount}个 / 每日邀请上限${$.friendList.inviteFriendMax}个，当前好友：${$.friendList.countOfFriend}个`);
+    if ($.friendList.friends && $.friendList.countOfFriend > ($.friendList.friends.length + 2)) {
+      //留2个好友不进行删除，供完成给好友浇水任务
+      console.log(`开始删除${$.friendList.friends.length}个好友,可拿每天的邀请奖励`);
       for (let friend of $.friendList.friends) {
         console.log(`\n开始删除好友 [${friend.shareCode}]`);
         const deleteFriendForFarm = await request('deleteFriendForFarm', { "shareCode": `${friend.shareCode}`,"version":8,"channel":1 });
@@ -805,7 +873,7 @@ async function getAwardInviteFriend() {
     await receiveFriendInvite();//为他人助力,接受邀请成为别人的好友
     if ($.friendList.inviteFriendCount > 0) {
       if ($.friendList.inviteFriendCount > $.friendList.inviteFriendGotAwardCount) {
-        console.log('开始领取邀请好友的奖励');
+        console.log('\n开始领取邀请好友的奖励');
         await awardInviteFriendForFarm();
         console.log(`领取邀请好友的奖励结果：：${JSON.stringify($.awardInviteFriendRes)}`);
       }
@@ -900,22 +968,20 @@ async function receiveFriendInvite() {
       console.log('自己不能邀请自己成为好友噢\n')
       continue
     }
+    console.log(`\n开始接收好友,助力码为 ${code} 发出的邀请`)
     await inviteFriend(code);
-    // console.log(`接收邀请成为好友结果:${JSON.stringify($.inviteFriendRes)}`)
-    if ($.inviteFriendRes && $.inviteFriendRes.helpResult && $.inviteFriendRes.helpResult.code === '0') {
-      console.log(`接收邀请成为好友结果成功,您已成为${$.inviteFriendRes.helpResult.masterUserInfo.nickName}的好友`)
-    } else if ($.inviteFriendRes && $.inviteFriendRes.helpResult && $.inviteFriendRes.helpResult.code === '17') {
-      console.log(`接收邀请成为好友结果失败,对方已是您的好友`)
+    if ($.inviteFriendRes) {
+      if ($.inviteFriendRes.helpResult) {
+        if ($.inviteFriendRes.helpResult.code === '0') {
+          console.log(`接收邀请成为好友成功,您已成为${$.inviteFriendRes.helpResult.masterUserInfo.nickName}的好友`)
+        } else if ($.inviteFriendRes.helpResult.code === '17') {
+          console.log(`接收邀请成为好友失败,对方已是您的好友`)
+        } else {
+          console.log(`接收 ${$.inviteFriendRes.helpResult.masterUserInfo.nickName} 的好友邀请失败,未知结果：code：${$.inviteFriendRes.helpResult.code}，type：${$.inviteFriendRes.helpResult.type}`)
+        }
+      }
     }
   }
-  // console.log(`开始接受6fbd26cc27ac44d6a7fed34092453f77的邀请\n`)
-  // await inviteFriend('6fbd26cc27ac44d6a7fed34092453f77');
-  // console.log(`接收邀请成为好友结果:${JSON.stringify($.inviteFriendRes.helpResult)}`)
-  // if ($.inviteFriendRes.helpResult.code === '0') {
-  //   console.log(`您已成为${$.inviteFriendRes.helpResult.masterUserInfo.nickName}的好友`)
-  // } else if ($.inviteFriendRes.helpResult.code === '17') {
-  //   console.log(`对方已是您的好友`)
-  // }
 }
 async function duck() {
   for (let i = 0; i < 10; i++) {
@@ -954,9 +1020,7 @@ async function getFullCollectionReward() {
           console.log(JSON.stringify(err));
           $.logErr(err);
         } else {
-          if (safeGet(data)) {
-            $.duckRes = JSON.parse(data);
-          }
+          $.duckRes = $.toObj(data, {})
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -1194,9 +1258,7 @@ async function initForFarm() {
           console.log(JSON.stringify(err));
           $.logErr(err);
         } else {
-          if (safeGet(data)) {
-            $.farmInfo = JSON.parse(data)
-          }
+          $.farmInfo = $.toObj(data, {})
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -1279,9 +1341,7 @@ async function browse(advertId) {
           console.log(JSON.stringify(err));
           $.logErr(err);
         } else {
-          if (safeGet(data)) {
-            console.log('东东乐园做任务结果', data);
-          }
+          console.log('东东乐园做任务结果', data);
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -1495,9 +1555,7 @@ function request(function_id, body = {}, timeout = 1000){
             console.log(`function_id:${function_id}`)
             $.logErr(err);
           } else {
-            if (safeGet(data)) {
-              data = JSON.parse(data);
-            }
+            data = $.toObj(data, {})
           }
         } catch (e) {
           $.logErr(e, resp);
@@ -1508,17 +1566,7 @@ function request(function_id, body = {}, timeout = 1000){
     }, timeout)
   })
 }
-function safeGet(data) {
-  try {
-    if (typeof JSON.parse(data) == "object") {
-      return true;
-    }
-  } catch (e) {
-    console.log(e);
-    console.log(`京东服务器访问数据为空，请检查自身设备网络情况`);
-    return false;
-  }
-}
+
 function taskUrl(function_id, body = {}) {
   return {
     url: `${JD_API_HOST}?functionId=${function_id}&appid=wh5&body=${escape(JSON.stringify(body))}`,
