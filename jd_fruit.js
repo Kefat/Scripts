@@ -135,17 +135,112 @@ async function jdFruit() {
 async function doDailyTask() {
   await taskInitForFarm();
   console.log(`开始签到`);
-  if (!$.farmTask.signInit.todaySigned) {
-    await signForFarm(); //签到
-    if ($.signResult.code === "0") {
-      console.log(`【签到成功】获得${$.signResult.amount}g💧\n`)
-      //message += `【签到成功】获得${$.signResult.amount}g💧\n`//连续签到${signResult.signDay}天
+  if ($.farmTask) {
+    if (!$.farmTask.signInit.todaySigned) {
+      await signForFarm(); //签到
+      if ($.signResult.code === "0") {
+        console.log(`【签到成功】获得${$.signResult.amount}g💧\n`)
+        //message += `【签到成功】获得${$.signResult.amount}g💧\n`//连续签到${signResult.signDay}天
+      } else {
+        // message += `签到失败,详询日志\n`;
+        console.log(`签到结果:  ${JSON.stringify($.signResult)}`);
+      }
     } else {
-      // message += `签到失败,详询日志\n`;
-      console.log(`签到结果:  ${JSON.stringify($.signResult)}`);
+      console.log(`今天已签到,连续签到${$.farmTask.signInit.totalSigned},下次签到可得${$.farmTask.signInit.signEnergyEachAmount}g\n`);
     }
-  } else {
-    console.log(`今天已签到,连续签到${$.farmTask.signInit.totalSigned},下次签到可得${$.farmTask.signInit.signEnergyEachAmount}g\n`);
+    console.log(`签到结束,开始广告浏览任务`);
+    if (!$.farmTask.gotBrowseTaskAdInit.f) {
+      let adverts = $.farmTask.gotBrowseTaskAdInit.userBrowseTaskAds
+      let browseReward = 0
+      let browseSuccess = 0
+      let browseFail = 0
+      for (let advert of adverts) { //开始浏览广告
+        if (advert.limit <= advert.hadFinishedTimes) {
+          // browseReward+=advert.reward
+          console.log(`${advert.mainTitle}+ ' 已完成`);//,获得${advert.reward}g
+          continue;
+        }
+        console.log('正在进行广告浏览任务: ' + advert.mainTitle);
+        await browseAdTaskForFarm(advert.advertId, 0);
+        if ($.browseResult.code === '0') {
+          console.log(`${advert.mainTitle}浏览任务完成`);
+          //领取奖励
+          await browseAdTaskForFarm(advert.advertId, 1);
+          if ($.browseRwardResult.code === '0') {
+            console.log(`领取浏览${advert.mainTitle}广告奖励成功,获得${$.browseRwardResult.amount}g`)
+            browseReward += $.browseRwardResult.amount
+            browseSuccess++
+          } else {
+            browseFail++
+            console.log(`领取浏览广告奖励结果:  ${JSON.stringify($.browseRwardResult)}`)
+          }
+        } else {
+          browseFail++
+          console.log(`广告浏览任务结果:   ${JSON.stringify($.browseResult)}`);
+        }
+      }
+      if (browseFail > 0) {
+        console.log(`【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\\n`);
+        // message += `【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\n`;
+      } else {
+        console.log(`【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`);
+        // message += `【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`;
+      }
+    } else {
+      console.log(`今天已经做过浏览广告任务\n`);
+    }
+    //去首页逛逛“领京豆”
+    if ($.farmTask['treasureBoxInit-getBean']) {
+      if (!$.farmTask['treasureBoxInit-getBean']['f']) {
+        if ($.farmTask['treasureBoxInit-getBean']['status'] === 0) {
+          console.log(`开始做 ${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务\n`)
+          $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":1,"babelChannel":"120","line":"getBean","version":14,"channel":1});
+          if ($.getTreasureBoxAwardRes.code === "0") {
+            await beanTaskList();
+            await $.wait(500);
+            $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":2,"babelChannel":"120","line":"getBean","version":14,"channel":1});
+            if ($.getTreasureBoxAwardRes && $.getTreasureBoxAwardRes.code === "0") {
+              console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
+            } else {
+              console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
+            }
+          } else {
+            console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
+          }
+        } else if ($.farmTask['treasureBoxInit-getBean']['status'] === 1) {
+          console.log(`任务已完成，水滴未领取，开始领取水滴\n`)
+          $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":2,"babelChannel":"120","line":"getBean","version":14,"channel":1});
+          if ($.getTreasureBoxAwardRes && $.getTreasureBoxAwardRes.code === "0") {
+            console.log(`领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
+          } else {
+            console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
+          }
+        }
+      } else {
+        console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}已完成\n`)
+      }
+    }
+    if (!$.farmTask.gotThreeMealInit.f) {
+      //
+      await gotThreeMealForFarm();
+      if ($.threeMeal.code === "0") {
+        console.log(`【定时领水】获得${$.threeMeal.amount}g💧\n`);
+        // message += `【定时领水】获得${$.threeMeal.amount}g💧\n`;
+      } else {
+        // message += `【定时领水】失败,详询日志\n`;
+        console.log(`定时领水成功结果:  ${JSON.stringify($.threeMeal)}`);
+      }
+    } else {
+      console.log('当前不在定时领水时间断或者已经领过\n')
+    }
+    //给好友浇水
+    if (!$.farmTask.waterFriendTaskInit.f) {
+      if ($.farmTask.waterFriendTaskInit.waterFriendCountKey < $.farmTask.waterFriendTaskInit.waterFriendMax) {
+        await doFriendsWater();
+      }
+    } else {
+      console.log(`给${$.farmTask.waterFriendTaskInit.waterFriendMax}个好友浇水任务已完成\n`)
+    }
   }
   // 被水滴砸中
   console.log(`被水滴砸中： ${$.farmInfo.todayGotWaterGoalTask.canPop ? '是' : '否'}`);
@@ -155,99 +250,6 @@ async function doDailyTask() {
       console.log(`【被水滴砸中】获得${$.goalResult.addEnergy}g💧\n`);
       // message += `【被水滴砸中】获得${$.goalResult.addEnergy}g💧\n`
     }
-  }
-  console.log(`签到结束,开始广告浏览任务`);
-  if (!$.farmTask.gotBrowseTaskAdInit.f) {
-    let adverts = $.farmTask.gotBrowseTaskAdInit.userBrowseTaskAds
-    let browseReward = 0
-    let browseSuccess = 0
-    let browseFail = 0
-    for (let advert of adverts) { //开始浏览广告
-      if (advert.limit <= advert.hadFinishedTimes) {
-        // browseReward+=advert.reward
-        console.log(`${advert.mainTitle}+ ' 已完成`);//,获得${advert.reward}g
-        continue;
-      }
-      console.log('正在进行广告浏览任务: ' + advert.mainTitle);
-      await browseAdTaskForFarm(advert.advertId, 0);
-      if ($.browseResult.code === '0') {
-        console.log(`${advert.mainTitle}浏览任务完成`);
-        //领取奖励
-        await browseAdTaskForFarm(advert.advertId, 1);
-        if ($.browseRwardResult.code === '0') {
-          console.log(`领取浏览${advert.mainTitle}广告奖励成功,获得${$.browseRwardResult.amount}g`)
-          browseReward += $.browseRwardResult.amount
-          browseSuccess++
-        } else {
-          browseFail++
-          console.log(`领取浏览广告奖励结果:  ${JSON.stringify($.browseRwardResult)}`)
-        }
-      } else {
-        browseFail++
-        console.log(`广告浏览任务结果:   ${JSON.stringify($.browseResult)}`);
-      }
-    }
-    if (browseFail > 0) {
-      console.log(`【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\\n`);
-      // message += `【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\n`;
-    } else {
-      console.log(`【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`);
-      // message += `【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`;
-    }
-  } else {
-    console.log(`今天已经做过浏览广告任务\n`);
-  }
-  //去首页逛逛“领京豆”
-  if ($.farmTask['treasureBoxInit-getBean']) {
-    if (!$.farmTask['treasureBoxInit-getBean']['f']) {
-      if ($.farmTask['treasureBoxInit-getBean']['status'] === 0) {
-        console.log(`开始做 ${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务\n`)
-        $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":1,"babelChannel":"120","line":"getBean","version":14,"channel":1});
-        if ($.getTreasureBoxAwardRes.code === "0") {
-          await beanTaskList();
-          await $.wait(500);
-          $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":2,"babelChannel":"120","line":"getBean","version":14,"channel":1});
-          if ($.getTreasureBoxAwardRes && $.getTreasureBoxAwardRes.code === "0") {
-            console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
-          } else {
-            console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
-          }
-        } else {
-          console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
-        }
-      } else if ($.farmTask['treasureBoxInit-getBean']['status'] === 1) {
-        console.log(`任务已完成，水滴未领取，开始领取水滴\n`)
-        $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":2,"babelChannel":"120","line":"getBean","version":14,"channel":1});
-        if ($.getTreasureBoxAwardRes && $.getTreasureBoxAwardRes.code === "0") {
-          console.log(`领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
-        } else {
-          console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
-        }
-      }
-    } else {
-      console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}已完成\n`)
-    }
-  }
-  if (!$.farmTask.gotThreeMealInit.f) {
-    //
-    await gotThreeMealForFarm();
-    if ($.threeMeal.code === "0") {
-      console.log(`【定时领水】获得${$.threeMeal.amount}g💧\n`);
-      // message += `【定时领水】获得${$.threeMeal.amount}g💧\n`;
-    } else {
-      // message += `【定时领水】失败,详询日志\n`;
-      console.log(`定时领水成功结果:  ${JSON.stringify($.threeMeal)}`);
-    }
-  } else {
-    console.log('当前不在定时领水时间断或者已经领过\n')
-  }
-  //给好友浇水
-  if (!$.farmTask.waterFriendTaskInit.f) {
-    if ($.farmTask.waterFriendTaskInit.waterFriendCountKey < $.farmTask.waterFriendTaskInit.waterFriendMax) {
-      await doFriendsWater();
-    }
-  } else {
-    console.log(`给${$.farmTask.waterFriendTaskInit.waterFriendMax}个好友浇水任务已完成\n`)
   }
   // await Promise.all([
   //   clockInIn(),//打卡领水
@@ -299,6 +301,7 @@ async function predictionFruit() {
   console.log('开始预测水果成熟时间\n');
   await initForFarm();
   await taskInitForFarm();
+  if (!$.farmTask) return
   let waterEveryDayT = $.farmTask.totalWaterTaskInit.totalWaterTaskTimes;//今天到到目前为止，浇了多少次水
   message += `【今日共浇水】${waterEveryDayT}次\n`;
   message += `【剩余 水滴】${$.farmInfo.farmUserPro.totalEnergy}g💧\n`;
@@ -327,6 +330,7 @@ async function doTenWater() {
     console.log(`您设置的是使用水滴换豆卡，且背包有水滴换豆卡${beanCard}张, 跳过10次浇水任务`)
     return
   }
+  if (!$.farmTask) return
   if ($.farmTask.totalWaterTaskInit.totalWaterTaskTimes < $.farmTask.totalWaterTaskInit.totalWaterTaskLimit) {
     console.log(`\n准备浇水十次`);
     let waterCount = 0;
@@ -356,7 +360,6 @@ async function doTenWater() {
     if (isFruitFinished) {
       option['open-url'] = urlSchema;
       $.msg($.name, ``, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n点击弹窗即达`, option);
-      $.done();
       if ($.isNode()) {
         await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}水果已可领取`, `京东账号${$.index} ${$.nickName}\n${$.farmInfo.farmUserPro.name}已可领取\n活动地址：https://h5.m.jd.com/babelDiy/Zeus/3KSjXqQabiTuD1cJ28QskrpWoBKT/index.html`);
       }
@@ -369,6 +372,7 @@ async function doTenWater() {
 async function getFirstWaterAward() {
   await taskInitForFarm();
   //领取首次浇水奖励
+  if (!$.farmTask) return
   if (!$.farmTask.firstWaterInit.f && $.farmTask.firstWaterInit.totalWaterTimes > 0) {
     await firstWaterTaskForFarm();
     if ($.firstWaterReward.code === '0') {
@@ -385,6 +389,7 @@ async function getFirstWaterAward() {
 //领取十次浇水奖励
 async function getTenWaterAward() {
   //领取10次浇水奖励
+  if (!$.farmTask) return
   if (!$.farmTask.totalWaterTaskInit.f && $.farmTask.totalWaterTaskInit.totalWaterTaskTimes >= $.farmTask.totalWaterTaskInit.totalWaterTaskLimit) {
     await totalWaterTaskForFarm();
     if ($.totalWaterReward.code === '0') {
@@ -759,6 +764,7 @@ async function masterHelpShare() {
 }
 //水滴雨
 async function executeWaterRains() {
+  if (!$.farmTask) return
   let executeWaterRain = !$.farmTask.waterRainInit.f;
   if (executeWaterRain) {
     console.log(`水滴雨任务，每天两次，最多可得10g水滴`);
@@ -889,6 +895,7 @@ async function doFriendsWater() {
   await friendListInitForFarm();
   console.log('开始给好友浇水...');
   await taskInitForFarm();
+  if (!$.farmTask) return
   const { waterFriendCountKey, waterFriendMax } = $.farmTask.waterFriendTaskInit;
   console.log(`今日已给${waterFriendCountKey}个好友浇水`);
   if (waterFriendCountKey < waterFriendMax) {
@@ -944,6 +951,7 @@ async function doFriendsWater() {
 //领取给3个好友浇水后的奖励水滴
 async function getWaterFriendGotAward() {
   await taskInitForFarm();
+  if (!$.farmTask) return
   const { waterFriendCountKey, waterFriendMax, waterFriendSendWater, waterFriendGotAward } = $.farmTask.waterFriendTaskInit
   if (waterFriendCountKey >= waterFriendMax) {
     if (!waterFriendGotAward) {
@@ -1273,7 +1281,7 @@ async function initForFarm() {
 async function taskInitForFarm() {
   console.log('\n初始化任务列表')
   const functionId = arguments.callee.name.toString();
-  $.farmTask = await request(functionId, {"version":14,"channel":1,"babelChannel":"120"});
+  $.farmTask = await request(functionId, {"version":14,"channel":1,"babelChannel": 0});
 }
 //获取好友列表API
 async function friendListInitForFarm() {
