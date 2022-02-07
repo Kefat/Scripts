@@ -27,14 +27,11 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [], cookie = '', message;
+let cookiesArr = [], cookie = '', message = '', allMsg = '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
   })
-  if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {
-  };
-  if(JSON.stringify(process.env).indexOf('GITHUB')>-1) process.exit(0)
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
@@ -58,12 +55,16 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/`, {"open-url": "https://bean.m.jd.com/"});
 
         if ($.isNode()) {
-          await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
+          //await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
         continue
       }
       await jdMs()
     }
+  }
+  if (allMsg) {
+    $.msg($.name, '', allMsg);
+    if ($.isNode()) await notify.sendNotify($.name, allMsg);
   }
 })()
   .catch((e) => {
@@ -109,9 +110,45 @@ function getActInfo() {
     })
   })
 }
+function assignmentPointsTransferRedPackage(assignmentPointsNum) {
+  return new Promise(resolve => {
+    const body = {
+      "assignmentPointsNum": `${assignmentPointsNum}`,
+      "random": `${randomString(8)}`,
+      "log": "4817e3a2~8,~1wsv3ig",
+      "sceneid": "MShPageh5"
+    }
+    $.post(taskPostUrl('assignmentPointsTransferRedPackage', body, 'appid=jwsp'), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${err},${jsonParse(resp.body)['message']}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          data = $.toObj(data);
+          if (data.code === 200) {
+            const { discountTotal } = data.result
+            console.log(`兑换成功：${discountTotal}元红包`)
+            allMsg += `账号 ${$.index} ${$.UserName}\n${discountTotal}元无门槛红包🧧自动兑换成功\n⚠️⚠️秒秒币将于1.18日清空⚠️⚠️，请尽快使用\n兑换入口：京东app-首页-京东秒杀-签到领红包\n复制链接浏览器打开：https://h5.m.jd.com/babelDiy/Zeus/3u9n1VYXKeYrZm1qbkWpy58KuNRf/index.html\n\n`;
+          } else {
+            console.log(`自动兑换失败：${$.toStr(data)}\n`)
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
 function getUserInfo(info=true) {
   return new Promise(resolve => {
-    $.post(taskPostUrl('homePageV2', {}, 'appid=SecKill2020'), (err, resp, data) => {
+    const body = {
+      "random": `${randomString(8)}`,
+      "log": "4817e3a2~8,~1wsv3ig",
+      "sceneid": "MShPageh5"
+    }
+    $.post(taskPostUrl('homePageV2', `${encodeURIComponent($.toStr(body))}`, 'appid=SecKill2020'), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${err},${jsonParse(resp.body)['message']}`)
@@ -119,9 +156,15 @@ function getUserInfo(info=true) {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data)
-            if (data.code === 2041) {
+            if (data.code && data.result) {
               $.score = data.result.assignment.assignmentPoints || 0
-              if(info) console.log(`当前秒秒币${$.score}`)
+              if(info) {
+                console.log(`当前秒秒币${$.score}`)
+                if (new Date().getDate() === 16 || new Date().getDate() === 17) {
+                  const num = Math.floor($.score / 100) * 100;
+                  await assignmentPointsTransferRedPackage(num);
+                }
+              }
             }
           }
         }
@@ -204,9 +247,22 @@ function getTaskList() {
     })
   })
 }
-
+function randomString(e) {
+  e = e || 32;
+  let t = "0123456789", a = t.length, n = "";
+  for (i = 0; i < e; i++)
+    n += t.charAt(Math.floor(Math.random() * a));
+  return n
+}
 function doTask(body) {
-  body = {...body, "encryptProjectId": $.encryptProjectId, "sourceCode": "wh5", "ext": {}}
+  body = {...body, "encryptProjectId": $.encryptProjectId, "sourceCode": "ace35880", "ext": {}}
+  let extParam = {
+    "businessData": {"random": `${randomString(8)}`},
+    // "signStr": "1642313134042~13kyCFixVPjMDFacmVUeTAxMQ==.a0RRZkprQVRmS2JBVio9NiADIy8fGAw7B2teU3hOdkMbZgdrDBEXMS0GUCMVaj4pMy8rRRwEKDchCxUoZ08b.95fa85d6~7,1~325FDBC05F3DFD091BBC0F657D7E1589741B16FD~074l0l4~C~SRJFXRMOaG0eE0RdXhMIaBFUBh0Kfx92YBxpcx1VH0QQHRJXBBwLfB92YRxqZh9RHkQTHBNQAh0LYRx1YR0DA3YcRhxHEm4cEFdDXhMOBxwQQkMRCRMDBQcCAAEAAQABAwgECAcFCxIeE0dWVxMIEUdER0RHVkZWEBwTR1RVEQoQV1ZHR0VGRlISHxJDVF0SCGsAAB0GAwgLHQcfCx0DHwZtHxJZWhEKARwTU0IWCRIDCFYKUAQFVgsHVQBRAlUCAAEGBFRSUFFUB1MKBlcGUREcEV5DEgkSW2BZX19RERwQRRIJAgcGAQABAAEABAMEABwTWloWCRIKCQcAAVcKBwNSBAcLAgJSAQQEUlcEBFZWBgFVBQELVgVWVQEBVgcDEBwTVkFWEQoQRXN7REUHRF8Af3xUZkIHS2BgXWJacmEPDBIfEV9EEQkSckBDXFYQcV9cQERAVkIeEXldUB8QHxFeUkYRChEBBAcIAgMWHxJBUkIRCWoKCgUcBwEHbR8SQF8TCmoWWmBaXl5WAgAeCxEcEVl8YxEcEAEEHgMWHxIDAR4AHQMQHxEBBQcKAgESHhIJCAYHAVYKBQBRBAYKAQJSAAQGUlUABVZVBwBSBQALVAZVVQAAVQcDERwRURFtHhJYX1AWCRJUV1ZVVVdGRxEcEVFZEgkSRxIdElJdEQoQRgMdAR8BER8SUFZsRhEKEAAAEh0WUVQQCxJBUl9WXF4NCwgABQYHAgUTHBNZWRIIagEfAx0Cbh8SUVxcVxEKEAEHBAMHAgMDAwICCgNMAl9GdUBLVloGRkR8dHdyV10DZ2V3ckl8cg4NHVR2cmlqAH4BYndmWWp6AHVrcEVeUGF ZXhhAUt8cUdGfFt6UnYBXQZSZlJmakoFA3NyBFJ2cHV2fnNxA3VgcAl2cXRWdERbWXhacWJnY3FBdGVhcXVxUkBhcARcY1thZ3hyfXh8WghkdANyAGRaVh9yW2hKeHFEXXRYCHVqcHpEf3B1WHVVdAlwSnAHe2UAQWlnR3hycFRbfVh dXdmWnpyS2ADel4BB3NyDQ4eAAYCCVcGAwNMSxwCTU9McU1kWGprZ2Fle3ZddXlgclNkdmV9ZndVRGRoS1R6dlREenZWCXZyW0dkY1hqendecnZ0VFR3d0tqZGVcXHVmVAV3c0dma2JwaXB2YldkdXFYc2h0ZWljS2V3dldidHNkYmRjW2ZldgIEZXVaXwxKAgVLV1xZCxMeEV5DVBIJEhFN~0u28lvk",
+    "signStr": "4817e3a2~8,~1wsv3ig",
+    "sceneid": "MShPageh5"
+  }
+  Object.assign(body, { "extParam": $.toStr(extParam) })
   return new Promise(resolve => {
     $.post(taskPostUrl('doInteractiveAssignment', body), (err, resp, data) => {
       try {
