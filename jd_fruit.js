@@ -192,36 +192,46 @@ async function doDailyTask() {
     //去首页逛逛“领京豆”
     if ($.farmTask['treasureBoxInit-getBean']) {
       if (!$.farmTask['treasureBoxInit-getBean']['f']) {
-        if ($.farmTask['treasureBoxInit-getBean']['status'] === 0) {
-          console.log(`开始做 ${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务\n`)
-          $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":1,"babelChannel":"120","line":"getBean","version":14,"channel":1});
-          if ($.getTreasureBoxAwardRes.code === "0") {
-            await beanTaskList();
-            await $.wait(500);
-            $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":2,"babelChannel":"120","line":"getBean","version":14,"channel":1});
-            if ($.getTreasureBoxAwardRes && $.getTreasureBoxAwardRes.code === "0") {
-              console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
-            } else {
-              console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
-            }
-          } else {
-            console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
-          }
-        } else if ($.farmTask['treasureBoxInit-getBean']['status'] === 1) {
-          console.log(`任务已完成，水滴未领取，开始领取水滴\n`)
+        console.log(`开始做 ${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务\n`)
+        $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":1,"babelChannel":"120","line":"getBean","version":14,"channel":1});
+        if ($.getTreasureBoxAwardRes.code === "0") {
+          await beanTaskList();
+          await $.wait(500);
           $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"type":2,"babelChannel":"120","line":"getBean","version":14,"channel":1});
           if ($.getTreasureBoxAwardRes && $.getTreasureBoxAwardRes.code === "0") {
-            console.log(`领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
+            console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}任务领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
           } else {
             console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
           }
+        } else {
+          console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
         }
       } else {
         console.log(`${$.farmTask['treasureBoxInit-getBean']['taskMainTitle']}已完成\n`)
       }
     }
+    if ($.farmTask['treasureBoxInit']) {
+      if (!$.farmTask['treasureBoxInit']['f']) {
+        console.log(`开始做 ${$.farmTask['treasureBoxInit']['taskMainTitle']}任务\n`)
+        $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"babelChannel":"10","line":"","channel":3,"type":1,"version":14});
+        if ($.getTreasureBoxAwardRes.code === "0") {
+          await newAppCenterInfo();
+          await $.wait(500);
+          await request('taskInitForFarm', {"version":14,"channel":3,"babelChannel": "10"});
+          $.getTreasureBoxAwardRes = await request('ddnc_getTreasureBoxAward', {"babelChannel":"11","line":"","channel":3,"type":2,"version":14});
+          if ($.getTreasureBoxAwardRes.code === "0") {
+            console.log(`${$.farmTask['treasureBoxInit']['taskMainTitle']}任务领取成功，获得水滴：${$.getTreasureBoxAwardRes['waterGram']}g\n`);
+          } else {
+            console.log(`领取失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
+          }
+        } else {
+          console.log(`${$.farmTask['treasureBoxInit']['taskMainTitle']}失败：${$.toStr($.getTreasureBoxAwardRes)}\n`);
+        }
+      } else {
+        console.log(`${$.farmTask['treasureBoxInit']['taskMainTitle']}已完成\n`)
+      }
+    }
     if (!$.farmTask.gotThreeMealInit.f) {
-      //
       await gotThreeMealForFarm();
       if ($.threeMeal.code === "0") {
         console.log(`【定时领水】获得${$.threeMeal.amount}g💧\n`);
@@ -287,6 +297,39 @@ function beanTaskList() {
           console.log(`${$.name} beanTaskList API请求失败，请检查网路重试`)
         } else {
           // console.log('data-----beanTaskList', data)
+          data = $.toObj(data);
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function newAppCenterInfo() {
+  return new Promise(resolve => {
+    const options = {
+      "url": "https://api.m.jd.com/client.action?functionId=newAppCenterInfo",
+      "body": "body=%7B%22showBi%22%3A0%2C%22cycNum%22%3A2%2C%22displayVersion%22%3A%2210.0.0%22%2C%22fQueryStamp%22%3A%221644385264260%22%2C%22showLines%22%3A2%2C%22geoLast%22%3A%22oW9xOe8bab%252FCbMs7Zc7a1kYaDRBHpZ6kBwMsQHM03hsIvUQMfRLIwVfTP92vmMGvgIDg1wu447LeCm8a6L0V%252BiYMitT2%252F08ZwqBKJg659qk%253D%22%2C%22homeAreaCode%22%3A%220%22%2C%22cycFirstTimeStamp%22%3A%221644385247665%22%2C%22geo%22%3A%22oW9xOe8bab%252FCbMs7Zc7a1kYaDRBHpZ6kBwMsQHM03hsIvUQMfRLIwVfTP92vmMGvgIDg1wu447LeCm8a6L0V%252BiYMitT2%252F08ZwqBKJg659qk%253D%22%2C%22scrollType%22%3A0%2C%22userCategory%22%3A%2297%22%7D&build=167963&client=apple&clientVersion=10.3.6&d_brand=apple&d_model=iPhone11%2C8&ef=1&eid=eidIf12a8121eas2urxgGc%2BzS5%2BUYGu1Nbed7bq8YY%2BgPd0Q0t%2BiviZdQsxnK/HTA7AxZzZBrtu1ulwEviYSV3QUuw2XHHC%2BPFHdNYx1A/3Zt8xYR%2Bd3&ep=%7B%22ciphertype%22%3A5%2C%22cipher%22%3A%7B%22screen%22%3A%22ENS4AtO3EJS%3D%22%2C%22wifiBssid%22%3A%22DJK1DNCmEQG0ZJU0ENG3CJDtCWGzYWGmDNq0ZNUmYwC%3D%22%2C%22osVersion%22%3A%22CJUkCq%3D%3D%22%2C%22area%22%3A%22CJvpCJYmCV81CNS1EP82Ctq1EK%3D%3D%22%2C%22openudid%22%3A%22ENq3CzTwENGmYtc3ENSnYtC0DWTwCNdwZNcnZtYmEWU2ZwYnCwY0Cm%3D%3D%22%2C%22uuid%22%3A%22aQf1ZRdxb2r4ovZ1EJZhcxYlVNZSZz09%22%7D%2C%22ts%22%3A1644385264%2C%22hdid%22%3A%22JM9F1ywUPwflvMIpYPok0tt5k9kW4ArJEU3lfLhxBqw%3D%22%2C%22version%22%3A%221.0.3%22%2C%22appname%22%3A%22com.360buy.jdmobile%22%2C%22ridx%22%3A-1%7D&ext=%7B%22prstate%22%3A%220%22%2C%22pvcStu%22%3A%221%22%7D&isBackground=N&joycious=2&lang=zh_CN&networkType=wifi&networklibtype=JDNetworkBaseAF&partner=apple&rfs=0000&scope=11&sign=aabcde877a786b0100d55ca9d21ba7b8&st=1644385337717&sv=100&uemps=0-0&uts=zrHR4oLv7fO8bj08KaWkuJrGiAm/G6alpSm6Xi3w6q6St29zL/3WOO6K%2Bj6xe%2BAVa0OTjS1zYWcWPxqDzVZJxYHk%2BqLSSnp91wBjZ7Dp9UuOhliM95VNAYi3%2BO0HWnakJ4QoSljqVcqATvj2ylOjjTRIhAqsm/NT",
+      "headers": {
+        "Cookie": cookie,
+        "Host": "api.m.jd.com",
+        "Accept": "*/*",
+        "Connection": "keep-alive",
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        "Accept-Language": "zh-Hans-CN;q=1,en-CN;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+    $.post(options, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} beanTaskList API请求失败，请检查网路重试`)
+        } else {
+          // console.log('data-----newAppCenterInfo', data)
           data = $.toObj(data);
         }
       } catch (e) {
@@ -865,17 +908,17 @@ async function getAwardInviteFriend() {
   // console.log(`查询好友列表数据：${JSON.stringify($.friendList)}\n`)
   if ($.friendList) {
     console.log(`\n今日已邀请好友${$.friendList.inviteFriendCount}个 / 每日邀请上限${$.friendList.inviteFriendMax}个，当前好友：${$.friendList.countOfFriend}个`);
-    if ($.friendList.friends && $.friendList.countOfFriend > ($.friendList.friends.length + 2)) {
-      //留2个好友不进行删除，供完成给好友浇水任务
-      console.log(`开始删除${$.friendList.friends.length}个好友,可拿每天的邀请奖励`);
-      for (let friend of $.friendList.friends) {
-        console.log(`\n开始删除好友 [${friend.shareCode}]`);
-        const deleteFriendForFarm = await request('deleteFriendForFarm', { "shareCode": `${friend.shareCode}`,"version":8,"channel":1 });
-        if (deleteFriendForFarm && deleteFriendForFarm.code === '0') {
-          console.log(`删除好友 [${friend.shareCode}] 成功\n`);
-        }
-      }
-    }
+    // if ($.friendList.friends && $.friendList.countOfFriend > ($.friendList.friends.length + 2)) {
+    //   //留2个好友不进行删除，供完成给好友浇水任务
+    //   console.log(`开始删除${$.friendList.friends.length}个好友,可拿每天的邀请奖励`);
+    //   for (let friend of $.friendList.friends) {
+    //     console.log(`\n开始删除好友 [${friend.shareCode}]`);
+    //     const deleteFriendForFarm = await request('deleteFriendForFarm', { "shareCode": `${friend.shareCode}`,"version":8,"channel":1 });
+    //     if (deleteFriendForFarm && deleteFriendForFarm.code === '0') {
+    //       console.log(`删除好友 [${friend.shareCode}] 成功\n`);
+    //     }
+    //   }
+    // }
     await receiveFriendInvite();//为他人助力,接受邀请成为别人的好友
     if ($.friendList.inviteFriendCount > 0) {
       if ($.friendList.inviteFriendCount > $.friendList.inviteFriendGotAwardCount) {
