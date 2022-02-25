@@ -85,7 +85,7 @@ async function jdFruit() {
   subTitle = `【京东账号${$.index}】${$.nickName}`;
   try {
     await initForFarm();
-    if ($.farmInfo.farmUserPro) {
+    if ($.farmInfo && $.farmInfo.farmUserPro) {
       // option['media-url'] = $.farmInfo.farmUserPro.goodsImage;
       message = `【水果名称】${$.farmInfo.farmUserPro.name}\n`;
       console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.farmInfo.farmUserPro.shareCode}\n`);
@@ -155,16 +155,36 @@ async function doDailyTask() {
       let browseSuccess = 0
       let browseFail = 0
       for (let advert of adverts) { //开始浏览广告
-        if (advert.limit <= advert.hadFinishedTimes) {
+        await $.wait(2000)
+        if (advert.limit <= advert.hadFinishedTimes && advert.limit <= advert.hadGotTimes) {
           // browseReward+=advert.reward
-          console.log(`${advert.mainTitle}+ ' 已完成`);//,获得${advert.reward}g
+          console.log(`${advert.mainTitle}+ ' 任务已完成并且奖励已领取`);//,获得${advert.reward}g
           continue;
         }
-        console.log('正在进行广告浏览任务: ' + advert.mainTitle);
-        await browseAdTaskForFarm(advert.advertId, 0);
-        if ($.browseResult.code === '0') {
-          console.log(`${advert.mainTitle}浏览任务完成`);
-          //领取奖励
+        if (advert.limit > advert.hadFinishedTimes) {
+          console.log('正在进行广告浏览任务: ' + advert.mainTitle);
+          await browseAdTaskForFarm(advert.advertId, 0);
+          if ($.browseResult.code === '0') {
+            console.log(`${advert.mainTitle}浏览任务完成`);
+            //领取奖励
+            await $.wait(1000)
+            await browseAdTaskForFarm(advert.advertId, 1);
+            if ($.browseRwardResult.code === '0') {
+              console.log(`领取浏览${advert.mainTitle}广告奖励成功,获得${$.browseRwardResult.amount}g`)
+              browseReward += $.browseRwardResult.amount
+              browseSuccess++
+            } else {
+              browseFail++
+              console.log(`领取浏览广告奖励结果:  ${JSON.stringify($.browseRwardResult)}`)
+            }
+          } else {
+            browseFail++
+            console.log(`广告浏览任务结果:   ${JSON.stringify($.browseResult)}`);
+          }
+        }
+        //领取奖励
+        if (advert.limit > advert.hadGotTimes) {
+          console.log('领取广告浏览任务奖励: ' + advert.mainTitle);
           await browseAdTaskForFarm(advert.advertId, 1);
           if ($.browseRwardResult.code === '0') {
             console.log(`领取浏览${advert.mainTitle}广告奖励成功,获得${$.browseRwardResult.amount}g`)
@@ -174,13 +194,10 @@ async function doDailyTask() {
             browseFail++
             console.log(`领取浏览广告奖励结果:  ${JSON.stringify($.browseRwardResult)}`)
           }
-        } else {
-          browseFail++
-          console.log(`广告浏览任务结果:   ${JSON.stringify($.browseResult)}`);
         }
       }
       if (browseFail > 0) {
-        console.log(`【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\\n`);
+        console.log(`【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\n`);
         // message += `【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\n`;
       } else {
         console.log(`【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`);
@@ -1595,13 +1612,13 @@ function TotalBean() {
 function request(function_id, body = {}, timeout = 1000){
   return new Promise(resolve => {
     setTimeout(() => {
-      $.get(taskUrl(function_id, body), (err, resp, data) => {
+      $.post(taskUrl(function_id, body), (err, resp, data) => {
         try {
           if (err) {
             console.log('\n东东农场: API查询请求失败 ‼️‼️')
             console.log(JSON.stringify(err));
             console.log(`function_id:${function_id}`)
-            $.logErr(err);
+            // $.logErr(err);
           } else {
             data = $.toObj(data, {})
           }
@@ -1617,7 +1634,9 @@ function request(function_id, body = {}, timeout = 1000){
 
 function taskUrl(function_id, body = {}) {
   return {
-    url: `${JD_API_HOST}?functionId=${function_id}&appid=wh5&body=${escape(JSON.stringify(body))}&client=apple&clientVersion=10.2.4`,
+    // url: `${JD_API_HOST}?functionId=${function_id}&appid=wh5&body=${escape(JSON.stringify(body))}&client=apple&clientVersion=10.2.4`,
+    url: `${JD_API_HOST}?functionId=${function_id}`,
+    body: `body=${escape(JSON.stringify(body))}&appid=wh5&client=apple&clientVersion=10.2.4`,
     headers: {
       Cookie: cookie,
       UserAgent: $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
