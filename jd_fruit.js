@@ -69,6 +69,10 @@ const urlSchema = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%2
       option = {};
       await shareCodesFormat();
       await jdFruit();
+      if ($.index % 5 === 0) {
+        console.log(`访问接口次数达到5次，休息一分钟.....`);
+        await $.wait(60 * 1000);
+      }
     }
   }
   if ($.isNode() && allMessage && $.ctrTemp) {
@@ -166,25 +170,16 @@ async function doDailyTask() {
           await browseAdTaskForFarm(advert.advertId, 0);
           if ($.browseResult.code === '0') {
             console.log(`${advert.mainTitle}浏览任务完成`);
-            //领取奖励
-            await $.wait(1000)
-            await browseAdTaskForFarm(advert.advertId, 1);
-            if ($.browseRwardResult.code === '0') {
-              console.log(`领取浏览${advert.mainTitle}广告奖励成功,获得${$.browseRwardResult.amount}g`)
-              browseReward += $.browseRwardResult.amount
-              browseSuccess++
-            } else {
-              browseFail++
-              console.log(`领取浏览广告奖励结果:  ${JSON.stringify($.browseRwardResult)}`)
-            }
           } else {
             browseFail++
-            console.log(`广告浏览任务结果:   ${JSON.stringify($.browseResult)}`);
+            console.log(`广告浏览任务失败:   ${JSON.stringify($.browseResult)}`);
           }
         }
         //领取奖励
         if (advert.limit > advert.hadGotTimes) {
           console.log('领取广告浏览任务奖励: ' + advert.mainTitle);
+          //领取奖励
+          await $.wait(1000)
           await browseAdTaskForFarm(advert.advertId, 1);
           if ($.browseRwardResult.code === '0') {
             console.log(`领取浏览${advert.mainTitle}广告奖励成功,获得${$.browseRwardResult.amount}g`)
@@ -192,7 +187,7 @@ async function doDailyTask() {
             browseSuccess++
           } else {
             browseFail++
-            console.log(`领取浏览广告奖励结果:  ${JSON.stringify($.browseRwardResult)}`)
+            console.log(`领取浏览广告奖励失败:  ${JSON.stringify($.browseRwardResult)}`)
           }
         }
       }
@@ -1609,7 +1604,7 @@ function TotalBean() {
     })
   })
 }
-function request(function_id, body = {}, timeout = 1000){
+function request(function_id, body = {}, timeout = 0){
   return new Promise(resolve => {
     setTimeout(() => {
       $.post(taskUrl(function_id, body), (err, resp, data) => {
@@ -1638,12 +1633,14 @@ function taskUrl(function_id, body = {}) {
     url: `${JD_API_HOST}?functionId=${function_id}`,
     body: `body=${escape(JSON.stringify(body))}&appid=wh5&client=apple&clientVersion=10.2.4`,
     headers: {
-      Cookie: cookie,
-      UserAgent: $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      "accept": "*/*",
-      "accept-encoding": "gzip, deflate, br",
-      "origin": "https://h5.m.jd.com",
-      "referer": "https://h5.m.jd.com/",
+      "Host": "api.m.jd.com",
+      "Accept": "*/*",
+      "Origin": "https://carry.m.jd.com",
+      "Accept-Encoding": "gzip, deflate, br",
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+      "Referer": "https://carry.m.jd.com/",
+      "Cookie": cookie
     },
     timeout: 10000,
   }
