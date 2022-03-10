@@ -71,7 +71,7 @@ const urlSchema = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%2
       await jdFruit();
       if ($.index % 5 === 0) {
         console.log(`访问接口次数达到5次，休息一分钟.....`);
-        await $.wait(60 * 1000);
+        await $.wait(65 * 1000);
       }
     }
   }
@@ -1207,7 +1207,7 @@ async function masterHelp() {
     babelChannel: "3",
     version: 2,
     channel: 1
-  });
+  }, 3000);
 }
 /**
  * 水滴雨API
