@@ -1207,7 +1207,7 @@ async function masterHelp() {
     babelChannel: "3",
     version: 2,
     channel: 1
-  }, 3000);
+  });
 }
 /**
  * 水滴雨API
