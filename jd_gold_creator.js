@@ -2,7 +2,7 @@
 金榜创造营
 活动入口：https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html
 活动时间：2021-05-21至2021-12-31
-脚本更新时间：2021-05-28 14:20
+脚本更新时间：2021-10-20
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ===================quantumultx================
 [task_local]
@@ -60,9 +60,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/`, {"open-url": "https://bean.m.jd.com/"});
 
         if ($.isNode()) {
-          await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
-        } else {
-          $.setdata('', `CookieJD${i ? i + 1 : ""}`);//cookie失效，故清空cookie。$.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。
+          // await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
         continue
       }
@@ -80,6 +78,8 @@ async function main() {
   try {
     await goldCreatorTab();//获取顶部主题
     await getDetail();
+    await goldCreatorPublish();
+    // await goldCenterHead();//金榜签到
     await showMsg();
   } catch (e) {
     $.logErr(e)
@@ -101,6 +101,40 @@ async function getDetail() {
     await goldCreatorDetail(item['matGrpId'], item['subTitleId'], item['taskId'], item['batchId']);
     await $.wait(2000);
   }
+}
+function goldCreatorPublish() {
+  return new Promise(resolve => {
+    const options = taskUrl('goldCreatorPublish')
+    $.get(options, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} goldCreatorPublish API请求失败，请检查网路重试`)
+        } else {
+          data = $.toObj(data);
+          if (data) {
+            if (data.code === '0') {
+              if (data.result.subCode === '0') {
+                if (data.result.lotteryResult.lotteryCode === '0') {
+                  console.log(`揭榜成功：获得${data.result.lotteryResult.lotteryScore}京豆\n`)
+                } else {
+                  console.log(`揭榜成功：获得空气~\n`)
+                }
+              } else {
+                console.log(`揭榜失败：${$.toStr(data)}\n`);
+              }
+            } else {
+              console.log(`揭榜异常：${$.toStr(data)}\n`);
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
 }
 function goldCreatorTab() {
   $.subTitleInfos = [];
@@ -126,6 +160,80 @@ function goldCreatorTab() {
               console.log(`已投票${unVoted - $.subTitleInfos.length}主题\n`);
             } else {
               console.log(`goldCreatorTab 异常：${JSON.stringify(data)}`)
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function goldCenterDoTask(type = 1) {
+  return new Promise(resolve => {
+    const body = {type};
+    const options = taskUrl('goldCenterDoTask', body)
+    $.get(options, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} goldCenterDoTask API请求失败，请检查网路重试`)
+        } else {
+          console.log(`京东金榜签到`, data)
+          data = $.toObj(data);
+          if (data) {
+            if (data.code === '0' && data.result) {
+              if (data.result.taskCode === '0') {
+                console.log(`京东金榜签到成功，获得京豆：${data.result.lotteryScore}`)
+              } else {
+                console.log(`京东金榜签到失败：${data.result.taskMsg}`)
+              }
+            } else {
+              console.log(`京东金榜签到异常`, $.toStr(data))
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function goldCenterHead() {
+  return new Promise(resolve => {
+    const body = {};
+    const options = taskUrl('goldCenterHead', body)
+    $.get(options, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} goldCenterDoTask API请求失败，请检查网路重试`)
+        } else {
+          data = $.toObj(data);
+          if (data) {
+            if (data.code === '0' && data.result) {
+              const { medalNum, taskDone, bingoDone } = data.result;
+              console.log(`京东金榜当前勋章数：${medalNum}\n`)
+              if (taskDone === 1) {
+                console.log(`你已点亮过勋章了，请明日继续！`)
+              } else {
+                await goldCenterDoTask(1);//金榜签到，首页-排行榜-金榜
+              }
+              if (medalNum && medalNum >= 5) {
+                if (bingoDone === 0) {
+                  console.log(`勋章已有5枚，开始抽盲盒`)
+                  await $.wait(1000)
+                  await goldCenterDoTask(2)
+                } else {
+                  console.log(`今日已抽过盲盒`)
+                }
+              }
+            } else {
+              console.log(`goldCenterHead 异常`, $.toStr(data))
             }
           }
         }
@@ -164,11 +272,12 @@ function goldCreatorDetail(groupId, subTitleId, taskId, batchId, flag = false) {
               $.remainVotes = data.result.remainVotes || 0;
               $.skuList = data.result.skuList || [];
               $.taskList = data.result.taskList || [];
+              $.signTask = data.result.signTask || [];
               if (flag) {
                 await doTask2(batchId);
               } else {
                 console.log(`当前剩余投票次数：${$.remainVotes}`);
-                await doTask(subTitleId, taskId, batchId);
+                if ($.remainVotes) await doTask(subTitleId, taskId, batchId);
               }
             } else {
               console.log(`goldCreatorDetail 异常：${JSON.stringify(data)}`)
@@ -185,6 +294,7 @@ function goldCreatorDetail(groupId, subTitleId, taskId, batchId, flag = false) {
 }
 async function doTask(subTitleId, taskId, batchId) {
   $.skuList = $.skuList.filter(vo => !!vo && vo['isVoted'] === 0);
+  if ($.skuList && $.skuList.length <= 0) return
   let randIndex = Math.floor(Math.random() * $.skuList.length);
   console.log(`给 【${$.skuList[randIndex]['name']}】 商品投票`);
   const body = {
@@ -197,6 +307,7 @@ async function doTask(subTitleId, taskId, batchId) {
     "type": 1,
     batchId
   };
+  await $.wait(3000);
   await goldCreatorDoTask(body);
 }
 async function doTask2(batchId) {
@@ -211,6 +322,11 @@ async function doTask2(batchId) {
       await goldCreatorDoTask(body);
       await $.wait(2000);
     }
+  }
+  console.log('$.signTask[\'taskStatus\']', $.signTask['taskStatus'])
+  if ($.signTask['taskStatus'] === 1) {
+    const body = {"taskId": $.signTask['taskId'], "itemId": $.signTask['taskItemInfo']['itemId'], "type": $.signTask['taskType'], batchId};
+    await goldCreatorDoTask(body);
   }
 }
 function goldCreatorDoTask(body) {
