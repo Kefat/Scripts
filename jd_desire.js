@@ -1,9 +1,8 @@
 /*
-大势新品赏
-活动地址：https://u.jd.com/3tGMjdf
-活动时间：2021年10月20日 – 10月31日24:00
-
-cron 1 0,22 * * * jd_desire.js
+小魔方
+活动时间：2022年3月16日 – 3月21日23:59:59
+https://prodev.m.jd.com/mall/active/2GaAnLLb7NcHkEjPXphja7SSQ7Z4/index.html
+1 0,19,22 16-21/1 3 * jd_desire.js
 
  */
 const $ = new Env('小魔方');
@@ -70,7 +69,8 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 function showMsg() {
   message += `本次运行获得${$.bean}京豆\n当前已获得京豆：${$.peasSum}`;
   return new Promise(resolve => {
-    $.msg($.name, '', `京东账号 ${$.index} ${$.nickName || $.UserName}\n${message}`);
+    // $.msg($.name, '', `京东账号 ${$.index} ${$.nickName || $.UserName}\n${message}`);
+    allMsg += `京东账号 ${$.index} ${$.nickName || $.UserName}\n${message}\n\n`;
     resolve();
   })
 }
@@ -124,7 +124,7 @@ function getTaskList(flag = false) {
                     //浏览商品组多个商品(会场)
                     const skuIds = [100024975558, 100012927643, 100013608673, 100026806864, 100026483136, 100026286084, 100012821223, 100026330682];
                     for (const skuId of skuIds) {
-                      console.log(`\n去完成 【${vo.taskName}】 任务`);
+                      console.log(`\n去完成 【${vo.taskName}】 任务，taskId：${vo.taskId}，skuIds：${skuId}`);
                       await doTask(vo.taskId, vo.groupId, skuId);
                       if ($.hasDone) {
                         $.hasDone = false;
@@ -138,6 +138,32 @@ function getTaskList(flag = false) {
                       console.log(`\n去完成 【${vo.taskName}】 任务`)
                       await doTask(vo.taskId, bo)
                       if ($.hasDone) break
+                      await $.wait(1000)
+                    }
+                  }
+                  if (vo.taskId === 2004) {
+                    const skuIds = [
+                      "18395215", "18468845", "18395285", "18470991", "18395381", "18468452", "18396456", "18472112", "18451573", "18468940", "18460143", "18471960"
+                    ]
+                    for (const skuId of skuIds) {
+                      console.log(`\n去完成 【${vo.taskName}】 任务，taskId：${vo.taskId}，skuIds：${skuId}`);
+                      await doTask(vo.taskId, skuId);
+                      if ($.hasDone) {
+                        $.hasDone = false;
+                        break;
+                      }
+                      await $.wait(1000)
+                    }
+                  }
+                  if (vo.taskId === 2006) {
+                    const skuIds = [2501602472, 2501602885, 2501602893, 2501602934, 2501602873, 2501602875, 2501602876];
+                    for (const skuId of skuIds) {
+                      console.log(`\n去完成 【${vo.taskName}】 任务，taskId：${vo.taskId}，skuIds：${skuId}`);
+                      await doTask(vo.taskId, skuId);
+                      if ($.hasDone) {
+                        $.hasDone = false;
+                        break;
+                      }
                       await $.wait(1000)
                     }
                   }
@@ -215,8 +241,10 @@ function getNewMyLotteryInfo() {
           data = $.toObj(data);
           if (data) {
             if (data['result'] && data['result']['code'] === 0) {
-              $.peasSum = data['result'].venueResult.peasResult.peasSum || 0;
-              console.log('当前已获得京豆：', $.peasSum)
+              if (data['result'].venueResult.peasResult) {
+                $.peasSum = data['result'].venueResult.peasResult.peasSum || 0;
+                console.log('当前已获得京豆：', $.peasSum)
+              }
             }
           }
         }
