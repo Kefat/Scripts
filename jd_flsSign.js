@@ -30,17 +30,20 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
   }
   try {
     let promiseArr = null;
-
+    // 2022-03-10 11:40:00 至 2022-12-31 23:59:59
+    promiseArr = cookiesArr.map((ck, index) => getActInfo(ck, index, 'https://prodev.m.jd.com/mall/active/2FzVtkSfUtvU8YoiTeALkJ68PxAs/index.html'));
+    await Promise.all(promiseArr);
+    //2022-03-17 00:00:00 至 2022-05-01 00:00:00
+    promiseArr = cookiesArr.map((ck, index) => getActInfo(ck, index, 'https://prodev.m.jd.com/mall/active/hPJiMgUQmc34bamrApLUBRUy82W/index.html'));
+    await Promise.all(promiseArr);
+    // 2022-01-01 00:00:00 至 2022-12-31 23:59:59
     promiseArr = cookiesArr.map((ck, index) => getActInfo(ck, index, 'https://pro.m.jd.com/mall/active/2BspupMr6qenk9JUWpbAnepLHjwy/index.html'));
     await Promise.all(promiseArr);
-
-    promiseArr = cookiesArr.map((ck, index) => getActInfo(ck, index, 'https://pro.m.jd.com/mall/active/3EVVqbSAdb1jWkED4D6rhVX1Xyf4/index.html'));
-    await Promise.all(promiseArr);
-
+    // 2021-12-06 00:00:00 至 2022-03-31 00:00:00
     promiseArr = cookiesArr.map((ck, index) => getActInfo(ck, index, 'https://pro.m.jd.com/mall/active/4Vh5ybVr98nfJgros5GwvXbmTUpg/index.html'));
     await Promise.all(promiseArr);
 
-    promiseArr = cookiesArr.map((ck, index) => getActInfo(ck, index, 'https://prodev.m.jd.com/mall/active/KcfFqWvhb5hHtaQkS4SD1UU6RcQ/index.html'));
+    promiseArr = cookiesArr.map((ck, index) => getActInfo(ck, index, 'https://prodev.m.jd.com/mall/active/hPJiMgUQmc34bamrApLUBRUy82W/index.html'));
     await Promise.all(promiseArr);
 
     promiseArr = cookiesArr.map((ck, index) => getActInfo(ck, index, 'https://pro.m.jd.com/mall/active/3SC6rw5iBg66qrXPGmZMqFDwcyXi/index.html'));
