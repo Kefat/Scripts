@@ -107,12 +107,30 @@ async function jdFruit() {
         console.log(`\n${$.farmInfo.farmUserPro.name}种植中...\n`)
       } else if ($.farmInfo.treeState === 0) {
         //已下单购买, 但未开始种植新的水果
-        option['open-url'] = urlSchema;
-        $.msg($.name, ``, `【京东账号${$.index}】 ${$.nickName || $.UserName}\n【提醒⏰】您忘了种植新的水果\n请去京东APP或微信小程序选购并种植新的水果\n点击弹窗即达`, option);
-        if ($.isNode()) {
-          await notify.sendNotify(`${$.name} - 您忘了种植新的水果`, `京东账号${$.index} ${$.nickName}\n【提醒⏰】您忘了种植新的水果\n请去京东APP或微信小程序选购并种植新的水果\n活动地址：https://h5.m.jd.com/babelDiy/Zeus/3KSjXqQabiTuD1cJ28QskrpWoBKT/index.html`);
+        if ($.farmInfo.hasOwnProperty('farmLevelWinGoods')) {
+          let farmLevelWinGoods = [];
+          for (const key of Object.keys($.farmInfo['farmLevelWinGoods'])) {
+            farmLevelWinGoods.push(...$.farmInfo['farmLevelWinGoods'][key]);
+          }
+          farmLevelWinGoods.reverse();
+          if (farmLevelWinGoods && farmLevelWinGoods[0] && farmLevelWinGoods[0]['type']) {
+            const body = {
+              "imageUrl": '',
+              "nickName": '',
+              "shareCode": '',
+              "goodsType": farmLevelWinGoods[0]['type'],
+              "type": "0",
+              "version": 11,
+              "channel": 3,
+              "babelChannel": 0
+            }
+            const info = await request('choiceGoodsForFarm',body);
+            console.log(`自动种植结果：${$.toStr(info)}`)
+            await request('gotStageAwardForFarm',{"type":"4","version":11,"channel":3,"babelChannel":0});
+            await request('waterGoodForFarm',{"type":"","version":11,"channel":3,"babelChannel":0});
+            await request('gotStageAwardForFarm',{"type":"1","version":11,"channel":3,"babelChannel":0});
+          }
         }
-        return
       }
       await ddPark();//
       await doDailyTask();
