@@ -217,6 +217,18 @@
       "script": "https://raw.githubusercontent.com/chavyleung/scripts/master/ximalaya/ximalaya.js"
     },
     {
+      "id": "chavyleung.bilibili.live",
+      "name": "bilibili直播",
+      "keys": ["chavy_cookie_bilibili"],
+      "author": "@chavyleung",
+      "repo": "https://github.com/chavyleung/scripts/blob/master/bilibili/bilibili.js",
+      "script": "https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.js",
+      "icons": [
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/bilibili.png",
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/bilibili.png"
+      ]
+    },
+    {
       "id": "V2EX",
       "name": "V2EX",
       "keys": ["chavy_cookie_v2ex"],
