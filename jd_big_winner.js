@@ -1,29 +1,19 @@
 /*
-省钱大赢家之翻翻乐
+发财大赢家之翻翻乐
 一天可翻多次，但有上限
 运气好每次可得0.3元以上的微信现金(需京东账号绑定到微信)
-脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
-=================================Quantumultx=========================
-[task_local]
-#省钱大赢家之翻翻乐
-20 * * * * jd_big_winner.js, tag=省钱大赢家之翻翻乐, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
-=================================Loon===================================
-[Script]
-cron "20 * * * *" script-path=jd_big_winner.js,tag=省钱大赢家之翻翻乐
-
-===================================Surge================================
-省钱大赢家之翻翻乐 = type=cron,cronexp="20 * * * *",wake-system=1,timeout=3600,script-path=jd_big_winner.js
-
-====================================小火箭=============================
-省钱大赢家之翻翻乐 = type=cron,script-path=jd_big_winner.js, cronexpr="20 * * * *", timeout=3600, enable=true
+#发财大赢家之翻翻乐
+20 10-23/2 * * * jd_big_winner.js
  */
-const $ = new Env('省钱大赢家之翻翻乐');
+const $ = new Env('发财大赢家之翻翻乐');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [], cookie = '', message = '', linkId = 'DA4SkG7NXupA9sksI00L0g', fflLinkId = 'YhCkrVusBVa_O2K-7xE6hA';
+let cookiesArr = [], cookie = '', message = '';
+//翻翻乐ID
+let fflLinkId = "WMDf1PTHmh8MYBpD97sieQ";
+let linkId = 'u_2EYfsxu0skdtZ6gbRjBQ'
 const JD_API_HOST = 'https://api.m.jd.com/api';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -37,12 +27,19 @@ if ($.isNode()) {
     ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 const len = cookiesArr.length;
-
+let res = {}
 !(async () => {
   $.redPacketId = []
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {"open-url": "https://bean.m.jd.com/"});
     return;
+  }
+  res = await getAuthorShareCode();
+  if (!res) {
+    $.http.get({url: 'https://purge.jsdelivr.net/gh/gitupdate/updateTeam@master/shareCodes/bigWinner.json'}).then((resp) => {
+    }).catch((e) => $.log('刷新CDN异常', e));
+    await $.wait(500)
+    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/gitupdate/updateTeam@master/shareCodes/bigWinner.json');
   }
   for (let i = 0; i < len; i++) {
     if (cookiesArr[i]) {
@@ -57,7 +54,7 @@ const len = cookiesArr.length;
   }
   if (message) {
     $.msg($.name, '', message);
-    //if ($.isNode()) await notify.sendNotify($.name, message);
+    if ($.isNode()) await notify.sendNotify($.name, message);
   }
 })()
     .catch((e) => {
@@ -72,6 +69,7 @@ async function main() {
     $.canApCashWithDraw = false;
     $.changeReward = true;
     $.canOpenRed = true;
+    let times = 0;
     await gambleHomePage();
     if (!$.time) {
       console.log(`开始进行翻翻乐拿红包\n`)
@@ -79,14 +77,27 @@ async function main() {
       if ($.canOpenRed) {
         while (!$.canApCashWithDraw && $.changeReward) {
           await openRedReward();
-          await $.wait(500);
+          times++
+          await $.wait(1500);
         }
+        
         if ($.canApCashWithDraw) {
           //提现
           await openRedReward('gambleObtainReward', $.rewardData.rewardType);
           await apCashWithDraw($.rewardData.id, $.rewardData.poolBaseId, $.rewardData.prizeGroupId, $.rewardData.prizeBaseId, $.rewardData.prizeType);
         }
       }
+    }
+    if (res['linkId'] && res['code']) {
+      $.codeList = res['code'];
+      linkId = res['linkId'];
+    } else {
+      return
+    }
+    for (let vo of $.codeList) {
+      if (!vo['inviter']) continue
+      await _618(vo['redEnvelopeId'], vo['inviter'], '1');
+      await _618(vo['redEnvelopeId'], vo['inviter'], '2')
     }
   } catch (e) {
     $.logErr(e)
@@ -101,7 +112,7 @@ function gambleHomePage() {
     'Origin': 'https://openredpacket-jdlite.jd.com',
     'Accept': 'application/json, text/plain, */*',
     'User-Agent': 'jdltapp;iPhone;3.3.2;14.4.1;network/wifi;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
-    'Referer': `https://618redpacket.jd.com/withdraw?activityId=${linkId}&channel=wjicon&lng=&lat=&sid=&un_area=`,
+    'Referer': `https://618redpacket.jd.com/withdraw?activityId=DA4SkG7NXupA9sksI00L0g&channel=wjicon&lng=&lat=&sid=&un_area=`,
     'Accept-Language': 'zh-cn',
     'Cookie': cookie
   }
@@ -109,6 +120,7 @@ function gambleHomePage() {
   const options = {
     url: `https://api.m.jd.com/?functionId=gambleHomePage&body=${encodeURIComponent(JSON.stringify(body))}&appid=activities_platform&clientVersion=3.5.0`,
     headers,
+    timeout: 10000
   }
   return new Promise(resolve => {
     $.get(options, (err, resp, data) => {
@@ -146,7 +158,7 @@ function gambleOpenReward() {
     'Origin': 'https://openredpacket-jdlite.jd.com',
     'Accept': 'application/json, text/plain, */*',
     'User-Agent': 'jdltapp;iPhone;3.3.2;14.4.1;network/wifi;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
-    'Referer': `https://618redpacket.jd.com/withdraw?activityId=${linkId}&channel=wjicon&lng=&lat=&sid=&un_area=`,
+    'Referer': `https://618redpacket.jd.com/withdraw?activityId=DA4SkG7NXupA9sksI00L0g&channel=wjicon&lng=&lat=&sid=&un_area=`,
     'Accept-Language': 'zh-cn',
     "Content-Type": "application/x-www-form-urlencoded",
     'Cookie': cookie
@@ -155,6 +167,7 @@ function gambleOpenReward() {
   const options = {
     url: `https://api.m.jd.com/`,
     headers,
+    timeout: 10000,
     body: `functionId=gambleOpenReward&body=${encodeURIComponent(JSON.stringify(body))}&t=${+new Date()}&appid=activities_platform&clientVersion=3.5.0`
   }
   return new Promise(resolve => {
@@ -192,7 +205,7 @@ function openRedReward(functionId = 'gambleChangeReward', type) {
     'Origin': 'https://openredpacket-jdlite.jd.com',
     'Accept': 'application/json, text/plain, */*',
     'User-Agent': 'jdltapp;iPhone;3.3.2;14.4.1;network/wifi;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
-    'Referer': `https://618redpacket.jd.com/withdraw?activityId=${linkId}&channel=wjicon&lng=&lat=&sid=&un_area=`,
+    'Referer': `https://618redpacket.jd.com/withdraw?activityId=DA4SkG7NXupA9sksI00L0g&channel=wjicon&lng=&lat=&sid=&un_area=`,
     'Accept-Language': 'zh-cn',
     "Content-Type": "application/x-www-form-urlencoded",
     'Cookie': cookie
@@ -202,6 +215,7 @@ function openRedReward(functionId = 'gambleChangeReward', type) {
   const options = {
     url: `https://api.m.jd.com/`,
     headers,
+    timeout: 10000,
     body: `functionId=${functionId}&body=${encodeURIComponent(JSON.stringify(body))}&t=${+new Date()}&appid=activities_platform&clientVersion=3.5.0`
   }
   return new Promise(resolve => {
@@ -264,7 +278,7 @@ function apCashWithDraw(id, poolBaseId, prizeGroupId, prizeBaseId, prizeType) {
     'Origin': 'https://openredpacket-jdlite.jd.com',
     'Accept': 'application/json, text/plain, */*',
     'User-Agent': 'jdltapp;iPhone;3.3.2;14.4.1;network/wifi;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
-    'Referer': `https://618redpacket.jd.com/withdraw?activityId=${linkId}&channel=wjicon&lng=&lat=&sid=&un_area=`,
+    'Referer': `https://618redpacket.jd.com/withdraw?activityId=DA4SkG7NXupA9sksI00L0g&channel=wjicon&lng=&lat=&sid=&un_area=`,
     'Accept-Language': 'zh-cn',
     "Content-Type": "application/x-www-form-urlencoded",
     'Cookie': cookie
@@ -284,6 +298,7 @@ function apCashWithDraw(id, poolBaseId, prizeGroupId, prizeBaseId, prizeType) {
   const options = {
     url: `https://api.m.jd.com/`,
     headers,
+    timeout: 10000,
     body: `functionId=apCashWithDraw&body=${encodeURIComponent(JSON.stringify(body))}&t=${+new Date()}&appid=activities_platform&clientVersion=3.5.0`
   }
   return new Promise(resolve => {
@@ -305,7 +320,7 @@ function apCashWithDraw(id, poolBaseId, prizeGroupId, prizeBaseId, prizeType) {
               }
             } else {
               console.log(`翻翻乐提现 失败：${JSON.stringify(data)}\n`);
-              message += `提现至微信钱包失败\n详情：${JSON.stringify(data)}\n\n`;
+              // message += `提现至微信钱包失败\n详情：${JSON.stringify(data)}\n\n`;
             }
           }
         }
@@ -313,6 +328,74 @@ function apCashWithDraw(id, poolBaseId, prizeGroupId, prizeBaseId, prizeType) {
         $.logErr(e, resp)
       } finally {
         resolve()
+      }
+    })
+  })
+}
+function _618(redEnvelopeId, inviter, helpType = '1') {
+  return new Promise(async resolve => {
+    let h5st = '';
+    const t = Date.now()
+    try {
+      const h5Tool = require('./utils/h5stTool_3_0.js');
+      $.CryptoJS = require('crypto-js');
+      $.stk = "appid,body,client,clientVersion,functionId,t";
+      const body = {
+        "linkId": `${linkId}`,
+        "redEnvelopeId": `${redEnvelopeId}`,
+        "inviter": `${inviter}`,
+        "helpType": `${helpType}`
+      }
+      let url = `https://api.m.jd.com/client.action?appid=activities_platform&functionId=openRedEnvelopeInteract&body=${$.toStr(body)}&client=H5&clientVersion=1.0.0&t=${t}`
+      h5st = await h5Tool.getH5st($, url, 'c8bce');
+      // console.log(`h5st`, h5st)
+    } catch (e) {}
+    $.get({
+      url: `https://api.m.jd.com/?functionId=openRedEnvelopeInteract&body={%22linkId%22:%22${linkId}%22,%22redEnvelopeId%22:%22${redEnvelopeId}%22,%22inviter%22:%22${inviter}%22,%22helpType%22:%22${helpType}%22}&t=${t}&appid=activities_platform&client=H5&clientVersion=1.0.0&h5st=${h5st}`,
+      headers: {
+        'Host': 'api.m.jd.com',
+        'accept': 'application/json, text/plain, */*',
+        'origin': 'https://618redpacket.jd.com',
+        'user-agent': 'jdltapp;iPhone;3.5.0;14.2;network/wifi;hasUPPay/0;pushNoticeIsOpen/0;lang/zh_CN;model/iPhone10,2;hasOCPay/0;appBuild/1066;supportBestPay/0;pv/7.0;apprpd/;Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
+        'accept-language': 'zh-cn',
+        'referer': `https://618redpacket.jd.com/?activityId=DA4SkG7NXupA9sksI00L0g&redEnvelopeId=${redEnvelopeId}&inviterId=${inviter}&helpType=1&lng=&lat=&sid=`,
+        'Cookie': cookie
+      }
+    }, (err, resp, data) => {
+      // console.log(data)
+      resolve()
+    })
+  })
+}
+function getAuthorShareCode(url = 'https://raw.githubusercontent.com/gitupdate/updateTeam/master/shareCodes/bigWinner.json') {
+  return new Promise(async resolve => {
+    const options = {
+      url: `${url}?${new Date()}`, "timeout": 10000, headers: {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+      }
+    };
+    if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
+      const tunnel = require("tunnel");
+      const agent = {
+        https: tunnel.httpsOverHttp({
+          proxy: {
+            host: process.env.TG_PROXY_HOST,
+            port: process.env.TG_PROXY_PORT * 1
+          }
+        })
+      }
+      Object.assign(options, { agent })
+    }
+    $.get(options, async (err, resp, data) => {
+      try {
+        if (err) {
+        } else {
+          if (data) data = JSON.parse(data)
+        }
+      } catch (e) {
+        // $.logErr(e, resp)
+      } finally {
+        resolve(data);
       }
     })
   })
