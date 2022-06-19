@@ -27,25 +27,31 @@ const $ = new Env('京东种豆得豆');
 //Node.js用户请在jdCookie.js处填写京东ck;
 //ios等软件用户直接用NobyDa的jd cookie
 let jdNotify = true;//是否开启静默运行。默认true开启
-let cookiesArr = [], cookie = '', jdPlantBeanShareArr = [], isBox = false, notify, newShareCodes, option, message,subTitle;
+let cookiesArr = [], cookie = '', newShareCodes, option, message, subTitle;
 //京东接口地址
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 //助力好友分享码(最多3个,否则后面的助力失败)
-//此此内容是IOS用户下载脚本到本地使用，填写互助码的地方，同一京东账号的好友互助码请使用@符号隔开。
-//下面给出两个账号的填写示例（iOS只支持2个京东账号）
-let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好友的shareCode
-                   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  '66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba@e7lhibzb3zek32e72n4xesxmgc2m76eju62zk3y@l4ex6vx6yynovp6l5zmgzx4nssii54ewecu36gi@l4ex6vx6yynovp6l5zmgzx4nssii54ewecu36gi',
-  //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'olmijoxgmjutyx55upqaqxrblt7f3h26dgj2riy@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziyvnsb2r54jq34s64sc4it3jlfnejwmtmsuadax2i@eeexxudqtlampbpvmceutaaht5tcftvr6kohuny@e7lhibzb3zek27gfeceqb6wwm45gshcaroxg5ka@e7lhibzb3zek3xxnrskw4mpzstihpk3f7fqziiy@olmijoxgmjutzhazczrfgf75qrbqseqdmb5ey5a',
-]
+const notify = $.isNode() ? require('./sendNotify') : '';
+//Node.js用户请在jdCookie.js处填写京东ck;
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+
 let allMessage = ``;
 let currentRoundId = null;//本期活动id
 let lastRoundId = null;//上期id
 let awardState = '';//上期活动的京豆是否收取
 let randomCount = $.isNode() ? 20 : 5;
+$.shareCodes = []
+if ($.isNode()) {
+  Object.keys(jdCookieNode).forEach((item) => {
+    if (jdCookieNode[item]) {
+      cookiesArr.push(jdCookieNode[item])
+    }
+  })
+} else {
+  cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
+}
 !(async () => {
-  await requireConfig();
+  // await requireConfig();
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
@@ -58,7 +64,7 @@ let randomCount = $.isNode() ? 20 : 5;
       $.isLogin = true;
       $.nickName = '';
       await TotalBean();
-      console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
+      console.log(`\n**********开始【京东账号${$.index}】${$.nickName || $.UserName}**********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
 
@@ -70,10 +76,55 @@ let randomCount = $.isNode() ? 20 : 5;
       message = '';
       subTitle = '';
       option = {};
-      await shareCodesFormat();
+      // await shareCodesFormat();
       await jdPlantBean();
       await showMsg();
     }
+  }
+  console.log(`\n\n===========开始好友助力=============`)
+  try {
+    for (let j = 0; j < cookiesArr.length; j++) {
+      if (!cookiesArr[j]) continue;
+      cookie = cookiesArr[j];
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+      $.index = j + 1;
+      if ($.shareCodes && $.shareCodes.length <= 0) break
+      for (let index = 0; index < $.shareCodes.length; index ++) {
+        $.userInviteInfo = $.shareCodes[index];
+        if ($.userInviteInfo['user'] === $.UserName) continue;
+        if ($.userInviteInfo['max']) continue;
+        console.log(`\n京东账号 ${$.index} ${$.UserName} 开始助力好友 ${$.userInviteInfo['user']}，邀请码为：${$.userInviteInfo['shareCode']}`);
+        await helpShare($.userInviteInfo['shareCode']);
+        await $.wait(4000)
+        if ($.helpResult && $.helpResult.code === '0') {
+          // console.log(`助力好友结果: ${JSON.stringify($.helpResult.data.helpShareRes)}`);
+          if ($.helpResult.data && $.helpResult.data.helpShareRes) {
+            if ($.helpResult.data.helpShareRes.state === '1') {
+              console.log(`助力好友${$.userInviteInfo['shareCode']}成功`)
+              console.log(`${$.helpResult.data.helpShareRes.promptText}\n`);
+            } else if ($.helpResult.data.helpShareRes.state === '2') {
+              console.log('您今日助力的机会已耗尽，已不能再帮助好友助力了\n');
+              break;
+            } else if ($.helpResult.data.helpShareRes.state === '3') {
+              console.log('该好友今日已满9人助力/20瓶营养液,明天再来为Ta助力吧\n')
+              $.shareCodes[index]['max'] = true;
+              $.shareCodes.splice(index, 1);
+              index--
+            } else if ($.helpResult.data.helpShareRes.state === '4') {
+              console.log(`${$.helpResult.data.helpShareRes.promptText}\n`)
+            } else {
+              console.log(`助力其他情况：${JSON.stringify($.helpResult.data.helpShareRes)}`);
+            }
+          } else {
+            console.log(`助力好友失败: ${JSON.stringify($.helpResult)}`);
+          }
+        } else {
+          console.log(`助力好友失败: ${JSON.stringify($.helpResult)}`);
+        }
+      }
+    }
+  } catch (e) {
+    $.log(e)
   }
   if ($.isNode() && allMessage) {
     await notify.sendNotify(`${$.name}`, `${allMessage}`)
@@ -92,7 +143,16 @@ async function jdPlantBean() {
     if ($.plantBeanIndexResult && $.plantBeanIndexResult.code === '0' && $.plantBeanIndexResult.data) {
       const shareUrl = $.plantBeanIndexResult.data.jwordShareInfo.shareUrl
       $.myPlantUuid = getParam(shareUrl, 'plantUuid')
-      console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.myPlantUuid}\n`);
+      // console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.myPlantUuid}\n`);
+      if ($.myPlantUuid) {
+        console.log(`【好友互助码】获取成功：${$.myPlantUuid}`);
+        $.shareCodes.push({
+          user: $.UserName,
+          max: false,
+          index: $.index,
+          shareCode: $.myPlantUuid
+        })
+      }
       const roundList = $.plantBeanIndexResult.data.roundList;
       $.currentRound = roundList.filter(vo => !!vo && vo['roundState'] === '2');
       $.lastRound = roundList.filter(vo => !!vo && vo['roundState'] === '1');
@@ -105,7 +165,7 @@ async function jdPlantBean() {
       message += `【上期时间】${$.lastRound[$.lastRound.length - 1].dateDesc.replace('上期 ', '')}\n`;
       message += `【上期成长值】${$.lastRound[$.lastRound.length - 1].growth}，瓜分${$.lastRound[$.lastRound.length - 1].splitBeansDesc}京豆\n`;
       await receiveNutrients();//定时领取营养液
-      await doHelp();//助力
+      // await doHelp();//助力
       await doTask();//做日常任务
       //await doEgg();
       await stealFriendWater();
@@ -245,7 +305,7 @@ async function doTask() {
   if ($.taskList && $.taskList.length > 0) {
     for (let item of $.taskList) {
       if (item.isFinished === 1) {
-        console.log(`${item.taskName} 任务已完成\n`);
+        console.log(`${item.taskName} 任务已完成`);
         continue;
       } else {
         if (item.taskType === 8) {
@@ -261,7 +321,7 @@ async function doTask() {
         console.log(`做 ${item.taskName}任务结果:${JSON.stringify($.receiveNutrientsTaskRes)}\n`);
       }
       if (item.taskType === 3) {
-         //浏览店铺
+        //浏览店铺
         console.log(`开始做 ${item.taskName}任务`);
         let unFinishedShopNum = item.totalNum - item.gainedNum;
         if (unFinishedShopNum === 0) {
@@ -269,23 +329,18 @@ async function doTask() {
         }
         await shopTaskList();
         const { data } = $.shopTaskListRes;
-        let goodShopListARR = [],moreShopListARR = [], shopList = [];
-        const { goodShopList, moreShopList } = data;
-		if (goodShopList) {
-		    for (let i of goodShopList) {
-		        if (i.taskState === '2') {
-		            goodShopListARR.push(i);
-		        }
-		    }
-		}
-		if (moreShopList) {
-		    for (let j of moreShopList) {
-		        if (j.taskState === '2') {
-		            moreShopListARR.push(j);
-		        }
-		    }
-		}
-        
+        let goodShopListARR = [], moreShopListARR = [], shopList = [];
+        const { goodShopList = [], moreShopList = [] } = data;
+        for (let i of goodShopList) {
+          if (i.taskState === '2') {
+            goodShopListARR.push(i);
+          }
+        }
+        for (let j of moreShopList) {
+          if (j.taskState === '2') {
+            moreShopListARR.push(j);
+          }
+        }
         shopList = goodShopListARR.concat(moreShopListARR);
         for (let shop of shopList) {
           const { shopId, shopTaskId } = shop;
@@ -298,7 +353,7 @@ async function doTask() {
           console.log(`shopRes结果:${JSON.stringify(shopRes)}`);
           if (shopRes && shopRes.code === '0') {
             if (shopRes.data && shopRes.data.nutrState && shopRes.data.nutrState === '1') {
-              unFinishedShopNum--;
+              unFinishedShopNum --;
             }
           }
           if (unFinishedShopNum <= 0) {
@@ -396,18 +451,23 @@ async function doTask() {
     }
   }
 }
-function showTaskProcess() {
-  return new Promise(async resolve => {
-    await plantBeanIndex();
-    $.taskList = $.plantBeanIndexResult.data.taskList;
-    if ($.taskList && $.taskList.length > 0) {
-      console.log("     任务   进度");
-      for (let item of $.taskList) {
-        console.log(`[${item["taskName"]}]  ${item["gainedNum"]}/${item["totalNum"]}   ${item["isFinished"]}`);
+async function showTaskProcess() {
+  await plantBeanIndex();
+  try {
+    if ($.plantBeanIndexResult.data) {
+      $.taskList = $.plantBeanIndexResult.data.taskList;
+      if ($.taskList && $.taskList.length > 0) {
+        console.log("     任务   进度");
+        for (let item of $.taskList) {
+          console.log(`[${item["taskName"]}]  ${item["gainedNum"]}/${item["totalNum"]}   ${item["isFinished"]}`);
+        }
       }
+    } else {
+      console.log(`异常：${$.toStr($.plantBeanIndexResult)}\n`)
     }
-    resolve()
-  })
+  } catch (e) {
+    console.error(e)
+  }
 }
 //助力好友
 async function doHelp() {
@@ -421,7 +481,7 @@ async function doHelp() {
     await helpShare(plantUuid);
     if ($.helpResult && $.helpResult.code === '0') {
       // console.log(`助力好友结果: ${JSON.stringify($.helpResult.data.helpShareRes)}`);
-      if ($.helpResult.data.helpShareRes) {
+      if ($.helpResult.data && $.helpResult.data.helpShareRes) {
         if ($.helpResult.data.helpShareRes.state === '1') {
           console.log(`助力好友${plantUuid}成功`)
           console.log(`${$.helpResult.data.helpShareRes.promptText}\n`);
@@ -435,6 +495,8 @@ async function doHelp() {
         } else {
           console.log(`助力其他情况：${JSON.stringify($.helpResult.data.helpShareRes)}`);
         }
+      } else {
+        console.log(`助力好友失败: ${JSON.stringify($.helpResult)}`);
       }
     } else {
       console.log(`助力好友失败: ${JSON.stringify($.helpResult)}`);
@@ -734,7 +796,7 @@ function request(function_id, body = {}){
   })
 }
 function taskUrl(function_id, body) {
-  body["version"] = "9.2.4.0";
+  body["version"] = "9.2.4.1";
   body["monitor_source"] = "plant_app_plant_index";
   body["monitor_refer"] = "";
   return {
