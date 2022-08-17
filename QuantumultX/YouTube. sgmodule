@@ -1,0 +1,30 @@
+#!name=Youtube 去广告自己修改版加直播测试（第二版）
+#!desc=Youtube版本：17.32.2验证可用；制作时间：2022-8-17
+
+
+[Rule]
+AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
+
+[URL Rewrite]
+# 原去广告脚本正则修正，叠加可以观看直播
+(^https?:\/\/(?!((r\d-)|manifest))[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier(,.+?)((&probe=1)|$) $1$4$5 header
+
+#适用于连接到电视观看时
+(^https?:\/\/(?!((r\d-)|manifest))[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)\/ctier\/L(\/.+?),ctier(,.+?)((\/probe\/1)|$) $1$4$5 header
+
+
+#适用于连接到电视观看时,逗号被url编码
+(^https?:\/\/(?!((r\d-)|manifest))[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)\/ctier\/L(\/.+?)%2Cctier(%2C.+?)((\/probe\/1)|$) $1$4$5 header
+
+
+
+
+^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad - reject
+
+^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v\d\/player\/ad_break - reject
+^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads - reject
+^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) - reject
+^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext - reject
+
+[MITM]
+hostname = %APPEND% -redirector*.googlevideo.com,*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com
