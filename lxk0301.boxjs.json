@@ -356,6 +356,195 @@
       ]
     },
     {
+      "id": "jd_Joy",
+      "name": "宠汪汪",
+      "keys": [],
+      "settings": [
+        {
+          "id": "jdJoyNotify",
+          "name": "静默运行",
+          "val": true,
+          "type": "boolean",
+          "desc": "运行宠汪汪(jd_joy.js)脚本时不发出系统弹窗通知"
+        },
+        {
+          "id": "jdJoyStealNotify",
+          "name": "静默运行",
+          "val": false,
+          "type": "boolean",
+          "desc": "运行宠汪汪(jd_joy_steal.js)脚本时不发出系统弹窗通知"
+        },
+        {
+          "id": "joyFeedCount",
+          "name": "每次喂养数量（默认10g）",
+          "val": "10",
+          "type": "radios",
+          "desc": "每次喂养狗粮克数(默认10g)",
+          "items": [
+            {
+              "key": "0",
+              "label": "不喂食"
+            },
+            {
+              "key": "10",
+              "label": "消耗10g"
+            },
+            {
+              "key": "20",
+              "label": "消耗20g"
+            },
+            {
+              "key": "40",
+              "label": "消耗40g"
+            },
+            {
+              "key": "80",
+              "label": "消耗80g"
+            }
+          ]
+        }
+      ],
+      "author": "@lxk0301",
+      "repo": "https://gitee.com/lxk0301/jd_scripts/tree/master",
+      "script": "https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdcww_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png"
+      ]
+    },
+    {
+      "id": "jd_Joy_Reward",
+      "name": "宠汪汪积分兑换京豆",
+      "keys": [],
+      "settings": [
+        {
+          "id": "jdJoyRewardNotify",
+          "name": "静默运行",
+          "val": false,
+          "type": "boolean",
+          "desc": "开启后成功兑换到京豆也不发出系统弹窗通知"
+        },
+        {
+          "id": "joyRewardName",
+          "name": "是否兑换京豆",
+          "val": "1",
+          "type": "radios",
+          "desc": "默认开启兑换，如不想兑换可选择不兑换",
+          "items": [
+            {
+              "key": "0",
+              "label": "不兑换奖品(选择此项将不兑换奖品)"
+            },
+            {
+              "key": "1",
+              "label": "兑换20京豆"
+            },
+            {
+              "key": "500",
+              "label": "兑换500京豆"
+            },
+            {
+              "key": "1000",
+              "label": "兑换1000京豆"
+            }
+          ]
+        }
+      ],
+      "author": "@lxk0301",
+      "repo": "https://gitee.com/lxk0301/jd_scripts/tree/master",
+      "script": "https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy_reward.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdcww_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png"
+      ]
+    },
+    {
+      "id": "jd_Joy_Run",
+      "name": "宠汪汪邀请助力与赛跑助力",
+      "keys": [
+        "jdJoyRunToken",
+        "jd_joy_run_name",
+        "jd_joy_invite_pin",
+        "jd_joy_run_pin",
+        "jd2_joy_run_name",
+        "jd2_joy_invite_pin",
+        "jd2_joy_run_pin"
+      ],
+      "desc": "宠汪汪的互助码friendPin是京东用户名,不是昵称(可在京东APP->我的->设置查看)。互助码之间用英文逗号隔开,下面给出具体示例,使用时可自行清空重新按格式填写你自己的",
+      "settings": [
+        {
+          "id": "joyRunFlag",
+          "name": "是否参加赛跑(默认参加)",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启脚本将会为您自动参加赛跑(默认参加双人赛跑)"
+        },
+        {
+          "id": "JOY_TEAM_LEVEL",
+          "name": "宠汪汪赛跑级别选择",
+          "val": "2",
+          "type": "text",
+          "desc": "参加多少人的赛跑比赛，其中2代表参加双人PK赛，10代表参加10人突围赛，50代表参加50人挑战赛，多账号参加不同级别的赛跑用&符号隔开,例如2&10&50"
+        },
+        {
+          "id": "joyRunNotify",
+          "name": "宠汪汪赛跑获胜是否通知",
+          "val": true,
+          "type": "boolean",
+          "desc": "宠汪汪赛跑获胜是否通知，默认通知"
+        },
+        {
+          "id": "jd_joy_run_name",
+          "name": "京东账号一昵称",
+          "val": "",
+          "type": "text",
+          "desc": "京东账号昵称,用于区分自己的京东账号(非必填，建议多个京东账号使用)"
+        },
+        {
+          "id": "jd_joy_invite_pin",
+          "name": "账号一邀请助力friendPin名单",
+          "val": "jd_6cd93e613b0e5,被折叠的记忆33",
+          "type": "text",
+          "desc": "多个账号使用英文逗号','隔开,最多3个"
+        },
+        {
+          "id": "jd_joy_run_pin",
+          "name": "账号一赛跑助力friendPin名单",
+          "val": "jd_6cd93e613b0e5,被折叠的记忆33",
+          "type": "text",
+          "desc": "多个账号使用英文逗号','隔开,最多6个"
+        },
+        {
+          "id": "jd2_joy_run_name",
+          "name": "京东账号二昵称",
+          "val": "",
+          "type": "text",
+          "desc": "京东账号昵称,用于区分自己的京东账号(非必填，建议多个京东账号使用)"
+        },
+        {
+          "id": "jd2_joy_invite_pin",
+          "name": "账号二邀请助力friendPin名单",
+          "val": "jd_6cd93e613b0e5,被折叠的记忆33",
+          "type": "text",
+          "desc": "多个账号使用英文逗号','隔开,最多3个"
+        },
+        {
+          "id": "jd2_joy_run_pin",
+          "name": "账号二赛跑助力friendPin名单",
+          "val": "jd_6cd93e613b0e5,被折叠的记忆33",
+          "type": "text",
+          "desc": "多个账号使用英文逗号','隔开,最多6个"
+        }
+      ],
+      "author": "@lxk0301",
+      "repo": "https://gitee.com/lxk0301/jd_scripts/tree/master",
+      "script": "https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy_run.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdcww_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png"
+      ]
+    },
+    {
       "id": "jdUnsubscribe",
       "name": "取关京东店铺和商品",
       "keys": [
@@ -405,6 +594,217 @@
       "icons": [
         "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
         "https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png"
+      ]
+    },
+    {
+      "id": "jd_SuperMarket",
+      "name": "东东超市",
+      "keys": [],
+      "settings": [
+        {
+          "id": "jdSuperMarketNotify",
+          "name": "静默运行",
+          "val": true,
+          "type": "boolean",
+          "desc": "运行此脚本时不发出系统弹窗通知"
+        },
+        {
+          "id": "JOIN_PK_TEAM",
+          "name": "自动参加作者PK队伍",
+          "val": true,
+          "type": "boolean",
+          "desc": "每次pk活动自动参加作者PK队伍，默认参加"
+        },
+        {
+          "id": "jdSuperMarketLottery",
+          "name": "抽奖(招财进宝)",
+          "val": false,
+          "type": "boolean",
+          "desc": "运行脚本消耗金币进行抽奖，默认抽奖"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "scripts":[
+        {
+          "name" : "东东超市",
+          "script" : "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_superMarket.js"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxc_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxc.png"
+      ]
+    },
+    {
+      "id": "jd_SuperMarket_Reawrd",
+      "name": "东东超市兑换奖品",
+      "keys": [
+        "coinToBeans"
+      ],
+      "desc": "默认不兑换奖品,例如:兑换20京豆输入20,兑换1000京豆输入1000,兑换 柠檬果香洗手液， 输入 柠檬果香洗手液。其他详细的奖品名称去东东超市活动页面查看",
+      "settings": [
+        {
+          "id": "jdSuperMarketRewardNotify",
+          "name": "静默运行",
+          "val": false,
+          "type": "boolean",
+          "desc": "开启后成功兑换到奖品不发出系统弹窗通知"
+        },
+        {
+          "id": "coinToBeans",
+          "name": "兑换奖品（默认不兑换）",
+          "val": "0",
+          "type": "text",
+          "desc": "输入兑换奖品名称(默认不兑换奖品)"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "scripts": [
+        {
+          "name" : "东东超市兑换奖品",
+          "script" : "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_blueCoin.js"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxc_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jxc.png"
+      ]
+    },
+    {
+      "id": "xmSports",
+      "name": "小米运动",
+      "keys": [
+        "xmSportsToken",
+        "xmMinStep",
+        "xmMaxStep"
+      ],
+      "settings": [
+        {
+          "id": "xmSportsToken",
+          "name": "小米运动Token",
+          "val": "",
+          "type": "text",
+          "desc": "小米运动登录时获取的token"
+        },
+        {
+          "id": "xmMinStep",
+          "name": "最小运动步数",
+          "val": "19000",
+          "type": "text",
+          "desc": "需要修改最小的运动步数的数字,例如:19000"
+        },
+        {
+          "id": "xmMaxStep",
+          "name": "最大运动步数",
+          "val": "25000",
+          "type": "text",
+          "desc": "需要修改最小的运动步数的数字,例如:25000"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/xmSports.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/xmyd_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/xmyd.png"
+      ]
+    },
+    {
+      "id": "lxk_jdfactory",
+      "name": "东东工厂",
+      "keys": [
+        "FACTORAY_WANTPRODUCT_NAME"
+      ],
+      "settings": [
+        {
+          "id": "FACTORAY_WANTPRODUCT_NAME",
+          "name": "心仪商品名称",
+          "val": "",
+          "type": "text",
+          "desc": "请尽量填写完整和别的商品有区分度"
+        }
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_jdfactory.js",
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jd_factory_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/jd_factory.png"
+      ]
+    },
+    {
+      "id": "jd_dreamFactory",
+      "name": "京喜工厂",
+      "keys": ["jd_jxFactory", "tuanActiveId"],
+      "descs_html": [
+        "请在输入框输入跟你互助的京喜工厂的好友互助码",
+        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
+        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
+      ],
+      "settings": [
+        {
+          "id": "jd_jxFactory",
+          "name": "京喜工厂好友邀请码 列表",
+          "val": "",
+          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "京喜工厂邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
+        },
+        {
+          "id": "tuanActiveId",
+          "name": "京喜工厂拼团瓜分电力活动团ID",
+          "val": "",
+          "type": "text",
+          "desc": "默认读取作者设置，如出现脚本提示开团失败：`活动已结束，请稍后再试~`，可自行抓包替换(开启抓包，进入拼团瓜分电力页面，寻找带有`tuan`的链接里面的`activeId=`"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/58xinian/icon/master/jdgc_mini.png",
+        "https://github.com/58xinian/icon/raw/master/jdgc.png"
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_dreamFactory.js"
+    },
+    {
+      "id": "jd_cash",
+      "name": "签到领现金",
+      "keys": ["jd_cash_invite"],
+      "descs_html": [
+        "请在输入框输入跟你互助的签到领现金的好友互助码",
+        "同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开。例：<br/>账号1-好友1邀请码@账号1邀请码-好友2邀请码<br/><br/>账号2-好友1邀请码@账号2-好友2邀请码",
+        "下方输入框给出一个示例,自己使用时删除示例邀请码然后按示例填写(只填邀请码)即可"
+      ],
+      "settings": [
+        {
+          "id": "cash_exchange",
+          "name": "是否消耗红包兑换京豆",
+          "val": false,
+          "type": "boolean",
+          "desc": "是否消耗2元红包兑换200京豆，一周可换四次，默认否"
+        },
+        {
+          "id": "jd_cash_invite",
+          "name": "签到领现金好友邀请码 列表",
+          "val": "",
+          "placeholder": "账号1的好友1邀请码@账号1的好友2邀请码\n\n账号2的好友1邀请码@账号2的好友2邀请码",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 8,
+          "desc": "签到领现金邀请码,同一个京东账号的好友邀请码用@隔开,不同京东账号互助码用换行(return按键)隔开"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/jd.png",
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png"
+      ],
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/jd_cash.js"
     }
   ]
 }
