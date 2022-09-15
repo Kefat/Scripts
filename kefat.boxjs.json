@@ -63,25 +63,42 @@
       ]
     },
     {
-      "id": "NeteaseMusic",
-      "name": "网易云音乐",
-      "keys": ["chavy_cookie_neteasemusic"],
+      "id": "xmSports",
+      "name": "小米运动",
+      "keys": [
+        "xmSportsToken",
+        "xmMinStep",
+        "xmMaxStep"
+      ],
       "settings": [
-        { "id": "CFG_neteasemusic_retryCnt", "name": "重试次数", "val": 10, "type": "text", "desc": "一直尝试签到直至出现“重复签到”标识!" },
         {
-          "id": "CFG_neteasemusic_retryInterval",
-          "name": "重试间隔 (毫秒)",
-          "val": 500,
+          "id": "xmSportsToken",
+          "name": "小米运动Token",
+          "val": "",
           "type": "text",
-          "desc": "每次重试间隔时间 (毫秒)！"
+          "desc": "小米运动登录时获取的token"
+        },
+        {
+          "id": "xmMinStep",
+          "name": "最小运动步数",
+          "val": "19000",
+          "type": "text",
+          "desc": "需要修改最小的运动步数的数字,例如:19000"
+        },
+        {
+          "id": "xmMaxStep",
+          "name": "最大运动步数",
+          "val": "25000",
+          "type": "text",
+          "desc": "需要修改最小的运动步数的数字,例如:25000"
         }
       ],
-      "author": "@chavyleung",
-      "repo": "https://github.com/chavyleung/scripts/tree/master/neteasemusic",
-      "script": "https://raw.githubusercontent.com/chavyleung/scripts/master/neteasemusic/neteasemusic.js",
+      "author": "",
+      "repo": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX",
+      "script": "https://raw.githubusercontent.com/Kefat/Scripts/main/QuantumultX/xmSports.js",
       "icons": [
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/neteasemusic.png",
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/neteasemusic.png"
+        "https://raw.githubusercontent.com/58xinian/icon/master/xmyd_mini.png",
+        "https://raw.githubusercontent.com/58xinian/icon/master/xmyd.png"
       ]
     },
     {
