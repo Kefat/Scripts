@@ -47,7 +47,7 @@ hostname = mobile.ximalaya.com, 180.153.255.10*
 
 
 const $ = new Env('喜马拉雅');
-const name = 'xmly';
+const name = '喜马拉雅';
 
 !(async () => {
     if (typeof $request !== "undefined") {
