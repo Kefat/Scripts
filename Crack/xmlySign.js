@@ -94,12 +94,12 @@ async function xmlySign(){
        (response) => {
             body = JSON.parse(response.body)
             if (body.ret == 0) {
-                let message = `【🎉🎉🎉 恭喜您鸭 🎉🎉🎉】签到状态:签到成功 ✅ `
+                let message = `【🎉🎉🎉 喜马拉雅 🎉🎉🎉】签到:签到成功 ✅ `
                 console.log(message)
                 $.msg(name, "", message)
                 return true
             } else {
-                let message = `【❤️‍🩹❤️‍🩹❤️‍🩹 恭喜个屁 ❤️‍🩹❤️‍🩹❤️‍🩹】签到状态:签到失败 ❌ ,${body.msg} `
+                let message = `【❤️‍🩹❤️‍🩹❤️‍🩹 喜马拉雅 ❤️‍🩹❤️‍🩹❤️‍🩹】签到:签到失败 ❌ ,${body.msg} `
                 console.log(message)
                 $.msg(name, "", message)
                 return false
