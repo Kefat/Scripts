@@ -5,11 +5,6 @@
 ########################################
 
 
-# > HDOBOX去广告
-host-suffix, applovin.com, reject
-host-suffix, applvn.com, reject
-host-suffix, doubleclick.net, reject
-
 # 美颜相机去首页和轮播广告
 host, adui.tg.meitu.com, reject
 host, aaid.uyunad.com, reject
