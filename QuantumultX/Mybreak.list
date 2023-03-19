@@ -23,8 +23,15 @@ host-suffix, u3.ucweb.com, reject
 # 深圳通微信小程序
 HOST-SUFFIX,wxsnsdythumb.wxs.qq.com, reject
 
-# > 高德地图
+# 高德地图
 host, amdc.m.taobao.com, reject
+
+# 虎牙直播
+host, pp-cdnfile2pcdn.msstatic.com, reject
+host, livewebbs2pcdn.msstatic.com, reject
+host, huyafile.msstatic.com, reject
+host, livewebbs2.msstatic.com, reject
+host, business.msstatic.com, reject
 
 # QQ音乐
 DOMAIN,tmeadcomm.y.qq.com,REJECT
