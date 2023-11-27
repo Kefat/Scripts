@@ -228,7 +228,7 @@ function paysign() {
                 paybag = `【微博钱包】 🔁 `
                 await payinfo()
             } else {
-                paybag = `【钱包签到】❌ Cookie失效` + '\n'
+                paybag = `【钱包签到】✅ 完成` + '\n'
             }
             resolve()
 
