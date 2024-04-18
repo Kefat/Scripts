@@ -68,25 +68,7 @@
       ]
     },
     {
-      "id": "blackmatrix7.smzdm",
-      "name": "什么值得买",
-      "keys": ["smzdm_cookie", "smzdm_session"],
-      "author": "@blackmatrix7",
-      "repo": "https://github.com/blackmatrix7/ios_rule_script/tree/master/script/smzdm",
-      "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/smzdm.png", "https://raw.githubusercontent.com/Orz-3/mini/master/Color/smzdm.png"],
-      "scripts": [
-        {
-          "name": "每日自动任务",
-          "script": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_mission.js"
-        },
-        {
-          "name": "每日自动签到",
-          "script": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_signin.js"
-        }
-      ]
-    },
-    {
-    "id": "iQIYI",
+      "id": "iQIYI",
     "name": "爱奇艺",
     "keys": ["CookieQY"],
     "descs_html": [
