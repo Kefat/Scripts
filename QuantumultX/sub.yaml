@@ -4,7 +4,7 @@ mode: Global
 log-level: info
 external-controller: ':9090'
 proxies:
-    name: 中国 - 香港 - Proxy Registration Eons Data - 74
+  - name: 中国 - 香港 - Proxy Registration Eons Data - 74
     network: tcp
     port: '15601'
     server: 183.240.179.195
