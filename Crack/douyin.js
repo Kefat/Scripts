@@ -1,4 +1,4 @@
-const enabled_live = false; // 开启直播推荐，默认关闭
+const enabled_live = true; // 开启直播推荐，默认关闭
 
 try {
   let body = $response.body.replace(/\"room_id\":(\d{2,})/g,'"room_id":"$1"');
