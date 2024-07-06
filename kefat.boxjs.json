@@ -314,7 +314,139 @@
     "repo": "https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js",
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/bilibili.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/bilibili.png"]
   }, {
-      "id": "V2EX",
+      "id": "sliverkiss_teaMilk",
+        "name": "奶茶多合一",
+        "author": "@Sliverkiss",
+        "repo": "",
+        "icons": [
+          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/teaMilk.png",
+          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/teaMilk.png"
+        ],
+        "keys": ["teaMilk_remove","teaMilk_data"],
+        "settings": [
+          {
+            "id": "teaMilk_remove",
+            "name": "开启自动移除无效任务",
+            "val": false,
+            "type": "boolean",
+            "desc": "默认关闭"
+          },{
+            "id": "teaMilk_data",
+            "name": "会员数据",
+            "val": "",
+            "type": "textarea",
+            "autoGrow": true,
+            "desc": ""
+          }
+        ]
+      },{
+        "id": "sliverkiss_naixue",
+        "name": "奈雪的茶",
+        "author": "@Sliverkiss",
+        "repo": "",
+        "icons": [
+          "https://raw.githubusercontent.com/sliverkiss/QuantumultX/main/icon/naixue.png",
+          "https://raw.githubusercontent.com/sliverkiss/QuantumultX/main/icon/naixue.png"
+        ],
+        "keys": ["naixue_data"],
+        "settings": [
+          {
+            "id": "naixue_data",
+            "name": "会员Cookie数据",
+            "val": "",
+            "type": "textarea",
+            "autoGrow": true,
+            "desc": "会员Cookie数据"
+          }
+        ]
+      },{
+        "id": "sliverkiss_mxbc",
+        "name": "蜜雪冰城",
+        "author": "@Sliverkiss",
+        "repo": "",
+        "icons": [
+          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/mxbc.png",
+          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/mxbc.png"
+        ],
+        "keys": ["mxbc_data"],
+        "settings": [
+          {
+            "id": "mxbc_data",
+            "name": "会员Cookie数据",
+            "val": "",
+            "type": "textarea",
+            "autoGrow": true,
+            "desc": "会员Cookie数据"
+          }
+        ]
+      },{
+        "id": "sliverkiss_aliyun",
+        "name": "阿里云盘",
+        "author": "@Sliverkiss",
+        "repo": "",
+        "icons": [
+          "https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/AliYunDrive.png",
+          "https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/AliYunDrive.png"
+        ],
+        "keys": ["aliyun_data"],
+        "settings": [
+          {
+            "id": "aliyun_data",
+            "name": "会员Cookie数据",
+            "val": "",
+            "type": "textarea",
+            "autoGrow": true,
+            "desc": "会员Cookie数据"
+          }
+        ]
+      },{
+        "id": "sliverkiss_hldc",
+        "name": "哈罗单车",
+        "author": "@Sliverkiss",
+        "repo": "",
+        "icons": [
+          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/Hldc.png",
+          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/Hldc.png"
+        ],
+        "keys": ["hldc_data"],
+        "settings": [
+          {
+            "id": "hldc_data",
+            "name": "会员Cookie数据",
+            "val": "",
+            "type": "textarea",
+            "autoGrow": true,
+            "desc": "会员Cookie数据"
+          }
+        ]
+      },{
+        "id": "sliverkiss_sfsy",
+        "name": "顺丰速运",
+        "author": "@Sliverkiss",
+        "repo": "",
+        "icons": [
+          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/sfsy.png",
+          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/sfsy.png"
+        ],
+        "keys": ["sfsy_bee","sfsy_data"],
+        "settings": [
+          {
+            "id": "sfsy_bee",
+            "name": "是否开启采蜜任务",
+            "val": false,
+            "type": "boolean",
+            "desc": "默认关闭"
+          },{
+            "id": "sfsy_data",
+            "name": "会员数据",
+            "val": "",
+            "type": "textarea",
+            "autoGrow": true,
+            "desc": ""
+          }
+        ]
+      },{
+        "id": "V2EX",
       "name": "V2EX",
       "keys": ["chavy_cookie_v2ex"],
       "author": "@chavyleung",
