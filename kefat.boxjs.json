@@ -27,6 +27,37 @@
       ]
     },
     {
+      "id": "kuwo",
+      "name": "酷我音乐",
+      "keys": ["kw_loginUid", "kw_loginSid"],
+      "desc": "",
+      "settings": [
+        {
+          "id": "kw_loginUid",
+          "name": "kw_loginUid",
+          "val": "",
+          "type": "text",
+          "placeholder": "",
+          "desc": ""
+        },
+        {
+          "id": "kw_loginSid",
+          "name": "kw_loginSid",
+          "val": "",
+          "type": "text",
+          "placeholder": "",
+          "desc": ""
+        }
+      ],
+      "script": "https://raw.githubusercontent.com/MCdasheng/QuantumultX/main/Scripts/myScripts/kuwo.js",
+      "author": "@mcdasheng",
+      "repo": "https://github.com/mcdasheng",
+      "icons": [
+        "https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png",
+        "https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png"
+      ]
+    },
+    {
       "id": "feng.com",
       "name": "威锋论坛",
       "author": "@FoKit@xiaobailian",
