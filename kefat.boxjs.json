@@ -118,93 +118,6 @@
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/iQIYI.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/iQIYI.png"]
   },
     {
-      "id": "yuheng.mi.step",
-      "name": "小米刷步",
-      "descs_html": [
-        "<p style='margin-top:20px;font-size:16px;color:#a29bfe;text-align:center;'>刷步格言: 每天刷一刷, 健康第一, 步数第二</p>",
-        "<p style='margin-left:10px;margin-top:30px;font-size:20px;font-weight:900;'>如需配置多账号务必看完以下说明<p>",
-        "<p style='margin-left:10px;margin-top:20px;font-size:12px;'>账密使用&&分割, 如果密码存在&&请先修改密码后再使用该脚本, 账密长度务必保持一致</p>",
-        "<p style='margin-left:10px;margin-top:20px;font-size:12px;'>区间和步数使用&进行分割, 如果不分割使用第一个作为统一配置, 如10000-19999, 即表示不管多少账号都使用这一区间, 如果使用多账号区间, 务必长度与账密保持一致</p>",
-        "<p style='margin-left:10px;margin-top:20px;font-size:12px;'>步数与区间规则一致, 使用多账号区间, 务必长度与账密保持一致</p>",
-        "<p style='margin-left:10px;margin-top:20px;color:#3498db;'>账号举例: 手机号1&&手机号2&&... (密码亦是如此)</p>",
-        "<p style='margin-left:10px;margin-top:20px;color:#3498db;'>区间举例: 1000-2000&1500-2000&...(注意长度与账密保持一致, 步数亦是如此)</p>",
-        "<p style='margin-left:10px;margin-top:20px;font-size:16px;color:#ff0000;'>步数优先级高于区间, 填写步数后区间作用将失效, 建议填写区间</p>",
-        "<p style='margin-left:10px;margin-top:20px;font-size:16px;color:#ff0000;'>步数不要超过50000</p>"
-      ],
-      "keys": [
-        "xiaomi_step_debug",
-        "xiaomi_step_increment_mode",
-        "xiaomi_step_run_count",
-        "xiaomi_step_username",
-        "xiaomi_step_password",
-        "xiaomi_step_space",
-        "xiaomi_step_step",
-        "xiaomi_step_increment_cache_list"
-      ],
-      "settings": [
-        {
-          "id": "xiaomi_step_debug",
-          "name": "是否开启调试模式",
-          "val": false,
-          "type": "boolean",
-          "desc": ""
-        },
-        {
-          "id": "xiaomi_step_increment_mode",
-          "name": "是否开启递增模式",
-          "val": false,
-          "type": "boolean",
-          "desc": "开启后建议把步数(区间)设置较之前小一些"
-        },
-        {
-          "id": "xiaomi_step_run_count",
-          "name": "递增次数(请根据contab次数配置)",
-          "val": "1",
-          "type": "text",
-          "desc": "如:cron设置0 10,8 * * *(每天运行两次),这里请填2"
-        },
-        {
-          "id": "xiaomi_step_username",
-          "name": "小米刷步账号",
-          "val": null,
-          "type": "text",
-          "rows": 1,
-          "desc": "小米刷步账号"
-        },
-        {
-          "id": "xiaomi_step_password",
-          "name": "小米刷步密码",
-          "val": null,
-          "type": "text",
-          "rows": 1,
-          "desc": ""
-        },
-        {
-          "id": "xiaomi_step_space",
-          "name": "设置步数区间, 如15000-20000, 使用 - 分割",
-          "val": null,
-          "type": "text",
-          "rows": 1,
-          "desc": "置空默认10000-19999之间"
-        },
-        {
-          "id": "xiaomi_step_step",
-          "name": "需要刷的步数",
-          "val": null,
-          "type": "text",
-          "rows": 1,
-          "desc": "填写后区间将无效"
-        }
-      ],
-      "author": "@yuheng",
-      "repo": "https://github.com/Yuheng0101/X",
-      "icons": [
-        "https://raw.githubusercontent.com/Yuheng0101/X/main/Tasks/mi/mini.png",
-        "https://raw.githubusercontent.com/Yuheng0101/X/main/Tasks/mi/color.png"
-      ],
-      "script": "https://raw.githubusercontent.com/Yuheng0101/X/main/Tasks/mi/step.js"
-    },
-    {
       "id": "10010Ck",
       "name": "中国联通",
       "keys": ["@YaYa_10010.cookie"],
@@ -372,26 +285,6 @@
         "settings": [
           {
             "id": "mxbc_data",
-            "name": "会员Cookie数据",
-            "val": "",
-            "type": "textarea",
-            "autoGrow": true,
-            "desc": "会员Cookie数据"
-          }
-        ]
-      },{
-        "id": "sliverkiss_aliyun",
-        "name": "阿里云盘",
-        "author": "@Sliverkiss",
-        "repo": "",
-        "icons": [
-          "https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/AliYunDrive.png",
-          "https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/AliYunDrive.png"
-        ],
-        "keys": ["aliyun_data"],
-        "settings": [
-          {
-            "id": "aliyun_data",
             "name": "会员Cookie数据",
             "val": "",
             "type": "textarea",
