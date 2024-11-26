@@ -150,19 +150,7 @@
             ]
         },
         {
-            "id": "chavyleung.bilibili.live",
-      "name": "bilibili直播",
-      "keys": ["chavy_cookie_bilibili"],
-      "author": "@chavyleung",
-      "repo": "https://github.com/chavyleung/scripts/blob/master/bilibili/bilibili.js",
-      "script": "https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.js",
-      "icons": [
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/bilibili.png",
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/bilibili.png"
-      ]
-    },
-    {
-    "id": "BiliRegion",
+            "id": "BiliRegion",
     "name": "哔哩番剧自动地区",
     "descs_html": [
       "<h4 align=\"center\">脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js\">脚本注释</a></h4>"
