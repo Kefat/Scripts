@@ -27,37 +27,6 @@
       ]
     },
     {
-      "id": "kuwo",
-      "name": "酷我音乐",
-      "keys": ["kw_loginUid", "kw_loginSid"],
-      "desc": "",
-      "settings": [
-        {
-          "id": "kw_loginUid",
-          "name": "kw_loginUid",
-          "val": "",
-          "type": "text",
-          "placeholder": "",
-          "desc": ""
-        },
-        {
-          "id": "kw_loginSid",
-          "name": "kw_loginSid",
-          "val": "",
-          "type": "text",
-          "placeholder": "",
-          "desc": ""
-        }
-      ],
-      "script": "https://raw.githubusercontent.com/MCdasheng/QuantumultX/main/Scripts/myScripts/kuwo.js",
-      "author": "@mcdasheng",
-      "repo": "https://github.com/mcdasheng",
-      "icons": [
-        "https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png",
-        "https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png"
-      ]
-    },
-    {
       "id": "feng.com",
       "name": "威锋论坛",
       "author": "@FoKit@xiaobailian",
@@ -215,33 +184,7 @@
     "repo": "https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js",
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/bilibili.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/bilibili.png"]
   }, {
-      "id": "sliverkiss_teaMilk",
-        "name": "奶茶多合一",
-        "author": "@Sliverkiss",
-        "repo": "",
-        "icons": [
-          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/teaMilk.png",
-          "https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/teaMilk.png"
-        ],
-        "keys": ["teaMilk_remove","teaMilk_data"],
-        "settings": [
-          {
-            "id": "teaMilk_remove",
-            "name": "开启自动移除无效任务",
-            "val": false,
-            "type": "boolean",
-            "desc": "默认关闭"
-          },{
-            "id": "teaMilk_data",
-            "name": "会员数据",
-            "val": "",
-            "type": "textarea",
-            "autoGrow": true,
-            "desc": ""
-          }
-        ]
-      },{
-        "id": "sliverkiss_naixue",
+      "id": "sliverkiss_naixue",
         "name": "奈雪的茶",
         "author": "@Sliverkiss",
         "repo": "",
