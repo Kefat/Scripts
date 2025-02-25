@@ -1,34 +1,12 @@
-#!name=CaiYun AdBlock
-#!desc=Converted from QX CaiYun AdBlock Rules
-#!author=ddgksf2013
-#!tgchannel=https://t.me/ddgksf2021
-# Surge Module Source: https://github.com/ddgksf2013/Modules
-# Original QX Config Source: https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/CaiYunAds.conf
+#!name=彩云天气 AdBlock
+#!desc=Converted  AdBlock Rules
+
 
 [URL Rewrite]
-# > 通用广告请求@ddgksf2013
 ^https?:\/\/ad\.cyapi\.cn\/v\d - reject
-
-[Script]
-# > 图层推广@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/wrapper\.cyapi\.cn\/v\d\/activity,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > 活动推广@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/api\.caiyunapp\.com\/v\d\/activity,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > 首页顶部推广@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/homefeatures,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > SVIP提醒推广@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/notification/message_center,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > 雨季特惠提醒@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/config/cypage,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > 发现页信息流推荐@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/feeds,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > 发现页banners@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/banners,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > 发现页中间部分@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/features,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > 发现页活动@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/campaigns,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+^https:\/\/starplucker\.cyapi\.cn\/v3\/(config\/cypage\/\w+\/conditions|notification\/message_center|operation\/homefeatures) - reject-dict
+caiyun_json = type=http-response,pattern=^https:\/\/wrapper\.cyapi\.cn\/v1\/activity\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Kefat/Scripts/refs/heads/main/Crack/caiyun.js
+caiyun_json = type=http-response,pattern=^https:\/\/wrapper\.cyapi\.cn\/v1\/(nafp\/origin_images|satellite)\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Kefat/Scripts/refs/heads/main/Crack/caiyun.js
 
 [MITM]
 hostname = %APPEND% *.cyapi.cn
-
