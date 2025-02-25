@@ -10,10 +10,6 @@
 ^https?:\/\/ad\.cyapi\.cn\/v\d - reject
 
 [Script]
-# > 伪装VIP解锁48小时降水[需登录][新验证接口][需旧版≤ 7.20.2]@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/biz\.cyapi\.cn\/api\/v\d\/user_detail,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
-# > 伪装VIP解锁48小时降水[需登录][需旧版≤ 7.20.2]@ddgksf2013
-caiyun_json = type=http-response,pattern=^https?:\/\/biz\.cyapi\.cn\/v\d\/user,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
 # > 图层推广@ddgksf2013
 caiyun_json = type=http-response,pattern=^https?:\/\/wrapper\.cyapi\.cn\/v\d\/activity,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
 # > 活动推广@ddgksf2013
@@ -34,5 +30,5 @@ caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d
 caiyun_json = type=http-response,pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/campaigns,requires-body=1,max-size=0,script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
 
 [MITM]
-hostname = %APPEND% wrapper.cyapi.cn, api.caiyunapp.com, starplucker.cyapi.cn, ad.cyapi.cn
+hostname = %APPEND% *.cyapi.cn
 
