@@ -8,7 +8,7 @@
 微博 = type=cron,cronexp=59 8 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/weibo.js,script-update-interval=0
 爱奇艺 = type=cron,cronexp=59 9 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js,script-update-interval=0
 高德地图 = type=cron,cronexp=59 10 * * *,wake-system=1,timeout=90,script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js,script-update-interval=0
-百度贴吧 = type=cron,cronexp=59 11 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/tieba/tieba_signin.js,script-update-interval=0
+百度贴吧 = type=cron,cronexp=59 11 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js,script-update-interval=0
 微信_顺丰速运 = type=cron,cronexp=59 12 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/Crack/sfky.js,script-update-interval=0
 微信_蜜雪冰城 = type=cron,cronexp=59 13 * * *,wake-system=1,timeout=30,script-path=https://gist.githubusercontent.com/Sliverkiss/865c82e42a5730bb696f6700ebb94cee/raw/mxbc.js,script-update-interval=0
 微信_奈雪点单 = type=cron,cronexp=59 14 * * *,wake-system=1,timeout=30,script-path= https://gist.githubusercontent.com/Sliverkiss/4d0e9572b99530b7cb0e7298622aa2a9/raw/naixue.js,script-update-interval=0
