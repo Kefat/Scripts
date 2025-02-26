@@ -3,15 +3,14 @@
 
 [Script]
 高德_抢票 = type=cron,cronexp=59 59 5 * * *,wake-system=1,timeout=180,script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDacheCoupon.js,script-update-interval=0
-每日一言 = type=cron,cronexp=59 6 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/githubdulong/Script/master/One.js,script-update-interval=0
-今日汇率 = type=cron,cronexp=59 7 * * *,wake-system=1,timeout=300,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/exchange.js,script-update-interval=0！
+每日一言 = type=cron,cronexp=59 7 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/githubdulong/Script/master/One.js,script-update-interval=0
 微博 = type=cron,cronexp=59 8 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/weibo.js,script-update-interval=0
 爱奇艺 = type=cron,cronexp=59 9 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js,script-update-interval=0
 高德地图 = type=cron,cronexp=59 10 * * *,wake-system=1,timeout=90,script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js,script-update-interval=0
 百度贴吧 = type=cron,cronexp=59 11 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js,script-update-interval=0
-微信_顺丰速运 = type=cron,cronexp=59 12 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/Crack/sfky.js,script-update-interval=0
-微信_蜜雪冰城 = type=cron,cronexp=59 13 * * *,wake-system=1,timeout=30,script-path=https://gist.githubusercontent.com/Sliverkiss/865c82e42a5730bb696f6700ebb94cee/raw/mxbc.js,script-update-interval=0
-微信_奈雪点单 = type=cron,cronexp=59 14 * * *,wake-system=1,timeout=30,script-path= https://gist.githubusercontent.com/Sliverkiss/4d0e9572b99530b7cb0e7298622aa2a9/raw/naixue.js,script-update-interval=0
-支付宝_哈啰单车 = type=cron,cronexp=59 15 * * *,wake-system=1,timeout=30,script-path=https://gist.githubusercontent.com/Sliverkiss/4e0081f7b18a2cea9dbdf13545e60885/raw/d53857028ced29aed98affb5d4a602b2a8bf94cf/hldc.js,script-update-interval=0
-喜马拉雅 = type=cron,cronexp=59 16 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/ClydeTime/Quantumult/main/Script/Task/xmlySign.js,script-update-interval=0
-V2EX = type=cron,cronexp=59 17 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/quanx/v2ex.js,script-update-interval=0
+微信_蜜雪冰城 = type=cron,cronexp=59 12 * * *,wake-system=1,timeout=30,script-path=https://gist.githubusercontent.com/Sliverkiss/865c82e42a5730bb696f6700ebb94cee/raw/mxbc.js,script-update-interval=0
+微信_奈雪点单 = type=cron,cronexp=59 13 * * *,wake-system=1,timeout=30,script-path= https://gist.githubusercontent.com/Sliverkiss/4d0e9572b99530b7cb0e7298622aa2a9/raw/naixue.js,script-update-interval=0
+支付宝_哈啰单车 = type=cron,cronexp=59 14 * * *,wake-system=1,timeout=30,script-path=https://gist.githubusercontent.com/Sliverkiss/4e0081f7b18a2cea9dbdf13545e60885/raw/d53857028ced29aed98affb5d4a602b2a8bf94cf/hldc.js,script-update-interval=0
+喜马拉雅 = type=cron,cronexp=59 15 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/ClydeTime/Quantumult/main/Script/Task/xmlySign.js,script-update-interval=0
+V2EX = type=cron,cronexp=59 16 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/quanx/v2ex.js,script-update-interval=0
+今日汇率 = type=cron,cronexp=59 17 * * *,wake-system=1,timeout=300,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/exchange.js,script-update-interval=0
