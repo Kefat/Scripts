@@ -1,4 +1,4 @@
-#!name=Task Module
+#!name=Task 
 #!desc=iOS Tasks 模块配置.自用
 
 [Script]
@@ -11,4 +11,5 @@
 微信_奈雪点单 = type=cron,cronexp=59 13 * * *,wake-system=1,timeout=30,script-path= https://gist.githubusercontent.com/Sliverkiss/4d0e9572b99530b7cb0e7298622aa2a9/raw/naixue.js,script-update-interval=0
 支付宝_哈啰单车 = type=cron,cronexp=59 14 * * *,wake-system=1,timeout=30,script-path=https://gist.githubusercontent.com/Sliverkiss/4e0081f7b18a2cea9dbdf13545e60885/raw/d53857028ced29aed98affb5d4a602b2a8bf94cf/hldc.js,script-update-interval=0
 喜马拉雅 = type=cron,cronexp=59 15 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/ClydeTime/Quantumult/main/Script/Task/xmlySign.js,script-update-interval=0
-今日汇率 = type=cron,cronexp=59 16 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/exchange.js,script-update-interval=0
+威锋 = type=cron,cronexp=59 16 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/githubdulong/Script/master/weifeng.js,script-update-interval=0
+今日汇率 = type=cron,cronexp=59 17 * * *,wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/exchange.js,script-update-interval=0
