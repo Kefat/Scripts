@@ -1,15 +1,12 @@
 #!name=京东去广告
 #!desc=169159
 
-[Rule]
-DOMAIN,dns.jd.com,REJECT,extended-matching,pre-matching
-URL-REGEX,"^http:\/\/\w{32}\.jddebug\.com\/diagnose\?",REJECT,extended-matching
-
 
 # > 京东
 ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome) url script-response-body https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/jingdong/jingdong.js
 # 禁京东直播小窗
 ^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=getWidgetV1052 url reject
+
 
 
 hostname = %APPEND% api.m.jd.com
