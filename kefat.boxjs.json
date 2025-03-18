@@ -87,37 +87,54 @@
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/iQIYI.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/iQIYI.png"]
   },
     {
-      "id": "blackmatrix7.tieba",
-      "name": "百度贴吧",
-      "keys": ["tieba_signin_cookie", "tieba_sync_qinglong"],
-      "author": "@blackmatrix7",
-      "repo": "https://github.com/blackmatrix7/ios_rule_script/tree/master/script/tieba",
-      "icons": [
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/tieba.png",
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/tieba.png"
-      ],
-      "script": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/tieba/tieba_signin.js",
-      "settings": [
-        {
-          "id": "tieba_sync_qinglong",
-          "name": "同步数据到青龙面板",
-          "val": false,
-          "type": "boolean",
-          "desc": "将必要数据同步至青龙面板，以执行作业"
+      "id": "BaiduTB",
+            "name": "百度贴吧",
+            "keys": [
+                "CookieTB"
+            ],
+            "descs_html": [
+                "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js\">脚本注释</a></h4>"
+            ],
+            "settings": [
+                {
+                    "id": "BDTB_DailyBonus_Mode",
+                    "name": "签到模式",
+                    "val": "0",
+                    "type": "radios",
+                    "desc": "",
+                    "items": [
+                        {
+                            "key": "0",
+                            "label": "自动切换"
+                        },
+                        {
+                            "key": "1",
+                            "label": "顺序执行"
+                        },
+                        {
+                            "key": "2",
+                            "label": "并发执行"
+                        }
+                    ]
+                },
+                {
+                    "id": "BDTB_DailyBonus_notify",
+                    "name": "通知汇总",
+                    "val": "",
+                    "type": "number",
+                    "placeholder": "默认20 (点击以展开说明)",
+                    "desc": "想签到几个汇总到一个通知里, 这里就填几个(比如我有13个要签到的, 这里填了5, 就会分三次推送通知)"
+                }
+            ],
+            "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
+            "author": "@sazs34, @NobyDa",
+            "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
+            "icons": [
+                "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/tieba.png",
+                "https://raw.githubusercontent.com/NobyDa/mini/master/Color/tieba.png"
+            ]
         },
-        {
-          "id": "tieba_signin_cookie",
-          "name": "百度贴吧Cookies",
-          "val": "",
-          "type": "textarea",
-          "placeholder": "推荐由脚本自动获取Cookies，如有特殊情况可手动填写，必须为Json格式",
-          "autoGrow": true,
-          "desc": "多账户Cookies，如出现异常，请删除全部内容，避免直接编辑数据"
-        }
-      ]
-    },
-    {
-      "id": "10010Ck",
+        {"id": "10010Ck",
       "name": "中国联通",
       "keys": ["@YaYa_10010.cookie"],
       "author": "@dompling",
