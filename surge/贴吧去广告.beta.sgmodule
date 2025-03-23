@@ -1,5 +1,5 @@
 #!name=百度贴吧去广告
-#!desc=移除开屏广告、信息流广告和帖内广告，精简侧拉抽屉及我的页面。需注意此插件会导致新回复等通知功能不可用，需手动进入消息页点击查看。仅限iOS 15及以上版本系统使用。
+#!desc=移除开屏广告、信息流广告和帖内广告
 #!author=ZenmoFeiShi[https://github.com/ZenmoFeiShi], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md], app2smile[https://github.com/app2smile]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Tieba.png
 #!category=BetaModule
@@ -10,15 +10,6 @@
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2024-10-20 18:25:56
 
-[Rule]
-DOMAIN,afd.baidu.com,REJECT,extended-matching,pre-matching
-DOMAIN,mobads.baidu.com,REJECT,extended-matching,pre-matching
-DOMAIN,180.76.76.200,REJECT,extended-matching,pre-matching
-IP-CIDR,180.76.76.200/32,REJECT,no-resolve,pre-matching
-
-[Map Local]
-^https:\/\/tiebac\.baidu\.com\/c\/f\/search\/discover data-type=text data="{}" status-code=200
-^https:\/\/tiebac\.baidu\.com\/c\/f\/forum\/forumGuide data-type=text data="{}" status-code=200
 
 [URL Rewrite]
 # > 百度贴吧-12.1.2版以下
@@ -27,11 +18,9 @@ IP-CIDR,180.76.76.200/32,REJECT,no-resolve,pre-matching
 ^https?:\/\/c\.tieba\.baidu\.com\/\w+\/\w+\/(sync|newRnSync|mlog) - reject
 ^https?:\/\/.+?\/c\/s\/splashSchedule - reject
 
-[Script]
-清理我的页面 = type=http-response, pattern=^https:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile, script-path=https://kelee.one/Resource/Script/Tieba/Tieba_remove_ads.js, requires-body=true
 
 
 
 [MITM]
-hostname = %APPEND% tiebac.baidu.com, tieba.baidu.com, c.tieba.baidu.com
+hostname = %APPEND%  c.tieba.baidu.com
 
