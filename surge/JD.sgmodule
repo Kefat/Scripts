@@ -3,9 +3,9 @@
 
 
 # > 京东
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome) url script-response-body https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/jingdong/jingdong.js
+京东_开屏去广告 = type=http-response,requires-body=1,max-size=0,pattern=^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome),script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/jingdong/jingdong.js
 # 禁京东直播小窗
-^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=getWidgetV1052 url reject
+^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=getWidgetV1052 - reject
 
 # > XiMaLaYa_喜马拉雅_屏蔽版本更新@ddgksf2013
 ^https?:\/\/.*\.xima.*\.com\/butler-portal\/versionCheck - reject
