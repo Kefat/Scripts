@@ -6,8 +6,6 @@
 # 禁京东直播小窗
 ^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=getWidgetV1052 - reject
 
-# > XiMaLaYa_喜马拉雅_屏蔽版本更新@ddgksf2013
-^https?:\/\/.*\.xima.*\.com\/butler-portal\/versionCheck - reject
 
 
-hostname = %APPEND% api.m.jd.com, *.xima*.*
+hostname = %APPEND% api.m.jd.com
