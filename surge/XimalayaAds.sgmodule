@@ -1,15 +1,17 @@
-#!name=喜马拉雅更新屏蔽
+#!name=喜马拉雅_更新屏蔽
 #!desc=Converted from QX Ximalaya AdBlock Rules
 #!author=ddgksf2013
-#!tgchannel=https://t.me/ddgksf2021
-# Surge Module Source: https://github.com/ddgksf2013/Modules
-# Original QX Config Source: https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/Ximalaya.conf
+
 
 [URL Rewrite]
+# > XiMaLaYa_喜马拉雅_屏蔽gif弹窗Ad@ddgksf2013
+^https?:\/\/.*\.xmcdn\.com\/\w{8}\/\w{4}-\w{16}\/.+gif$ - reject
 # > XiMaLaYa_喜马拉雅_部分Tab弹窗@ddgksf2013
 ^https?:\/\/.*\.xima.*\.com\/discovery-feed\/isShowUserGiftPendant - reject
 # > XiMaLaYa_喜马拉雅_屏蔽版本更新@ddgksf2013
 ^https?:\/\/.*\.xima.*\.com\/butler-portal\/versionCheck - reject
+# > XiMaLaYa_喜马拉雅_屏蔽开屏广告@ddgksf2013
+^https?:\/\/(adse\.wsa|adse|adbehavior|xdcs-collector)\.xima.*\.com\/.* - reject
 
 [Script]
 # > XiMaLaYa_喜马拉雅_首页顶部去除直播@ddgksf2013
@@ -17,5 +19,5 @@ ximalaya_json = type=http-response,pattern=^https?:\/\/.*\.xima.*\.com\/discover
 
 
 [MITM]
-hostname = %APPEND% *.xima*.*
+hostname = %APPEND% *.xima*.*, *.xmcdn.*
 
