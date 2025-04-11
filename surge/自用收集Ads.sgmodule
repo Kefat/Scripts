@@ -12,6 +12,22 @@ DOMAIN-KEYWORD,safebrowsing.,REJECT,extended-matching,pre-matching
 DOMAIN,pageviewp.icbc.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mall.icbc.com.cn,REJECT,extended-matching,pre-matching
 
+#>通用广告
+DOMAIN-SUFFIX,doubleclick-cn.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,doubleclick.net,REJECT,extended-matching,pre-matching
+
+#>数字联盟
+DOMAIN-SUFFIX,shuzilm.cn,REJECT,extended-matching,pre-matching
+
+#>云闪付 开屏广告
+DOMAIN,ads.95516.com,REJECT,extended-matching,pre-matching
+DOMAIN,switch.cup.com.cn,REJECT,extended-matching,pre-matching
+
+#>HttpDNS
+DOMAIN,hdns.ksyun.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,httpdns.,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,httpdns-,REJECT,extended-matching,pre-matching
+
 
 [URL Rewrite]
 #>中国移动开屏广告
