@@ -8,6 +8,12 @@ DOMAIN,lookup.api.bsb.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,u3.ucweb.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,safebrowsing.,REJECT,extended-matching,pre-matching
 
+#>百度
+DOMAIN,mobads.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pos.baidu.com,REJECT,extended-matching,pre-matching
+IP-CIDR,180.76.76.112/32,REJECT,no-resolve
+IP-CIDR,180.76.76.200/32,REJECT,no-resolve
+
 #>工商银行
 DOMAIN,pageviewp.icbc.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mall.icbc.com.cn,REJECT,extended-matching,pre-matching
