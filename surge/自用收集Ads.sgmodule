@@ -2,47 +2,6 @@
 #!desc=AdBlock Rules
 #!author=网络收集
 
-[Rule]
-#>安全浏览限制解除
-DOMAIN,lookup.api.bsb.baidu.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,u3.ucweb.com,REJECT,extended-matching,pre-matching
-DOMAIN-KEYWORD,safebrowsing.,REJECT,extended-matching,pre-matching
-
-#>百度
-DOMAIN,mobads.baidu.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,pos.baidu.com,REJECT,extended-matching,pre-matching
-IP-CIDR,180.76.76.112/32,REJECT,no-resolve
-IP-CIDR,180.76.76.200/32,REJECT,no-resolve
-
-#>工商银行
-DOMAIN,pageviewp.icbc.com.cn,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,mall.icbc.com.cn,REJECT,extended-matching,pre-matching
-
-#>通用广告
-DOMAIN-SUFFIX,doubleclick-cn.net,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,doubleclick.net,REJECT,extended-matching,pre-matching
-
-#>数字联盟
-DOMAIN-SUFFIX,shuzilm.cn,REJECT,extended-matching,pre-matching
-
-#>云闪付 开屏广告
-DOMAIN,ads.95516.com,REJECT,extended-matching,pre-matching
-DOMAIN,switch.cup.com.cn,REJECT,extended-matching,pre-matching
-
-#>HttpDNS
-DOMAIN,hdns.ksyun.com,REJECT,extended-matching,pre-matching
-DOMAIN-KEYWORD,httpdns.,REJECT,extended-matching,pre-matching
-DOMAIN-KEYWORD,httpdns-,REJECT,extended-matching,pre-matching
-
-
-[URL Rewrite]
-#>中国移动开屏广告
-^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) - reject
-^https?:\/\/tower\.ubixioe\.com\/mob\/mediation - reject
-^https?:\/\/sdk1xyajs\.data\.kuiniuca\.com - reject
-
-#>威锋 - 开屏广告
-^https:\/\/api\.wfdata\.club\/v2\/yesfeng\/yesList - reject
 
 [Script]
 # > XiMaLaYa_喜马拉雅_首页顶部去除直播@ddgksf2013
@@ -50,5 +9,5 @@ ximalaya_json = type=http-response,pattern=^https?:\/\/.*\.xima.*\.com\/discover
 
 
 [MITM]
-hostname = %APPEND% client.app.coc.10086.cn, tower.ubixioe.com, sdk1xyajs.data.kuiniuca.com, api.wfdata.club, *.xima*.*
+hostname = %APPEND% *.xima*.*
 
