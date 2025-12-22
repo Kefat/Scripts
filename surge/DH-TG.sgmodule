@@ -1,0 +1,13 @@
+#!name= DH Optimize TG NetWork
+#!desc= 优化 tg 转圈
+#!category= 👸 ▸ DH_NetWork
+
+[General]
+use-local-host-item-for-proxy = true
+
+[Host]
+5.28.195.1 = 91.108.56.188
+5.28.195.2 = 91.108.56.188
+5.28.195.3 = 91.108.56.188
+5.28.195.4 = 91.108.56.188
+5.28.195.5 = 91.108.56.188
