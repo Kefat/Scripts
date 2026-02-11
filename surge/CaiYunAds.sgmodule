@@ -11,4 +11,4 @@
 
 
 [MITM]
-hostname = %APPEND% *.cyapi.cn
+hostname = %APPEND% starplucker.cyapi.cn, wrapper\.cyapi\.cn
