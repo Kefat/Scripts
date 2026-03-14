@@ -23,9 +23,6 @@ AND,((DOMAIN-SUFFIX,chat.bilibili.com), (OR,((DOMAIN-KEYWORD,stun), (DOMAIN-KEYW
 ^https:\/\/grpc\.biliapi\.net\/bilibili\.app\.interface\.v1\.Search\/DefaultWords$ header="content-type: application/grpc" data-type=base64 data="AAAAACkaHeaQnOe0ouinhumikeOAgeeVquWJp+aIlnVw5Li7IgAoAToAQgBKAA=="
 ^https:\/\/grpc\.biliapi\.net\/bilibili\.app\.(view\.v1\.View\/TFInfo|viewunite\.v1\.View\/ViewEndPage)$ header="content-type: application/grpc" data-type=base64 data="AAAAAAA="
 
-[URL Rewrite]
-^https:\/\/api\.bilibili\.com\/pgc\/page\/channel\?(.*)&mobi_app=iphone&(.*)$ https://api.bilibili.com/pgc/page/channel?$1&mobi_app=iphone_i&$2 header
-
 [Body Rewrite]
 http-response-jq ^https:\/\/api\.bilibili\.com\/x\/pd-proxy\/tracker\? '.data[][]?="stun.chat.bilibili.com:3478"'
 http-response-jq ^https:\/\/api\.bilibili\.com\/pgc\/view\/v2\/app\/season\? 'del(.data.payment)'
