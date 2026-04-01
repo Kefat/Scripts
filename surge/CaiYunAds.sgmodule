@@ -39,4 +39,4 @@ caiyun_json = type=http-response, pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\
 
 
 [MITM]
-hostname = %APPEND% wrapper.cyapi.cn, api.caiyunapp.com, starplucker.cyapi.cn, ad.cyapi.cn
+hostname = %APPEND% *.cyapi.cn
