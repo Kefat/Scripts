@@ -1,14 +1,40 @@
 #!name=彩云天气 AdBlock
 #!author=自用
 
+[Map Local]
+# > 通用广告请求@ddgksf2013
+^https?:\/\/ad\.cyapi\.cn\/v\d data-type=text data=" " status-code=200
 
-[URL Rewrite]
-^https:\/\/starplucker\.cyapi\.cn\/v3\/(config\/cypage\/\w+\/conditions|notification\/message_center|operation\/homefeatures) url reject-dict
-^https:\/\/wrapper\.cyapi\.cn\/v1\/activity\? url script-response-body https://raw.githubusercontent.com/Kefat/Scripts/refs/heads/main/Crack/caiyun.js
-^https:\/\/wrapper\.cyapi\.cn\/v1\/(nafp\/origin_images|satellite)\? url script-request-header https://raw.githubusercontent.com/Kefat/Scripts/refs/heads/main/Crack/caiyun.js
-
-
+[Script]
+# 赏叶赏花模块
+caiyun = type=http-response, pattern=^https:\/\/wrapper\.cyapi\.cn\/v1\/activity\?app_name=weather, script-path=https://raw.githubusercontent.com/wf021325/qx/master/js/caiyun.js, requires-body=true, max-size=-1, timeout=60
+# 解锁旧版vip(7.20.0之前)
+caiyun = type=http-response, pattern=^https:\/\/biz\.cyapi\.cn\/v2\/user, script-path=https://raw.githubusercontent.com/wf021325/qx/master/js/caiyun.js, requires-body=true, max-size=-1, timeout=60
+# 卫星云图 48小时预报
+caiyun = type=http-request, pattern=^https:\/\/wrapper\.cyapi\.cn\/v1\/(satellite|nafp\/origin_images), script-path=https://raw.githubusercontent.com/wf021325/qx/master/js/caiyun.js, timeout=60
+# 7.20.0版本显示VIP
+caiyun = type=http-response, pattern=^https?:\/\/biz\.cyapi\.cn\/api\/v1\/user_detail$, script-path=https://raw.githubusercontent.com/wf021325/qx/master/js/caiyun.js, requires-body=true, max-size=-1, timeout=60
+# 7.22.0版本 40天趋势/60天潮汐/风 等等有时候无法加载
+caiyun = type=http-request, pattern=^https:\/\/starplucker\.cyapi\.cn\/v3\/, script-path=https://raw.githubusercontent.com/wf021325/qx/master/js/caiyun.js, requires-body=true, max-size=-1, timeout=60
+# > 图层推广
+caiyun_json = type=http-response, pattern=^https?:\/\/wrapper\.cyapi\.cn\/v\d\/activity, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
+# > 活动推广
+caiyun_json = type=http-response, pattern=^https?:\/\/api\.caiyunapp\.com\/v\d\/activity, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
+# > 首页顶部推广
+caiyun_json = type=http-response, pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/homefeatures, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
+# > SVIP提醒推广
+caiyun_json = type=http-response, pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/notification/message_center, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
+# > 雨季特惠提醒
+caiyun_json = type=http-response, pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/config/cypage, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
+# > 发现页信息流推荐
+caiyun_json = type=http-response, pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/feeds, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
+# > 发现页
+caiyun_json = type=http-response, pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/banners, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
+# > 发现页中间部分
+caiyun_json = type=http-response, pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/features, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
+# > 发现页活动
+caiyun_json = type=http-response, pattern=^https?:\/\/starplucker\.cyapi\.cn\/v\d/campaigns, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caiyun_json.js, requires-body=true, max-size=-1, timeout=60
 
 
 [MITM]
-hostname = %APPEND% starplucker.cyapi.cn, wrapper\.cyapi\.cn
+hostname = %APPEND% wrapper.cyapi.cn, api.caiyunapp.com, starplucker.cyapi.cn, ad.cyapi.cn
