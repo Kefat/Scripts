@@ -1,5 +1,7 @@
-#!name=彩云天气 AdBlock
-#!author=自用
+#!name=彩云天气
+#!desc=移除开屏广告、自用
+#!author=@可莉,@ddgksf2013,wf021325
+
 
 [Map Local]
 # > 通用广告请求@ddgksf2013
