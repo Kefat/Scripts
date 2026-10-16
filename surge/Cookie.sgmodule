@@ -2,37 +2,28 @@
 #!desc=iOS Cookies 模块配置.自用
 
 [Script]
-# Chavy (wapside.189.cn:9001, api.wfdata.club, *.v2ex.com, music.163.com, tieba.baidu.com, *.smzdm.com, *.video.qq.com, 113.96.156.178, *.ximalaya.com)
-电信营业厅Cookie = type=http-request,pattern=^https:\/\/wapside.189.cn:9001\/api\/home\/sign,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.cookie.js
-威锋Cookie = type=http-request,pattern=^https?:\/\/api.wfdata.club\/v1\/auth\/signin,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/feng/feng.cookie.js
-V2EX Cookie = type=http-request,pattern=^https:\/\/www\.v2ex\.com\/mission\/daily,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.cookie.js
-网易云音乐Cookie = type=http-request,pattern=^https:\/\/music.163.com\/weapi\/user\/level,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/neteasemusic/quanx/neteasemusic.cookie.js
-百度签到Cookie = type=http-request,pattern=^https?:\/\/tieba\.baidu\.com\/?.?,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/tieba/tieba.cookie.js
-什么值得买Cookie = type=http-request,pattern=^https:\/\/www\.smzdm\.com\/?.?,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/smzdm/smzdm.cookie.js
-腾讯视频Cookie = type=http-request,pattern=^https:\/\/access.video.qq.com\/user\/auth_refresh,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/videoqq/videoqq.cookie.js
-喜马拉雅Cookie = type=http-request,pattern=^https?:\/\/.*\/mobile\-user\/(v1\/)?homePage\/.*,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/ximalaya/ximalaya.cookie.js
+# hostname = c.tieba.baidu.com
+百度贴吧 = type=http-request, pattern=^https?:\/\/(c\.tieba\.baidu\.com|180\.97\.\d+\.\d+)\/c\/s\/login, script-path=https://gist.githubusercontent.com/blackmatrix7/cebabe7a385fc6a9ad32e2f7a35851dc/raw/1363d8720c92267d0a97fcd8eb98673760891fc9/tieba_min.js, timeout=60
+百度贴吧 = type=http-request, pattern=^https?:\/\/c\.tieba\.baidu\.com\/c\/s\/channelIconConfig, script-path=https://gist.githubusercontent.com/blackmatrix7/cebabe7a385fc6a9ad32e2f7a35851dc/raw/1363d8720c92267d0a97fcd8eb98673760891fc9/tieba_min.js, timeout=60
 
-# Nobyda  (ifac*.iqiyi.com, api.m.jd.com, ms.jr.jd.com, me-api.jd.com)
-爱奇艺Cookie = type=http-request,pattern=^https?:\/\/iface(\d)?\.iqiyi\.com\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
-京东Cookie = type=http-request,requires-body=1,pattern=^https:\/\/(api\.m|me-api|ms\.jr)\.jd\.com\/(client\.action\?functionId=signBean|user_new\/info\/GetJDUserInfoUnion\?|gw\/generic\/hy\/h5\/m\/appSign\?),script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+# hostname = m.client.10010.com
+中国联通组件 = type=http-request, pattern=https:\/\/m\.client\.10010\.com\/(.*)\/smartwisdomCommon, script-path=https://raw.githubusercontent.com/dompling/Script/master/10010/index.js, timeout=60
+中国联通组件 = type=http-request, pattern=https:\/\/m(?:xx)?\.client\.10010\.com\/(?:.*\/)?smartwisdomCommon(?:New)?(?:\?.*)?$, script-path=https://raw.githubusercontent.com/dompling/Script/master/10010/index.js, requires-body=true, max-size=0, script-update-interval=0
 
-# Dompling
-京东金融领豆Cookie = type=http-request,pattern=^https?:\/\/ms\.jr\.jd\.com\/gw\/generic\/uc\/newna\/m\/userstat,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/dompling/Script/master/jd/jd_jr_cookie.js
+# hostname = tm-web.pin-dao.cn
+微信-奈雪点单 = type=http-request, pattern=^https:\/\/tm-web\.pin-dao\.cn\/user\/base-userinfo, script-path=https://gist.githubusercontent.com/Sliverkiss/4d0e9572b99530b7cb0e7298622aa2a9/raw/naixue.js, requires-body=true, max-size=-1, timeout=60
 
-# ZCY01
-京东保价Cookie = type=http-request,pattern=https:\/\/api\.m.jd.com\/api\?appid=siteppM&functionId=siteppM_priceskusPull,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtectRewrite.js
+# hostname = api.hellobike.com
+支付宝-哈啰单车 = type=http-request, pattern=^https:\/\/api\.hellobike\.com\/api\?user\.taurus\.pointInfo, script-path=https://gist.githubusercontent.com/Sliverkiss/4e0081f7b18a2cea9dbdf13545e60885/raw/d53857028ced29aed98affb5d4a602b2a8bf94cf/hldc.js, requires-body=true, max-size=-1, timeout=60
 
-# Blackmatrix7（m.client.10010.com, c.tieba.baidu.com）
-联通_获取cookie = type=http-request,pattern=^https?:\/\/m\.client\.10010\.com\/dailylottery\/static\/(integral|doubleball)\/firstpage,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/10010/unicom_signin.min.js
-贴吧_获取cookie = type=http-request,pattern=^https?:\/\/(c\.tieba\.baidu\.com|180\.97\.\d+\.\d+)\/c\/s\/login,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/tieba/tieba_checkin.js
-贴吧_获取新版cookie = type=http-request,pattern=^https?:\/\/c\.tieba\.baidu\.com\/c\/s\/channelIconConfig,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/tieba/tieba_checkin.js
+# hostname = xmc.ximalaya.com
+喜马拉雅 = type=http-request, pattern=^https?:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/, script-path=https://raw.githubusercontent.com/ClydeTime/Quantumult/main/Script/Task/xmlySign.js, timeout=60
 
-# Sunert（api.weibo.cn）
-微博Cookie = type=http-request,pattern=https:\/\/api\.weibo\.cn\/\d\/users\/show,script-path=https://raw.githubusercontent.com/Sunert/Script/master/Task/weibo.js
+# hostname = api.weibo.cn
+微博 = type=http-request, pattern=^https:\/\/m?api\.weibo\.c(n|om)\/\d\/users\/show, script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/weibo.js, timeout=60
 
-# Aaron-lv (account.huami.com)
-小米运动获取Token = type=http-response,pattern=^https:\/\/account\.huami\.com\/v2\/client\/login, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/backUp/xmSports.js
-
+# hostname = *.amap.com
+高德地图 = type=http-request, pattern=^https:\/\/m?api\.weibo\.c(n|om)\/\d\/users\/show, script-path=https://raw.githubusercontent.com/Kefat/Scripts/main/weibo.js, timeout=60
 
 [MITM]
-hostname = wapside.189.cn:9001, api.wfdata.club, *.v2ex.com, music.163.com, tieba.baidu.com, *.smzdm.com, *.video.qq.com, 113.96.156.178, *.ximalaya.com, ifac*.iqiyi.com, api.m.jd.com, ms.jr.jd.com, me-api.jd.com, m.client.10010.com, c.tieba.baidu.com, api.weibo.cn, account.huami.com
+hostname = %APPEND% c.tieba.baidu.com, m.client.10010.com, tm-web.pin-dao.cn, api.hellobike.com, xmc.ximalaya.com, api.weibo.cn, *.amap.com
